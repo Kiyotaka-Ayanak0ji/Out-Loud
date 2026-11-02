@@ -9,9 +9,9 @@ import { DECISIONS, PROPOSALS } from "../lib/content";
 const Row = ({ label, children, note }) => (
   <div className="grid grid-cols-[92px_1fr] items-baseline gap-3 sm:grid-cols-[110px_1fr]">
     <span className="field-label">{label}</span>
-    <p className="text-sm leading-relaxed text-slate-300">
+    <p className="text-sm leading-relaxed text-tx">
       {children}
-      {note && <span className="ml-2 font-mono text-[10px] uppercase text-slate-500">{note}</span>}
+      {note && <span className="ml-2 font-mono text-[10px] uppercase text-tx-faint">{note}</span>}
     </p>
   </div>
 );
@@ -20,7 +20,7 @@ const DecisionCard = ({ d, idx }) => {
   const [open, setOpen] = useState(idx === 0);
   const { motionOn } = useMotion();
   const body = (
-    <div className="border-t border-white/5 px-5 py-5">
+    <div className="border-t border-line/10 px-5 py-5">
       <div className="grid gap-3">
         <Row label="Context">{d.context}</Row>
         <Row label="Decision">{d.decision}</Row>
@@ -44,10 +44,10 @@ const DecisionCard = ({ d, idx }) => {
         className="flex w-full items-center gap-3 p-5 text-left"
       >
         <span className="font-mono text-xs font-semibold text-acc-soft">{d.id}</span>
-        <span className="flex-1 font-display text-[15px] font-bold leading-snug text-slate-100">{d.title}</span>
+        <span className="flex-1 font-display text-[15px] font-bold leading-snug text-tx-hi">{d.title}</span>
         <EvidenceTag />
         <ChevronDown
-          className={`h-4 w-4 flex-none text-slate-400 transition-transform duration-300 ${open ? "rotate-180" : ""}`}
+          className={`h-4 w-4 flex-none text-tx-faint transition-transform duration-300 ${open ? "rotate-180" : ""}`}
         />
       </button>
       {open &&
@@ -85,7 +85,7 @@ const Autopsy = () => (
           <Tag tone="indigo">Hit · [n]</Tag>
           <Tag tone="indigo">Mixed · [n]</Tag>
           <Tag tone="indigo">Miss · [n]</Tag>
-          <span className="ml-1 text-xs text-slate-500">Counts land with the real decisions.</span>
+          <span className="ml-1 text-xs text-tx-faint">Counts land with the real decisions.</span>
         </div>
       </Reveal>
       <div className="mt-6 grid gap-4 lg:grid-cols-2">
@@ -97,22 +97,22 @@ const Autopsy = () => (
       </div>
 
       <Reveal className="mt-10">
-        <div data-testid="mistakes-panel" className="rounded-2xl border border-tangerine/30 bg-tangerine/[0.06] p-6">
-          <p className="font-mono text-xs font-semibold uppercase tracking-widest2 text-orange-300">
+        <div data-testid="mistakes-panel" className="rounded-2xl border border-tan/30 bg-tan/[0.06] p-6">
+          <p className="font-mono text-xs font-semibold uppercase tracking-widest2 text-tan-soft">
             Mistakes panel — the honesty log
           </p>
           <div className="mt-4 grid gap-4 sm:grid-cols-3">
             <div>
               <p className="field-label">What happened</p>
-              <p className="mt-1 text-sm text-slate-300">[A real mistake with consequences — not a disguised strength.]</p>
+              <p className="mt-1 text-sm text-tx">[A real mistake with consequences — not a disguised strength.]</p>
             </div>
             <div>
               <p className="field-label">What it cost</p>
-              <p className="mt-1 text-sm text-slate-300">[Time, money or users — placeholder.]</p>
+              <p className="mt-1 text-sm text-tx">[Time, money or users — placeholder.]</p>
             </div>
             <div>
               <p className="field-label">What changes</p>
-              <p className="mt-1 text-sm text-slate-300">[What you do differently now.]</p>
+              <p className="mt-1 text-sm text-tx">[What you do differently now.]</p>
             </div>
           </div>
         </div>
@@ -120,7 +120,7 @@ const Autopsy = () => (
 
       <div className="mt-10">
         <Reveal>
-          <p className="font-mono text-xs font-semibold uppercase tracking-widest2 text-orange-300">
+          <p className="font-mono text-xs font-semibold uppercase tracking-widest2 text-tan-soft">
             Growth experiments — proposed, not proven
           </p>
         </Reveal>
@@ -129,25 +129,25 @@ const Autopsy = () => (
             <Reveal key={p.id} delay={i * 0.06} className="h-full">
               <div
                 data-testid={`proposal-card-${i + 1}`}
-                className="h-full rounded-2xl border border-white/10 bg-white/[0.03] p-5 transition-colors hover:border-tangerine/40"
+                className="h-full rounded-2xl border border-line/10 bg-fill/[0.03] p-5 transition-colors hover:border-tan/40"
               >
                 <div className="flex items-center justify-between gap-2">
-                  <span className="font-mono text-xs text-slate-500">{p.id}</span>
+                  <span className="font-mono text-xs text-tx-faint">{p.id}</span>
                   <ProposalTag />
                 </div>
-                <p className="mt-3 font-display text-[15px] font-bold text-slate-100">{p.title}</p>
+                <p className="mt-3 font-display text-[15px] font-bold text-tx-hi">{p.title}</p>
                 <div className="mt-4 grid gap-2.5">
                   <div>
                     <p className="field-label">Hypothesis</p>
-                    <p className="mt-0.5 text-xs text-slate-400">{p.hypothesis}</p>
+                    <p className="mt-0.5 text-xs text-tx-low">{p.hypothesis}</p>
                   </div>
                   <div>
                     <p className="field-label">Test</p>
-                    <p className="mt-0.5 text-xs text-slate-400">{p.test}</p>
+                    <p className="mt-0.5 text-xs text-tx-low">{p.test}</p>
                   </div>
                   <div>
                     <p className="field-label">Kill criterion</p>
-                    <p className="mt-0.5 text-xs text-slate-400">{p.kill}</p>
+                    <p className="mt-0.5 text-xs text-tx-low">{p.kill}</p>
                   </div>
                 </div>
               </div>

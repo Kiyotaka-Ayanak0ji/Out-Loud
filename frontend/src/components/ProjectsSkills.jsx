@@ -31,7 +31,7 @@ const ProjectsSkills = () => {
                 className={`rounded-full px-4 py-2 text-xs font-semibold transition-colors ${
                   cat === c
                     ? "bg-acc text-white"
-                    : "border border-white/10 bg-white/[0.04] text-slate-300 hover:border-acc-bright/40 hover:text-white"
+                    : "border border-line/10 bg-fill/5 text-tx-low hover:border-acc-bright/40 hover:text-tx-hi"
                 }`}
               >
                 {c}
@@ -53,24 +53,24 @@ const ProjectsSkills = () => {
                     alt=""
                     className="h-full w-full object-cover transition-transform duration-500 hover:scale-[1.04]"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#161E31] via-transparent to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-panel via-transparent to-transparent" />
                   <PlaceholderTag className="absolute left-4 top-4" />
                 </div>
                 <div className="flex flex-1 flex-col p-5 sm:p-6">
                   <div className="flex items-center justify-between gap-3">
-                    <h3 className="font-display text-lg font-bold text-slate-100">{p.title}</h3>
-                    <span className="font-mono text-[10px] uppercase tracking-widest2 text-slate-500">{p.cat}</span>
+                    <h3 className="font-display text-lg font-bold text-tx-hi">{p.title}</h3>
+                    <span className="font-mono text-[10px] uppercase tracking-widest2 text-tx-faint">{p.cat}</span>
                   </div>
-                  <p className="mt-2 text-sm text-slate-400">{p.overview}</p>
+                  <p className="mt-2 text-sm text-tx-low">{p.overview}</p>
                   <div className="mt-4">
                     <p className="field-label">Work completed</p>
-                    <p className="mt-1 text-sm text-slate-300">{p.work}</p>
+                    <p className="mt-1 text-sm text-tx">{p.work}</p>
                   </div>
                   <div className="mt-4 flex flex-wrap gap-2">
                     {p.tools.map((t, j) => (
                       <span
                         key={j}
-                        className="rounded-full border border-white/10 bg-white/[0.04] px-3 py-1 text-[11px] font-medium text-slate-300"
+                        className="rounded-full border border-line/10 bg-fill/5 px-3 py-1 text-[11px] font-medium text-tx-low"
                       >
                         {t}
                       </span>
@@ -92,14 +92,11 @@ const ProjectsSkills = () => {
         <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {SKILL_GROUPS.map((g, i) => (
             <Reveal key={g.id} delay={i * 0.05} className="h-full">
-              <div data-testid={`skill-group-${i + 1}`} className="h-full rounded-2xl border border-white/10 bg-white/[0.03] p-5">
-                <p className="font-display text-sm font-bold text-slate-100">{g.name}</p>
+              <div data-testid={`skill-group-${i + 1}`} className="h-full rounded-2xl border border-line/10 bg-fill/[0.03] p-5">
+                <p className="font-display text-sm font-bold text-tx-hi">{g.name}</p>
                 <div className="mt-3 flex flex-wrap gap-2">
                   {g.items.map((s, j) => (
-                    <span
-                      key={j}
-                      className="rounded-full border border-acc/25 bg-acc/10 px-2.5 py-1 text-[11px] text-acc-soft"
-                    >
+                    <span key={j} className="rounded-full border border-acc/25 bg-acc/10 px-2.5 py-1 text-[11px] text-acc-soft">
                       {s}
                     </span>
                   ))}

@@ -17,22 +17,19 @@ export const Reveal = ({ children, delay = 0, y = 26, className = "" }) => {
   );
 };
 
-export const SectionHeader = ({ no, kicker, title, desc, accent = "indigo" }) => {
-  const accents = {
-    indigo: "text-acc-soft",
-    emerald: "text-emerald-300",
-    tangerine: "text-orange-300",
-    amber: "text-amber-300",
-  };
-  return (
-    <Reveal className="max-w-2xl">
-      <p className={`font-mono text-xs font-semibold uppercase tracking-widest2 ${accents[accent] || accents.indigo}`}>
-        {no} · {kicker}
-      </p>
-      <h2 className="mt-3 font-display text-3xl font-bold tracking-tight text-slate-50 sm:text-4xl">
-        {title}
-      </h2>
-      {desc ? <p className="mt-4 text-sm leading-relaxed text-slate-400 sm:text-base">{desc}</p> : null}
-    </Reveal>
-  );
+const ACCENTS = {
+  indigo: "text-acc-soft",
+  emerald: "text-emer-soft",
+  tangerine: "text-tan-soft",
+  amber: "text-amb-soft",
 };
+
+export const SectionHeader = ({ no, kicker, title, desc, accent = "indigo" }) => (
+  <Reveal className="max-w-2xl">
+    <p className={`font-mono text-xs font-semibold uppercase tracking-widest2 ${ACCENTS[accent] || ACCENTS.indigo}`}>
+      {no} · {kicker}
+    </p>
+    <h2 className="mt-3 font-display text-3xl font-bold tracking-tight text-tx-hi sm:text-4xl">{title}</h2>
+    {desc ? <p className="mt-4 text-sm leading-relaxed text-tx-low sm:text-base">{desc}</p> : null}
+  </Reveal>
+);

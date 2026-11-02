@@ -24,6 +24,12 @@ Build a polished, mobile-first portfolio web app called **Out Loud** — memorab
 - Verified: nav links scroll to sections; decision cards expand/collapse; sample→"Build my profile" produces editable labelled sample result; empty-input error feedback; mic button requests permission only on click with clear feedback; easter egg accepts "out" (case-insensitive), retry feedback, hint, spoiler, reset; animation toggle flips motion site-wide with content/controls fully usable in both modes; audio plays on click.
 - Honesty: every personal field is [bracketed placeholder]; "Evidence needed" tags; "Not measured" notes; receipts marked placeholder; no metrics claimed anywhere.
 
+## Update 2026-11-02 (v2 — polish round)
+- Fixed title glitch: the old headline component was defined inline in Hero, so every audio timeupdate re-render remounted it. Replaced with a self-contained Typewriter (own timer state, immune to parent re-renders) rotating three phrases: type → hold → erase → next. Static full phrase when motion off / reduced motion.
+- Added dark/light themes: semantic CSS-variable tokens (`--c-*`) mapped through Tailwind (bg/surface/panel/fill/line/tx/acc/emer/tan/amb), applied to every section, card, control, tag and focus ring; inline pre-paint script in index.html prevents theme flash; choice persisted in localStorage; clearly labelled theme toggle in the nav, separate from the motion toggle.
+- Rebuilt The Secret Layer as a deciphering bench: three grayscale real-world plates (concrete/metal/wood) with O, U, T genuinely embedded at build time as +30-luminance ghosts on contrast-flattened textures (gen_clue_plates.py); an in-browser canvas levels tool (slider + auto levels) recovers each letter — the method really works on the served pixels. Story, 3 progressive hints + per-plate strong hint, answer input, wrong-answer feedback, reset, spoiler, solve explanation, aria-live feedback, non-visual "solve by ear" riddle route.
+- Finish pass: marquee removed, section dividers, consistent tokens in both themes, mobile input width fix, nowrap nav logo.
+
 ## Prioritized backlog
 - P0 (after approval): real personal content, résumé-based About, real decision cards with evidence, real voice recordings + receipts.
 - P1: hidden-image steganography decoder (PNG LSB, browser-based) in Secret Layer; real intro recording replacing TTS sample.

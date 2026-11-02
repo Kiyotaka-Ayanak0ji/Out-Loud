@@ -11,13 +11,13 @@ const MARKERS = {
 };
 
 const Field = ({ label, value }) => (
-  <div className="rounded-xl border border-white/10 bg-white/[0.03] px-4 py-3">
+  <div className="rounded-xl border border-line/10 bg-fill/[0.03] px-4 py-3">
     <p className="field-label">{label}</p>
     <span
       contentEditable
       suppressContentEditableWarning
       spellCheck={false}
-      className="mt-1 block rounded px-1 text-sm font-medium text-slate-200 focus:bg-white/10"
+      className="mt-1 block rounded px-1 text-sm font-medium text-tx focus:bg-fill/10"
     >
       {value}
     </span>
@@ -89,7 +89,7 @@ const BharatDemo = () => {
           <div className="glass rounded-3xl p-5 sm:p-8">
             <div className="flex flex-wrap items-center gap-2">
               <Tag tone="emerald">Sample input — clearly labelled</Tag>
-              <span className="text-xs text-slate-500">Tap a sample, or type your own.</span>
+              <span className="text-xs text-tx-faint">Tap a sample, or type your own.</span>
             </div>
 
             <div className="mt-4 flex flex-wrap gap-2">
@@ -98,7 +98,7 @@ const BharatDemo = () => {
                   key={s.id}
                   data-testid={`voice-bharat-sample-btn-${i + 1}`}
                   onClick={() => loadSample(s)}
-                  className="rounded-full border border-emeraldx/40 bg-emeraldx/10 px-3.5 py-2 text-xs font-semibold text-emerald-300 transition-all hover:-translate-y-0.5 hover:bg-emeraldx/20"
+                  className="rounded-full border border-emer/40 bg-emer/10 px-3.5 py-2 text-xs font-semibold text-emer-soft transition-all hover:-translate-y-0.5 hover:bg-emer/20"
                 >
                   {s.label}
                 </button>
@@ -114,7 +114,7 @@ const BharatDemo = () => {
               value={transcript}
               onChange={(e) => setTranscript(e.target.value)}
               placeholder="[Spoken-style sentences appear here — type or load a sample, then edit freely.]"
-              className="mt-2 min-h-[110px] w-full resize-y rounded-2xl border border-white/15 bg-ink/50 p-4 text-sm leading-relaxed text-slate-200 placeholder:text-slate-600"
+              className="mt-2 min-h-[110px] w-full resize-y rounded-2xl border border-line/15 bg-bg/50 p-4 text-sm leading-relaxed text-tx placeholder:text-tx-faint"
             />
 
             <div className="mt-4 flex flex-wrap items-center gap-3">
@@ -122,7 +122,7 @@ const BharatDemo = () => {
                 data-testid="voice-bharat-build-btn"
                 onClick={build}
                 disabled={loading}
-                className="inline-flex items-center gap-2 rounded-full bg-emeraldx px-5 py-2.5 text-sm font-bold text-[#04211B] transition-transform hover:-translate-y-0.5 disabled:opacity-60"
+                className="inline-flex items-center gap-2 rounded-full bg-emer px-5 py-2.5 text-sm font-bold text-[#04211B] transition-transform hover:-translate-y-0.5 disabled:opacity-60"
               >
                 {loading && <Loader2 className="h-4 w-4 animate-spin" />}
                 {loading ? "Building…" : "Build my profile"}
@@ -130,7 +130,7 @@ const BharatDemo = () => {
               <button
                 data-testid="voice-bharat-mic-btn"
                 onClick={askMic}
-                className="inline-flex items-center gap-2 rounded-full border border-emeraldx/40 px-5 py-2.5 text-sm font-semibold text-emerald-300 transition-colors hover:bg-emeraldx/10"
+                className="inline-flex items-center gap-2 rounded-full border border-emer/40 px-5 py-2.5 text-sm font-semibold text-emer-soft transition-colors hover:bg-emer/10"
               >
                 <Mic className="h-4 w-4" />
                 Use microphone
@@ -138,22 +138,27 @@ const BharatDemo = () => {
             </div>
 
             <div aria-live="polite" className="mt-3 min-h-[20px] text-xs" data-testid="voice-bharat-mic-msg">
-              {error && <p role="alert" className="text-orange-300" data-testid="voice-bharat-error">{error}</p>}
-              {micMsg && (
-                <p className={micState === "granted" ? "text-emerald-300" : "text-orange-300"}>{micMsg}</p>
+              {error && (
+                <p role="alert" className="text-tan-soft" data-testid="voice-bharat-error">
+                  {error}
+                </p>
               )}
+              {micMsg && <p className={micState === "granted" ? "text-emer-soft" : "text-tan-soft"}>{micMsg}</p>}
             </div>
 
             {loading ? (
-              <div data-testid="voice-bharat-loading" className="mt-6 rounded-2xl border border-white/10 p-6">
+              <div data-testid="voice-bharat-loading" className="mt-6 rounded-2xl border border-line/10 p-6">
                 <p className="field-label">Building sample profile…</p>
-                <div className="mt-3 h-2 w-full overflow-hidden rounded-full bg-white/10">
-                  <div className="h-full w-1/3 animate-pulse rounded-full bg-emeraldx/60" />
+                <div className="mt-3 h-2 w-full overflow-hidden rounded-full bg-line/10">
+                  <div className="h-full w-1/3 animate-pulse rounded-full bg-emer/60" />
                 </div>
               </div>
             ) : (
               result && (
-                <div data-testid="voice-bharat-result" className="mt-6 rounded-2xl border border-emeraldx/30 bg-emeraldx/[0.05] p-5 sm:p-6">
+                <div
+                  data-testid="voice-bharat-result"
+                  className="mt-6 rounded-2xl border border-emer/30 bg-emer/[0.05] p-5 sm:p-6"
+                >
                   <div className="flex flex-wrap items-center justify-between gap-2">
                     <SampleTag>Sample result — fields editable</SampleTag>
                     {!result.conf && <Tag tone="slate">Demo output</Tag>}
@@ -167,22 +172,22 @@ const BharatDemo = () => {
                   {result.conf && (
                     <div className="mt-4 grid gap-2">
                       {["Extraction confidence", "Fields confirmed"].map((lbl, i) => (
-                        <div key={lbl} className="flex items-center gap-3 text-xs text-slate-400">
+                        <div key={lbl} className="flex items-center gap-3 text-xs text-tx-low">
                           <span className="w-40 flex-none">{lbl}</span>
-                          <div className="h-1.5 flex-1 overflow-hidden rounded-full bg-white/10">
-                            <div className="h-full rounded-full bg-emeraldx" style={{ width: `${result.conf[i]}%` }} />
+                          <div className="h-1.5 flex-1 overflow-hidden rounded-full bg-line/10">
+                            <div className="h-full rounded-full bg-emer" style={{ width: `${result.conf[i]}%` }} />
                           </div>
                           <span className="w-9 text-right font-mono tabular-nums">{result.conf[i]}%</span>
                         </div>
                       ))}
                     </div>
                   )}
-                  {result.note && <p className="mt-4 text-xs text-slate-500">{result.note}</p>}
+                  {result.note && <p className="mt-4 text-xs text-tx-faint">{result.note}</p>}
                 </div>
               )
             )}
 
-            <p className="mt-5 text-xs text-slate-500">
+            <p className="mt-5 text-xs text-tx-faint">
               Concept demo — nothing you type or say is stored or sent.
             </p>
           </div>

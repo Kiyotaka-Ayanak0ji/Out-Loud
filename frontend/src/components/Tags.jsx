@@ -1,9 +1,17 @@
 const TONES = {
-  slate: "border-white/15 bg-white/5 text-slate-300",
+  slate: "border-line/15 bg-fill/5 text-tx-low",
   indigo: "border-acc/40 bg-acc/10 text-acc-soft",
-  tangerine: "border-tangerine/45 bg-tangerine/10 text-orange-300",
-  emerald: "border-emeraldx/45 bg-emeraldx/10 text-emerald-300",
-  amber: "border-amberx/45 bg-amberx/10 text-amber-300",
+  tangerine: "border-tan/45 bg-tan/10 text-tan-soft",
+  emerald: "border-emer/45 bg-emer/10 text-emer-soft",
+  amber: "border-amb/45 bg-amb/10 text-amb-soft",
+};
+
+const DOTS = {
+  slate: "bg-tx-faint",
+  indigo: "bg-acc",
+  tangerine: "bg-tan",
+  emerald: "bg-emer",
+  amber: "bg-amb",
 };
 
 export const Tag = ({ tone = "slate", children, className = "", ...rest }) => (
@@ -17,28 +25,28 @@ export const Tag = ({ tone = "slate", children, className = "", ...rest }) => (
 
 export const EvidenceTag = (props) => (
   <Tag tone="slate" {...props}>
-    <span className="h-1.5 w-1.5 rounded-full bg-slate-400" />
+    <span className="h-1.5 w-1.5 rounded-full bg-tx-faint" />
     Evidence needed
   </Tag>
 );
 
 export const PlaceholderTag = (props) => (
   <Tag tone="amber" {...props}>
-    <span className="h-1.5 w-1.5 rounded-full bg-amberx" />
+    <span className={`h-1.5 w-1.5 rounded-full ${DOTS.amber}`} />
     Placeholder
   </Tag>
 );
 
 export const ProposalTag = (props) => (
   <Tag tone="tangerine" {...props}>
-    <span className="h-1.5 w-1.5 rounded-full bg-tangerine" />
+    <span className={`h-1.5 w-1.5 rounded-full ${DOTS.tangerine}`} />
     Proposal
   </Tag>
 );
 
 export const SampleTag = (props) => (
   <Tag tone="emerald" {...props}>
-    <span className="h-1.5 w-1.5 rounded-full bg-emeraldx" />
+    <span className={`h-1.5 w-1.5 rounded-full ${DOTS.emerald}`} />
     Sample
   </Tag>
 );

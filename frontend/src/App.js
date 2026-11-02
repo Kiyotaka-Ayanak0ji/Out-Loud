@@ -1,10 +1,10 @@
 import React, { useEffect } from "react";
 import Lenis from "lenis";
 import { MotionProvider, useMotion } from "./context/motion-context";
+import { ThemeProvider } from "./context/theme-context";
 import { setLenis } from "./lib/scroll";
 import Nav from "./components/Nav";
 import Hero from "./components/Hero";
-import Marquee from "./components/Marquee";
 import Autopsy from "./components/Autopsy";
 import BharatDemo from "./components/BharatDemo";
 import SecretLayer from "./components/SecretLayer";
@@ -29,10 +29,10 @@ class ErrorBoundary extends React.Component {
   render() {
     if (this.state.error) {
       return (
-        <div className="grid min-h-screen place-items-center bg-ink p-8 text-center">
+        <div className="grid min-h-screen place-items-center bg-bg p-8 text-center">
           <div>
-            <p className="font-display text-2xl font-bold text-white">Something broke.</p>
-            <p className="mt-2 text-sm text-slate-400">Reload the page to keep exploring Out Loud.</p>
+            <p className="font-display text-2xl font-bold text-tx-hi">Something broke.</p>
+            <p className="mt-2 text-sm text-tx-low">Reload the page to keep exploring Out Loud.</p>
           </div>
         </div>
       );
@@ -40,6 +40,12 @@ class ErrorBoundary extends React.Component {
     return this.props.children;
   }
 }
+
+const Divider = () => (
+  <div aria-hidden className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <div className="h-px bg-gradient-to-r from-transparent via-line/15 to-transparent" />
+  </div>
+);
 
 const Page = () => {
   const { motionOn } = useMotion();
@@ -63,22 +69,28 @@ const Page = () => {
   }, [motionOn]);
 
   return (
-    <div className="relative min-h-screen overflow-x-clip bg-ink font-body text-slate-100">
+    <div className="relative min-h-screen overflow-x-clip bg-bg font-body text-tx">
       <div
         aria-hidden
-        className="pointer-events-none fixed inset-0 z-0 opacity-[0.05]"
+        className="pointer-events-none fixed inset-0 z-0 opacity-[0.04]"
         style={{ backgroundImage: `url("${NOISE}")` }}
       />
       <Nav />
       <main className="relative z-10">
         <Hero />
-        <Marquee />
+        <Divider />
         <Autopsy />
+        <Divider />
         <BharatDemo />
+        <Divider />
         <SecretLayer />
+        <Divider />
         <Receipts />
+        <Divider />
         <ProjectsSkills />
+        <Divider />
         <AboutMe />
+        <Divider />
         <ContactMe />
       </main>
       <Footer />
@@ -88,9 +100,11 @@ const Page = () => {
 
 const App = () => (
   <MotionProvider>
-    <ErrorBoundary>
-      <Page />
-    </ErrorBoundary>
+    <ThemeProvider>
+      <ErrorBoundary>
+        <Page />
+      </ErrorBoundary>
+    </ThemeProvider>
   </MotionProvider>
 );
 

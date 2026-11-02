@@ -18,20 +18,20 @@ const AboutMe = () => (
           <div className="flex flex-wrap items-center gap-4">
             <Logo className="h-11 w-11" />
             <div>
-              <p className="font-display text-lg font-bold text-white">{OWNER_NAME}</p>
-              <p className="font-mono text-[10px] uppercase tracking-widest2 text-slate-500">[Role placeholder]</p>
+              <p className="font-display text-lg font-bold text-tx-hi">{OWNER_NAME}</p>
+              <p className="font-mono text-[10px] uppercase tracking-widest2 text-tx-faint">[Role placeholder]</p>
             </div>
             <PlaceholderTag className="ml-auto" />
           </div>
-          <p className="mt-5 text-sm leading-relaxed text-slate-300 sm:text-base">
+          <p className="mt-5 text-sm leading-relaxed text-tx sm:text-base">
             [Professional summary placeholder — two or three first-person lines will be filled here from the résumé
             and project materials. Nothing is claimed until it is supplied.]
           </p>
           <div className="mt-6 grid gap-3 sm:grid-cols-3">
             {["A", "B", "C"].map((g) => (
-              <div key={g} className="rounded-2xl border border-white/10 bg-white/[0.03] p-4">
+              <div key={g} className="rounded-2xl border border-line/10 bg-fill/[0.03] p-4">
                 <p className="field-label">[Principle {g}]</p>
-                <p className="mt-1 text-xs text-slate-400">[One line on how you work — placeholder.]</p>
+                <p className="mt-1 text-xs text-tx-low">[One line on how you work — placeholder.]</p>
               </div>
             ))}
           </div>

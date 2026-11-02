@@ -5,6 +5,7 @@ import { useMotion } from "../context/motion-context";
 import { scrollToSection } from "../lib/scroll";
 import { CHAPTERS, HERO } from "../lib/content";
 import { MEDIA } from "../lib/media";
+import Typewriter from "./Typewriter";
 import { Tag } from "./Tags";
 
 const BARS = [12, 20, 28, 36, 26, 40, 22, 32, 16, 28, 38, 24, 14, 22, 30, 18];
@@ -36,22 +37,6 @@ const Hero = () => {
 
   const pct = dur ? Math.min(100, (time / dur) * 100) : 0;
 
-  const Line = ({ children, delay }) =>
-    !motionOn ? (
-      <span className="block">{children}</span>
-    ) : (
-      <span className="block overflow-hidden">
-        <motion.span
-          className="block"
-          initial={{ y: "112%" }}
-          animate={{ y: 0 }}
-          transition={{ duration: 0.9, delay, ease: [0.16, 1, 0.3, 1] }}
-        >
-          {children}
-        </motion.span>
-      </span>
-    );
-
   return (
     <section
       id="hero"
@@ -74,26 +59,21 @@ const Hero = () => {
 
       <div className="mx-auto grid max-w-7xl gap-12 px-4 pb-16 sm:px-6 lg:grid-cols-[1.1fr_0.9fr] lg:items-center lg:px-8 lg:pb-24">
         <div>
-          <span className="inline-flex items-center gap-2 rounded-full border border-amberx/40 bg-amberx/10 px-3.5 py-1.5 font-mono text-[11px] font-semibold uppercase tracking-widest2 text-amber-300">
-            <span className="pulse-dot h-1.5 w-1.5 rounded-full bg-amberx" />
+          <span className="inline-flex items-center gap-2 rounded-full border border-amb/40 bg-amb/10 px-3.5 py-1.5 font-mono text-[11px] font-semibold uppercase tracking-widest2 text-amb-soft">
+            <span className="pulse-dot h-1.5 w-1.5 rounded-full bg-amb" />
             {HERO.badge}
           </span>
-          <h1 className="mt-6 font-display text-5xl font-extrabold leading-[0.98] tracking-tight text-white sm:text-6xl lg:text-7xl xl:text-8xl">
-            <Line delay={0.05}>{HERO.headlineTop}</Line>
-            <Line delay={0.16}>
-              <span className="bg-gradient-to-r from-acc-bright via-violet-400 to-fuchsia-400 bg-clip-text text-transparent">
-                {HERO.headlineAccent}
-              </span>
-            </Line>
-          </h1>
-          <p className="mt-6 max-w-md text-base leading-relaxed text-slate-400">{HERO.sub}</p>
+          <div className="mt-6">
+            <Typewriter />
+          </div>
+          <p className="mt-6 max-w-md text-base leading-relaxed text-tx-low">{HERO.sub}</p>
           <nav aria-label="Chapters" className="mt-8 flex flex-wrap gap-2">
             {CHAPTERS.slice(1).map((c) => (
               <button
                 key={c.id}
                 data-testid={`chapter-link-${c.id}`}
                 onClick={() => scrollToSection(c.id)}
-                className="rounded-full border border-white/10 bg-white/[0.04] px-3.5 py-2 text-xs font-semibold text-slate-300 transition-all hover:-translate-y-0.5 hover:border-acc-bright/50 hover:text-white"
+                className="rounded-full border border-line/10 bg-fill/5 px-3.5 py-2 text-xs font-semibold text-tx-low transition-all hover:-translate-y-0.5 hover:border-acc-bright/50 hover:text-tx-hi"
               >
                 <span className="mr-1.5 font-mono text-acc-soft">{c.no}</span>
                 {c.full}
@@ -106,8 +86,8 @@ const Hero = () => {
           <div className="glass overflow-hidden rounded-3xl">
             <div className="relative h-36 sm:h-44">
               <img src={MEDIA.heroWave} alt="" className="h-full w-full object-cover" />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#161E31] via-[#161E31]/30 to-transparent" />
-              <p className="absolute bottom-3 left-5 font-mono text-[10px] uppercase tracking-widest2 text-slate-300">
+              <div className="absolute inset-0 bg-gradient-to-t from-panel via-panel/30 to-transparent" />
+              <p className="absolute bottom-3 left-5 font-mono text-[10px] uppercase tracking-widest2 text-tx-low">
                 {HERO.playerLabel}
               </p>
             </div>
@@ -134,25 +114,25 @@ const Hero = () => {
                     />
                   ))}
                 </div>
-                <span className="font-mono text-[11px] tabular-nums text-slate-400">
+                <span className="font-mono text-[11px] tabular-nums text-tx-faint">
                   {fmt(time)} / {fmt(dur || 10)}
                 </span>
               </div>
-              <div className="mt-4 h-1 overflow-hidden rounded-full bg-white/10">
+              <div className="mt-4 h-1 overflow-hidden rounded-full bg-line/10">
                 <div
                   className="h-full rounded-full bg-gradient-to-r from-acc to-violet-400 transition-all duration-200"
                   style={{ width: `${pct}%` }}
                 />
               </div>
               <div
-                className="mt-5 rounded-2xl border border-dashed border-white/15 bg-white/[0.03] p-4"
+                className="mt-5 rounded-2xl border border-dashed border-line/15 bg-fill/[0.03] p-4"
                 data-testid="hero-transcript"
               >
                 <Tag tone="amber">{HERO.transcriptTag}</Tag>
-                <p className="mt-2.5 text-sm leading-relaxed text-slate-400">{HERO.transcript}</p>
+                <p className="mt-2.5 text-sm leading-relaxed text-tx-low">{HERO.transcript}</p>
               </div>
               {audioError && (
-                <p className="mt-3 text-xs text-orange-300" data-testid="hero-audio-error">
+                <p className="mt-3 text-xs text-tan-soft" data-testid="hero-audio-error">
                   Audio could not play in this browser — the transcript above shows the same content.
                 </p>
               )}
