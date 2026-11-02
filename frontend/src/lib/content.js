@@ -14,10 +14,10 @@ export const OWNER_NAME = "Ansik Aryan Samal";
 export const HERO = {
   badge: "Built by voice",
   sub: "[Two-line first-person pitch — placeholder. The real intro will be recorded and written here.]",
-  playerLabel: "Sample intro — 10 seconds",
-  transcriptTag: "Sample — no recording yet",
+  playerLabel: "Voice intro — your recording",
+  transcriptTag: "Voice recording needed",
   transcript:
-    "[Transcript of the sample clip appears here. The real intro transcript will replace it once recorded.]",
+    "[Transcript appears once the intro is recorded — add yours in Content Setup.]",
 };
 
 export const HERO_PHRASES = ["I build out loud.", "Proof over promises.", "Made by voice."];

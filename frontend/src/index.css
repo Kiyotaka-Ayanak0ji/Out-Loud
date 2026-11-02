@@ -172,3 +172,52 @@
   animation: none !important;
   transition: none !important;
 }
+
+/* ---- print summary: hide the app, show only the print sheet ---- */
+#print-root {
+  display: none;
+}
+@media print {
+  .screen-only {
+    display: none !important;
+  }
+  #print-root {
+    display: block !important;
+  }
+  body {
+    background: #ffffff !important;
+    color: #000000;
+  }
+  html {
+    background: #ffffff !important;
+  }
+  #print-root h1 {
+    font-family: "Syne", sans-serif;
+  }
+  #print-root h2 {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 10pt;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    margin: 11pt 0 4pt;
+    border-bottom: 0.5pt solid #bbb;
+    padding-bottom: 2pt;
+  }
+  #print-root p,
+  #print-root li {
+    font-size: 9.5pt;
+    line-height: 1.45;
+    margin: 0 0 2pt;
+  }
+  #print-root .notset {
+    color: #666;
+    font-style: italic;
+  }
+  #print-root a {
+    color: #000;
+  }
+  @page {
+    size: A4;
+    margin: 13mm;
+  }
+}

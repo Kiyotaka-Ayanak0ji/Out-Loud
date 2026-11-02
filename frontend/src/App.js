@@ -1,7 +1,8 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Lenis from "lenis";
 import { MotionProvider, useMotion } from "./context/motion-context";
 import { ThemeProvider } from "./context/theme-context";
+import { ProfileProvider } from "./context/profile-context";
 import { setLenis } from "./lib/scroll";
 import Nav from "./components/Nav";
 import Hero from "./components/Hero";
@@ -13,6 +14,8 @@ import ProjectsSkills from "./components/ProjectsSkills";
 import AboutMe from "./components/AboutMe";
 import ContactMe from "./components/ContactMe";
 import Footer from "./components/Footer";
+import PrintSummary from "./components/PrintSummary";
+import SetupApp from "./setup/SetupApp";
 import "./App.css";
 
 const NOISE =
@@ -40,6 +43,16 @@ class ErrorBoundary extends React.Component {
     return this.props.children;
   }
 }
+
+const useHashRoute = () => {
+  const [route, setRoute] = useState(() => window.location.hash.replace(/^#/, "") || "/");
+  useEffect(() => {
+    const on = () => setRoute(window.location.hash.replace(/^#/, "") || "/");
+    window.addEventListener("hashchange", on);
+    return () => window.removeEventListener("hashchange", on);
+  }, []);
+  return route;
+};
 
 const Divider = () => (
   <div aria-hidden className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -98,12 +111,25 @@ const Page = () => {
   );
 };
 
+const Shell = () => {
+  const route = useHashRoute();
+  const isSetup = route.startsWith("/setup");
+  return (
+    <>
+      <div className="screen-only">{isSetup ? <SetupApp /> : <Page />}</div>
+      <PrintSummary />
+    </>
+  );
+};
+
 const App = () => (
   <MotionProvider>
     <ThemeProvider>
-      <ErrorBoundary>
-        <Page />
-      </ErrorBoundary>
+      <ProfileProvider>
+        <ErrorBoundary>
+          <Shell />
+        </ErrorBoundary>
+      </ProfileProvider>
     </ThemeProvider>
   </MotionProvider>
 );

@@ -1,7 +1,8 @@
 import { useRef, useState } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
-import { Pause, Play } from "lucide-react";
+import { MicOff, Pause, Play } from "lucide-react";
 import { useMotion } from "../context/motion-context";
+import { useProfile } from "../context/profile-context";
 import { scrollToSection } from "../lib/scroll";
 import { CHAPTERS, HERO } from "../lib/content";
 import { MEDIA } from "../lib/media";
@@ -18,6 +19,9 @@ const fmt = (t) => {
 
 const Hero = () => {
   const { motionOn } = useMotion();
+  const { profile } = useProfile();
+  const hasAudio = !!profile.intro.audio;
+  const hasTranscript = !!profile.intro.transcript?.trim();
   const [playing, setPlaying] = useState(false);
   const [time, setTime] = useState(0);
   const [dur, setDur] = useState(0);
@@ -30,7 +34,7 @@ const Hero = () => {
 
   const togglePlay = () => {
     const a = audioRef.current;
-    if (!a) return;
+    if (!a || !hasAudio) return;
     if (playing) a.pause();
     else a.play().catch(() => setAudioError(true));
   };
@@ -92,44 +96,70 @@ const Hero = () => {
               </p>
             </div>
             <div className="p-5 sm:p-6">
-              <div className="flex items-center gap-4">
-                <button
-                  data-testid="hero-audio-play-btn"
-                  onClick={togglePlay}
-                  aria-label={playing ? "Pause sample intro" : "Play sample intro"}
-                  className="grid h-12 w-12 flex-none place-items-center rounded-full bg-acc text-white shadow-[0_10px_30px_-8px_rgba(99,102,241,0.7)] transition-transform hover:scale-105"
-                >
-                  {playing ? (
-                    <Pause className="h-[18px] w-[18px]" />
-                  ) : (
-                    <Play className="ml-0.5 h-5 w-5" />
-                  )}
-                </button>
-                <div className="flex h-12 flex-1 items-center gap-[3px]" aria-hidden>
-                  {BARS.map((h, i) => (
-                    <span
-                      key={i}
-                      style={{ height: `${h}px`, animationDelay: `${i * 0.09}s` }}
-                      className={`wf-bar w-[3px] rounded-full bg-gradient-to-t from-acc to-violet-400 ${playing ? "wf-anim" : ""}`}
+              {hasAudio ? (
+                <>
+                  <div className="flex items-center gap-4">
+                    <button
+                      data-testid="hero-audio-play-btn"
+                      onClick={togglePlay}
+                      aria-label={playing ? "Pause the intro recording" : "Play the intro recording"}
+                      className="grid h-12 w-12 flex-none place-items-center rounded-full bg-acc text-white shadow-[0_10px_30px_-8px_rgba(99,102,241,0.7)] transition-transform hover:scale-105"
+                    >
+                      {playing ? (
+                        <Pause className="h-[18px] w-[18px]" />
+                      ) : (
+                        <Play className="ml-0.5 h-5 w-5" />
+                      )}
+                    </button>
+                    <div className="flex h-12 flex-1 items-center gap-[3px]" aria-hidden>
+                      {BARS.map((h, i) => (
+                        <span
+                          key={i}
+                          style={{ height: `${h}px`, animationDelay: `${i * 0.09}s` }}
+                          className={`wf-bar w-[3px] rounded-full bg-gradient-to-t from-acc to-violet-400 ${playing ? "wf-anim" : ""}`}
+                        />
+                      ))}
+                    </div>
+                    <span className="font-mono text-[11px] tabular-nums text-tx-faint">
+                      {fmt(time)} / {fmt(dur || 0)}
+                    </span>
+                  </div>
+                  <div className="mt-4 h-1 overflow-hidden rounded-full bg-line/10">
+                    <div
+                      className="h-full rounded-full bg-gradient-to-r from-acc to-violet-400 transition-all duration-200"
+                      style={{ width: `${pct}%` }}
                     />
-                  ))}
-                </div>
-                <span className="font-mono text-[11px] tabular-nums text-tx-faint">
-                  {fmt(time)} / {fmt(dur || 10)}
-                </span>
-              </div>
-              <div className="mt-4 h-1 overflow-hidden rounded-full bg-line/10">
+                  </div>
+                </>
+              ) : (
                 <div
-                  className="h-full rounded-full bg-gradient-to-r from-acc to-violet-400 transition-all duration-200"
-                  style={{ width: `${pct}%` }}
-                />
-              </div>
+                  className="flex items-center gap-3 rounded-2xl border border-amb/30 bg-amb/[0.07] p-4"
+                  data-testid="hero-audio-needed"
+                >
+                  <span className="grid h-10 w-10 flex-none place-items-center rounded-full bg-amb/15 text-amb-soft">
+                    <MicOff className="h-4 w-4" />
+                  </span>
+                  <div>
+                    <p className="font-display text-sm font-bold text-tx-hi">Voice recording needed</p>
+                    <p className="text-xs leading-relaxed text-tx-low">
+                      The real intro will play here once it is recorded in Content Setup. Everything else on this
+                      page works without it.
+                    </p>
+                  </div>
+                </div>
+              )}
               <div
                 className="mt-5 rounded-2xl border border-dashed border-line/15 bg-fill/[0.03] p-4"
                 data-testid="hero-transcript"
               >
-                <Tag tone="amber">{HERO.transcriptTag}</Tag>
-                <p className="mt-2.5 text-sm leading-relaxed text-tx-low">{HERO.transcript}</p>
+                <Tag tone={hasAudio ? "emerald" : "amber"}>
+                  {hasAudio ? "Recorded intro — plays on tap only" : "Voice recording needed"}
+                </Tag>
+                <p className="mt-2.5 text-sm leading-relaxed text-tx-low">
+                  {hasTranscript
+                    ? profile.intro.transcript
+                    : "[Transcript appears once the intro is recorded — add yours in Content Setup.]"}
+                </p>
               </div>
               {audioError && (
                 <p className="mt-3 text-xs text-tan-soft" data-testid="hero-audio-error">
@@ -141,20 +171,22 @@ const Hero = () => {
         </div>
       </div>
 
-      <audio
-        ref={audioRef}
-        src="/audio/intro-sample.mp3"
-        preload="metadata"
-        onPlay={() => setPlaying(true)}
-        onPause={() => setPlaying(false)}
-        onEnded={() => {
-          setPlaying(false);
-          setTime(0);
-        }}
-        onTimeUpdate={(e) => setTime(e.currentTarget.currentTime)}
-        onLoadedMetadata={(e) => setDur(e.currentTarget.duration)}
-        onError={() => setAudioError(true)}
-      />
+      {hasAudio && (
+        <audio
+          ref={audioRef}
+          src={profile.intro.audio}
+          preload="metadata"
+          onPlay={() => setPlaying(true)}
+          onPause={() => setPlaying(false)}
+          onEnded={() => {
+            setPlaying(false);
+            setTime(0);
+          }}
+          onTimeUpdate={(e) => setTime(e.currentTarget.currentTime)}
+          onLoadedMetadata={(e) => setDur(e.currentTarget.duration)}
+          onError={() => setAudioError(true)}
+        />
+      )}
     </section>
   );
 };

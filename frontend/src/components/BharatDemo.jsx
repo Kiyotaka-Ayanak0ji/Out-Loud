@@ -3,6 +3,7 @@ import { Loader2, Mic } from "lucide-react";
 import { Reveal, SectionHeader } from "./Reveal";
 import { SampleTag, Tag } from "./Tags";
 import { GENERIC_RESULT, VOICE_SAMPLES } from "../lib/content";
+import { useProfile } from "../context/profile-context";
 
 const MARKERS = {
   electrician: ["electrician", "wiring", "bijli"],
@@ -25,6 +26,8 @@ const Field = ({ label, value }) => (
 );
 
 const BharatDemo = () => {
+  const { profile } = useProfile();
+  const origin = profile.bharat.origin?.trim();
   const [transcript, setTranscript] = useState("");
   const [result, setResult] = useState(null);
   const [error, setError] = useState("");
@@ -82,7 +85,10 @@ const BharatDemo = () => {
           kicker="Voice-First Bharat"
           accent="emerald"
           title="Where voice is the interface."
-          desc="[Pitch placeholder — why speech-first products win for Bharat. Try the sample demo below: load a sample, edit the transcript, then build the profile.]"
+          desc={
+            origin ||
+            "[Pitch placeholder — why speech-first products win for Bharat. Try the sample demo below: load a sample, edit the transcript, then build the profile.]"
+          }
         />
 
         <Reveal className="mt-8">

@@ -2,12 +2,16 @@ import { useEffect, useRef, useState } from "react";
 import { Ear, Eye, Lightbulb, RefreshCcw } from "lucide-react";
 import { Reveal, SectionHeader } from "./Reveal";
 import { Tag } from "./Tags";
+import Decoder from "./Decoder";
 import { PLATES, SECRET } from "../lib/content";
+import { useProfile } from "../context/profile-context";
 
 const W = 720;
 const lum = (r, g, b) => 0.2126 * r + 0.7152 * g + 0.0722 * b;
 
 const SecretLayer = () => {
+  const { profile } = useProfile();
+  const story = profile.secret.story?.trim() ? profile.secret.story : SECRET.story;
   const [plateIdx, setPlateIdx] = useState(0);
   const [threshold, setThreshold] = useState(128);
   const [status, setStatus] = useState("loading");
@@ -112,7 +116,7 @@ const SecretLayer = () => {
           kicker="The Secret Layer"
           accent="tangerine"
           title="Three plates. One buried word."
-          desc={SECRET.story}
+          desc={story}
         />
 
         <Reveal className="mt-6">
@@ -339,6 +343,10 @@ const SecretLayer = () => {
 
             <p className="mt-4 text-xs text-tx-faint">{SECRET.note}</p>
           </div>
+        </Reveal>
+
+        <Reveal className="mt-6">
+          <Decoder />
         </Reveal>
       </div>
     </section>
