@@ -1,123 +1,14 @@
-import { ArrowUpRight } from "lucide-react";
 import { useProfile } from "../context/profile-context";
-import { OWNER_NAME } from "../lib/content";
-
-const NotSet = ({ label }) => <p className="notset">{label} — not yet provided</p>;
-
-/*
- * Print-only one-page summary. Reads the profile applied from the private
- * Content Setup on this device; omits or labels anything not provided.
- */
-const PrintSummary = () => {
-  const { profile } = useProfile();
-  const a = profile.about;
-  const c = profile.contact;
-  const decisions = profile.autopsy.decisions.filter((d) => d.title && d.title.trim());
-  const projects = profile.projects.filter((p) => p.title && p.title.trim());
-  const skills = profile.skills.filter((s) => s.name && s.name.trim() && s.items && s.items.trim());
-  const links = [
-    ["Résumé", a.resume],
-    ["LinkedIn", a.linkedin],
-    ["GitHub", a.github],
-    ["Other", a.other],
-  ].filter(([, v]) => v && v.trim());
-
-  return (
-    <div id="print-root" aria-hidden={true}>
-      <div className="mx-auto max-w-[680px] text-black">
-        <p className="font-mono text-[8pt] uppercase" style={{ letterSpacing: "0.2em" }}>
-          Out Loud — print summary
-        </p>
-        <h1 style={{ fontSize: "21pt", fontWeight: 800, lineHeight: 1.1, margin: "4pt 0 2pt" }}>{OWNER_NAME}</h1>
-        {a.role ? (
-          <p style={{ fontSize: "10pt", fontWeight: 600 }}>{a.role}</p>
-        ) : (
-          <p className="notset">Role — not yet provided</p>
-        )}
-
-        <h2>Introduction</h2>
-        {profile.intro.transcript ? (
-          <p>{profile.intro.transcript}</p>
-        ) : (
-          <NotSet label="Introduction" />
-        )}
-
-        <h2>Selected projects</h2>
-        {projects.length ? (
-          projects.map((p, i) => (
-            <div key={i} style={{ marginBottom: "5pt" }}>
-              <p style={{ fontWeight: 700, fontSize: "9.5pt" }}>{p.title}</p>
-              {p.summary ? <p>{p.summary}</p> : null}
-              {p.work ? <p>Contribution: {p.work}</p> : null}
-              {p.tools ? <p>Tools: {p.tools}</p> : null}
-              {p.link ? (
-                <p>
-                  Link: <a href={p.link}>{p.link}</a>
-                  {p.evidenceOk ? " (evidence attached)" : " (evidence needed)"}
-                </p>
-              ) : (
-                <p className="notset">Link — not yet provided</p>
-              )}
-            </div>
-          ))
-        ) : (
-          <NotSet label="Projects" />
-        )}
-
-        <h2>Key skills</h2>
-        {skills.length ? (
-          skills.map((s, i) => (
-            <p key={i}>
-              <b>{s.name}:</b> {s.items}
-            </p>
-          ))
-        ) : (
-          <NotSet label="Skills" />
-        )}
-
-        <h2>Decisions worth asking about</h2>
-        {decisions.length ? (
-          decisions.map((d, i) => (
-            <p key={i}>
-              <b>{d.title}</b>
-              {d.result ? ` — ${d.result}` : " — result not yet provided"}
-              {d.evidenceOk ? " (evidence attached)" : ""}
-            </p>
-          ))
-        ) : (
-          <NotSet label="Decisions" />
-        )}
-
-        <h2>Links</h2>
-        {links.length ? (
-          links.map(([label, v]) => (
-            <p key={label}>
-              <b>{label}:</b>{" "}
-              <a href={v}>{v}</a>
-            </p>
-          ))
-        ) : (
-          <NotSet label="Links" />
-        )}
-
-        <h2>Contact</h2>
-        {c.publish ? (
-          <>
-            {c.email ? <p>Email: {c.email}</p> : null}
-            {c.location ? <p>Location: {c.location}</p> : null}
-            {c.profiles ? <p>Profiles: {c.profiles}</p> : null}
-          </>
-        ) : (
-          <p className="notset">Contact details not published by the owner yet</p>
-        )}
-
-        <p style={{ marginTop: "8pt", fontSize: "7.5pt", color: "#555" }}>
-          Generated from the private Content Setup on this device · Nothing is claimed without evidence ·
-          {" "}out loud, by {OWNER_NAME}
-        </p>
-      </div>
-    </div>
-  );
-};
-
-export default PrintSummary;
+import { OWNER_NAME, EDUCATION } from "../lib/profile-data";
+export default function PrintSummary() {
+  const { profile: p } = useProfile();
+  return <div id="print-root" data-testid="print-summary"><h1>{OWNER_NAME}</h1><p>{p.about.role}</p><p>{p.contact.publish ? `${p.contact.email} · ${p.contact.location}` : ""}</p>
+    <h2>Profile</h2><p>{p.about.bio}</p><h2>Selected work</h2>
+    {p.projects.map((project) => <div className="print-project" key={project.id}><p><b>{project.title}{project.status ? ` (${project.status})` : ""}.</b> {project.summary}</p></div>)}
+    <h2>Project outcomes</h2><p>Résumé-reported: 5,300+ stocks and about 10,000 views in 3 to 4 months for the Stock Screener; 95% unseen-data accuracy for the job authenticity tool. Supporting evidence: Upload needed.</p>
+    <h2>Core skills</h2><p>Python, JavaScript, TypeScript, SQL, React.js, Node.js, Express.js, Flask, FastAPI, PostgreSQL, MongoDB, Scikit-learn, RAG, prompt engineering.</p>
+    <h2>Education</h2><p>{EDUCATION[0]}</p><p>Data Science and Artificial Intelligence, IIT Roorkee and Masai School. Ongoing, 2026.</p>
+    <h2>Links</h2><p>{p.about.linkedin}</p><p>{p.about.github}</p><p>{p.about.other}</p>
+    <h2>Availability & work requirement</h2><p>Availability: {p.contact.availability || "Upload needed."} The $3,000 answer: {p.secret.grant || "Upload needed."}</p>
+  </div>;
+}

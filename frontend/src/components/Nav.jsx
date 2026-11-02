@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { Menu, X } from "lucide-react";
+import { Menu, X, Printer } from "lucide-react";
 import Logo from "./Logo";
 import ThemeToggle from "./ThemeToggle";
 import { useMotion } from "../context/motion-context";
@@ -12,6 +12,7 @@ export const MotionToggle = ({ withLabel = true }) => {
   return (
     <button
       data-testid="motion-toggle-btn"
+      aria-label="Toggle animations"
       onClick={toggleMotion}
       aria-pressed={motionOn}
       title="Turn animations on or off"
@@ -34,18 +35,18 @@ export const MotionToggle = ({ withLabel = true }) => {
 };
 
 const MenuList = ({ go }) => (
-  <nav aria-label="All chapters" className="flex h-full flex-col justify-center gap-1 px-8 pb-10 pt-24">
+  <nav aria-label="All chapters" className="flex h-full flex-col justify-start gap-1 overflow-y-auto px-8 pb-10 pt-24">
     {CHAPTERS.slice(1).map((c) => (
       <button
         key={c.id}
         data-testid={`menu-link-${c.id}`}
         onClick={() => go(c.id)}
-        className="flex items-baseline gap-4 border-b border-line/10 py-4 text-left"
+        className="flex items-baseline gap-4 border-b border-line/10 py-3 text-left"
       >
-        <span className="font-mono text-xs text-acc-soft">{c.no}</span>
         <span className="font-display text-2xl font-bold text-tx-hi">{c.full}</span>
       </button>
     ))}
+    <button onClick={() => window.print()} data-testid="menu-print-btn" className="flex items-center gap-3 py-4 text-sm text-tx-low"><Printer className="h-4 w-4" />Print summary</button>
   </nav>
 );
 
@@ -69,18 +70,19 @@ const Nav = () => {
     <>
       <a
         href="#autopsy"
+        data-testid="skip-to-content"
         className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:rounded-full focus:bg-acc focus:px-4 focus:py-2 focus:text-sm focus:font-semibold focus:text-white"
       >
         Skip to content
       </a>
       <header className="fixed inset-x-0 top-0 z-50">
         <div className="mx-auto max-w-7xl px-3 sm:px-6 lg:px-8">
-          <div className="glass mt-3 flex items-center justify-between gap-3 rounded-2xl px-4 py-3">
-            <button data-testid="nav-home-btn" onClick={() => go("hero")} className="flex items-center gap-2.5">
+          <div className="glass mt-3 flex items-center justify-between gap-2 rounded-2xl px-3 py-3 sm:px-4">
+            <button data-testid="nav-home-btn" onClick={() => go("hero")} className="flex flex-none items-center gap-2.5">
               <Logo className="h-7 w-7" />
-              <span className="whitespace-nowrap font-display text-lg font-bold tracking-tight text-tx-hi">Out Loud</span>
+              <span className="whitespace-nowrap font-display text-base font-semibold text-tx-hi sm:text-lg">Out Loud</span>
             </button>
-            <nav aria-label="Chapters" className="hidden items-center gap-1 lg:flex">
+            <nav aria-label="Chapters" className="hidden items-center gap-1 xl:flex">
               {CHAPTERS.slice(1).map((c) => (
                 <button
                   key={c.id}
@@ -92,7 +94,8 @@ const Nav = () => {
                 </button>
               ))}
             </nav>
-            <div className="flex items-center gap-2">
+            <div className="flex flex-none items-center gap-1.5 sm:gap-2">
+              <button onClick={() => window.print()} data-testid="nav-print-btn" aria-label="Print summary" title="Print summary" className="hidden h-9 w-9 place-items-center rounded-full border border-line/10 text-tx-low hover:text-tx-hi sm:grid"><Printer className="h-4 w-4" /></button>
               <ThemeToggle />
               <MotionToggle withLabel={false} />
               <button
@@ -100,7 +103,7 @@ const Nav = () => {
                 aria-label={open ? "Close menu" : "Open menu"}
                 aria-expanded={open}
                 onClick={() => setOpen((v) => !v)}
-                className="grid h-9 w-9 place-items-center rounded-full border border-line/10 bg-fill/5 text-tx lg:hidden"
+                className="grid h-9 w-9 place-items-center rounded-full border border-line/10 bg-fill/5 text-tx xl:hidden"
               >
                 {open ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
               </button>
@@ -117,13 +120,13 @@ const Nav = () => {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.25 }}
-              className="fixed inset-0 z-40 bg-bg/95 backdrop-blur-xl lg:hidden"
+              className="fixed inset-0 z-40 bg-bg/95 backdrop-blur-xl xl:hidden"
               data-testid="nav-overlay"
             >
               <MenuList go={go} />
             </motion.div>
           ) : (
-            <div className="fixed inset-0 z-40 bg-bg/95 backdrop-blur-xl lg:hidden" data-testid="nav-overlay">
+            <div className="fixed inset-0 z-40 bg-bg/95 backdrop-blur-xl xl:hidden" data-testid="nav-overlay">
               <MenuList go={go} />
             </div>
           ))}

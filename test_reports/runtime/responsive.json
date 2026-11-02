@@ -1,0 +1,416 @@
+[
+  {
+    "theme": "dark",
+    "width": 320,
+    "scroll": 320,
+    "controls": [
+      {
+        "id": "nav-home-btn",
+        "left": 25,
+        "right": 134,
+        "top": 29,
+        "bottom": 57
+      },
+      {
+        "id": "theme-toggle-btn",
+        "left": 157,
+        "right": 193,
+        "top": 25,
+        "bottom": 61
+      },
+      {
+        "id": "motion-toggle-btn",
+        "left": 199,
+        "right": 253,
+        "top": 28,
+        "bottom": 58
+      },
+      {
+        "id": "nav-menu-btn",
+        "left": 259,
+        "right": 295,
+        "top": 25,
+        "bottom": 61
+      }
+    ],
+    "clipped": []
+  },
+  {
+    "theme": "light",
+    "width": 320,
+    "scroll": 320,
+    "controls": [
+      {
+        "id": "nav-home-btn",
+        "left": 25,
+        "right": 134,
+        "top": 29,
+        "bottom": 57
+      },
+      {
+        "id": "theme-toggle-btn",
+        "left": 157,
+        "right": 193,
+        "top": 25,
+        "bottom": 61
+      },
+      {
+        "id": "motion-toggle-btn",
+        "left": 199,
+        "right": 253,
+        "top": 28,
+        "bottom": 58
+      },
+      {
+        "id": "nav-menu-btn",
+        "left": 259,
+        "right": 295,
+        "top": 25,
+        "bottom": 61
+      }
+    ],
+    "clipped": []
+  },
+  {
+    "theme": "dark",
+    "width": 768,
+    "scroll": 768,
+    "controls": [
+      {
+        "id": "nav-home-btn",
+        "left": 41,
+        "right": 159,
+        "top": 29,
+        "bottom": 57
+      },
+      {
+        "id": "nav-print-btn",
+        "left": 504,
+        "right": 540,
+        "top": 25,
+        "bottom": 61
+      },
+      {
+        "id": "theme-toggle-btn",
+        "left": 548,
+        "right": 621,
+        "top": 25,
+        "bottom": 61
+      },
+      {
+        "id": "motion-toggle-btn",
+        "left": 629,
+        "right": 683,
+        "top": 28,
+        "bottom": 58
+      },
+      {
+        "id": "nav-menu-btn",
+        "left": 691,
+        "right": 727,
+        "top": 25,
+        "bottom": 61
+      }
+    ],
+    "clipped": []
+  },
+  {
+    "theme": "light",
+    "width": 768,
+    "scroll": 768,
+    "controls": [
+      {
+        "id": "nav-home-btn",
+        "left": 41,
+        "right": 159,
+        "top": 29,
+        "bottom": 57
+      },
+      {
+        "id": "nav-print-btn",
+        "left": 501,
+        "right": 537,
+        "top": 25,
+        "bottom": 61
+      },
+      {
+        "id": "theme-toggle-btn",
+        "left": 545,
+        "right": 621,
+        "top": 25,
+        "bottom": 61
+      },
+      {
+        "id": "motion-toggle-btn",
+        "left": 629,
+        "right": 683,
+        "top": 28,
+        "bottom": 58
+      },
+      {
+        "id": "nav-menu-btn",
+        "left": 691,
+        "right": 727,
+        "top": 25,
+        "bottom": 61
+      }
+    ],
+    "clipped": []
+  },
+  {
+    "theme": "dark",
+    "width": 1024,
+    "scroll": 1024,
+    "controls": [
+      {
+        "id": "nav-home-btn",
+        "left": 49,
+        "right": 167,
+        "top": 29,
+        "bottom": 57
+      },
+      {
+        "id": "nav-print-btn",
+        "left": 752,
+        "right": 788,
+        "top": 25,
+        "bottom": 61
+      },
+      {
+        "id": "theme-toggle-btn",
+        "left": 796,
+        "right": 869,
+        "top": 25,
+        "bottom": 61
+      },
+      {
+        "id": "motion-toggle-btn",
+        "left": 877,
+        "right": 931,
+        "top": 28,
+        "bottom": 58
+      },
+      {
+        "id": "nav-menu-btn",
+        "left": 939,
+        "right": 975,
+        "top": 25,
+        "bottom": 61
+      }
+    ],
+    "clipped": []
+  },
+  {
+    "theme": "light",
+    "width": 1024,
+    "scroll": 1024,
+    "controls": [
+      {
+        "id": "nav-home-btn",
+        "left": 49,
+        "right": 167,
+        "top": 29,
+        "bottom": 57
+      },
+      {
+        "id": "nav-print-btn",
+        "left": 749,
+        "right": 785,
+        "top": 25,
+        "bottom": 61
+      },
+      {
+        "id": "theme-toggle-btn",
+        "left": 793,
+        "right": 869,
+        "top": 25,
+        "bottom": 61
+      },
+      {
+        "id": "motion-toggle-btn",
+        "left": 877,
+        "right": 931,
+        "top": 28,
+        "bottom": 58
+      },
+      {
+        "id": "nav-menu-btn",
+        "left": 939,
+        "right": 975,
+        "top": 25,
+        "bottom": 61
+      }
+    ],
+    "clipped": []
+  },
+  {
+    "theme": "dark",
+    "width": 1440,
+    "scroll": 1440,
+    "controls": [
+      {
+        "id": "nav-home-btn",
+        "left": 129,
+        "right": 247,
+        "top": 29,
+        "bottom": 57
+      },
+      {
+        "id": "nav-link-autopsy",
+        "left": 434.5,
+        "right": 511.5,
+        "top": 27.25,
+        "bottom": 58.75
+      },
+      {
+        "id": "nav-link-bharat",
+        "left": 515.5,
+        "right": 583.5,
+        "top": 27.25,
+        "bottom": 58.75
+      },
+      {
+        "id": "nav-link-secret",
+        "left": 587.5,
+        "right": 654.5,
+        "top": 27.25,
+        "bottom": 58.75
+      },
+      {
+        "id": "nav-link-receipts",
+        "left": 658.5,
+        "right": 738.5,
+        "top": 27.25,
+        "bottom": 58.75
+      },
+      {
+        "id": "nav-link-work",
+        "left": 742.5,
+        "right": 798.5,
+        "top": 27.25,
+        "bottom": 58.75
+      },
+      {
+        "id": "nav-link-about",
+        "left": 802.5,
+        "right": 864.5,
+        "top": 27.25,
+        "bottom": 58.75
+      },
+      {
+        "id": "nav-link-contact",
+        "left": 868.5,
+        "right": 944.5,
+        "top": 27.25,
+        "bottom": 58.75
+      },
+      {
+        "id": "nav-print-btn",
+        "left": 1132,
+        "right": 1168,
+        "top": 25,
+        "bottom": 61
+      },
+      {
+        "id": "theme-toggle-btn",
+        "left": 1176,
+        "right": 1249,
+        "top": 25,
+        "bottom": 61
+      },
+      {
+        "id": "motion-toggle-btn",
+        "left": 1257,
+        "right": 1311,
+        "top": 28,
+        "bottom": 58
+      }
+    ],
+    "clipped": []
+  },
+  {
+    "theme": "light",
+    "width": 1440,
+    "scroll": 1440,
+    "controls": [
+      {
+        "id": "nav-home-btn",
+        "left": 129,
+        "right": 247,
+        "top": 29,
+        "bottom": 57
+      },
+      {
+        "id": "nav-link-autopsy",
+        "left": 433,
+        "right": 510,
+        "top": 27.25,
+        "bottom": 58.75
+      },
+      {
+        "id": "nav-link-bharat",
+        "left": 514,
+        "right": 582,
+        "top": 27.25,
+        "bottom": 58.75
+      },
+      {
+        "id": "nav-link-secret",
+        "left": 586,
+        "right": 653,
+        "top": 27.25,
+        "bottom": 58.75
+      },
+      {
+        "id": "nav-link-receipts",
+        "left": 657,
+        "right": 737,
+        "top": 27.25,
+        "bottom": 58.75
+      },
+      {
+        "id": "nav-link-work",
+        "left": 741,
+        "right": 797,
+        "top": 27.25,
+        "bottom": 58.75
+      },
+      {
+        "id": "nav-link-about",
+        "left": 801,
+        "right": 863,
+        "top": 27.25,
+        "bottom": 58.75
+      },
+      {
+        "id": "nav-link-contact",
+        "left": 867,
+        "right": 943,
+        "top": 27.25,
+        "bottom": 58.75
+      },
+      {
+        "id": "nav-print-btn",
+        "left": 1129,
+        "right": 1165,
+        "top": 25,
+        "bottom": 61
+      },
+      {
+        "id": "theme-toggle-btn",
+        "left": 1173,
+        "right": 1249,
+        "top": 25,
+        "bottom": 61
+      },
+      {
+        "id": "motion-toggle-btn",
+        "left": 1257,
+        "right": 1311,
+        "top": 28,
+        "bottom": 58
+      }
+    ],
+    "clipped": []
+  }
+]

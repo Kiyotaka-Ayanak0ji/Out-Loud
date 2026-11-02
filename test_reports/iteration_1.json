@@ -1,0 +1,61 @@
+{
+  "summary": "Completed frontend-only runtime verification against the public preview in Chromium: 24/26 grouped checks passed. Two confirmed UI bugs; no backend/auth/model integration is in scope. Application source files were not modified.",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {
+    "ui_bugs": [
+      {
+        "component": "SecretLayer / Reveal / MotionToggle",
+        "issue": "Changing motion on OR off silently replaces the rendered puzzle canvas with a transparent 300x150 canvas. Initially it is 720x720 with populated pixels; after either toggle all alpha values are zero. Auto levels or changing threshold/plate restores it.",
+        "selector": "[data-testid='motion-toggle-btn'], [data-testid='decipher-canvas']",
+        "priority": "MEDIUM"
+      },
+      {
+        "component": "Nav",
+        "issue": "At 320px the menu button extends beyond the right viewport edge: x285..321 in dark, x288..324 in light. The header loses its right padding and the menu circle clips. Menu remains operable; 768/1024/1440 and main content have no detected horizontal overflow.",
+        "selector": "[data-testid='nav-menu-btn']",
+        "priority": "MEDIUM"
+      }
+    ],
+    "integration_issues": [],
+    "design_issues": []
+  },
+  "test_report_links": [
+    "/app/tests/portfolio_runtime.py",
+    "/app/tests/portfolio_edges.py",
+    "/app/test_reports/runtime/results.json",
+    "/app/test_reports/runtime/edge-results.json",
+    "/app/test_reports/runtime/responsive.json"
+  ],
+  "action_items": [
+    "Redraw the puzzle canvas when its DOM instance is recreated by a motion toggle, or prevent Reveal from replacing the canvas subtree.",
+    "Reduce or adapt the header control footprint/padding at 320px in both themes.",
+    "Rerun the two saved regression scripts after changes; retain real MediaRecorder and explicit local-only save/download behavior."
+  ],
+  "critical_code_review_comments": [
+    "Reveal.jsx switches its wrapper between motion.div and div when motionOn changes, remounting child DOM. SecretLayer.jsx drawing effect depends only on threshold/status/plateIdx, so the new canvas is never drawn until one of those changes. Confirmed using pixel data, not just visibility.",
+    "Nav.jsx fixed control widths, gaps and padding exceed the available 320px header inner width; overflow-x-clip hides the excess rather than fixing the layout."
+  ],
+  "updated_files": [
+    "/app/tests/portfolio_runtime.py",
+    "/app/tests/portfolio_edges.py",
+    "/app/test_reports/iteration_1.json"
+  ],
+  "success_rate": {"backend": "N/A: intentionally skipped", "frontend": "92.3% (24/26 grouped checks)"},
+  "test_credentials": "Read /app/memory/test_credentials.md. No authentication or credentials; #/setup is an unlisted local editor, not an authenticated account.",
+  "seed_data_creation": "Only disposable isolated browser contexts and TEST_ WAV/transcript fixtures; no database or production data. Tested reset and discarded browser contexts. Explicit fixture exports remain under test_reports/runtime.",
+  "retest_needed": false,
+  "should_main_agent_self_test": false,
+  "post_fix_verification": {
+    "date": "2026-11-02",
+    "status": "PASS",
+    "fixes": ["Stable Reveal motion.div retains the canvas subtree during motion toggles", "Compact mobile theme button and adapted header spacing retain right padding at 320px"],
+    "results": "Main agent reran both testing-agent scripts in foreground: portfolio_runtime.py 19/19 PASS; portfolio_edges.py 7/7 PASS. Final build also passed.",
+    "canvas": "720x720, alpha sum 132192000 before and after both toggle directions",
+    "mobile_header": "320px dark and light: menu bounds x259..295, no clipped controls or horizontal overflow",
+    "final_grouped_checks": "26/26 passed; no app page errors",
+    "reports": ["/app/test_reports/runtime/results.json", "/app/test_reports/runtime/edge-results.json", "/app/test_reports/runtime/responsive.json"],
+    "scope": "Chromium; real MediaRecorder with synthetic input. No physical microphone, Safari/Firefox or full accessibility audit. Initial issue lists above retained as historical findings, now resolved."
+  },
+  "context_for_next_testing_agent": "Core suite final run 18/19, supplemental final run 6/7. Verified loaded Space Grotesk; eight public sections; seven projects and category/detail/skills interactions; six keyboard-operated decisions and About details; desktop/mobile seven-section navigation; both themes and responsive 320/768/1024/1440; motion/reduced-motion/typewriter stable desktop and 320; no public setup links or owner controls; approved email/GitHub zero; all four public images loaded; design lab four variants and toggle; all 34 editor note control groups; representative audio+transcript round trips in all eight sections; WAV playback, replacement transcript reset, individual download bytes, JSON export, explicit IndexedDB save/reload; public same-browser preview/fresh-browser/legacy localStorage isolation including Flow text; real MediaRecorder start/stop/playback/replacement and finalized recording retained after step switch; all tracks stopped including delayed permission resolution; denied/unsupported/non-audio/empty/oversize errors; reset cancel/confirm/persistence; storage unavailable load/save/reset/download fallback. Bharat three exact deterministic samples match required facts, arbitrary/altered input remains Not stated, editable results, no confidence claims. Puzzle all plates/slider/auto/hints/text clues/empty/wrong/out/spoiler/reset pass. Failed plate Retry recovery confirmed. Decoder out gives exact Upload needed., ouu fails CRC, invalid/corrupt image errors; served master SHA256 3050bf1ace5cf297109a80c3f8be4ccfaf75e338d82f6845bdca7e5ca0e7245c matches disk. Browser unit Unicode round trips/CRC/malformed frames pass. Both print themes white with screen app/nav hidden and exactly one A4 PDF page, accurate contacts/no private transcript content; both print buttons invoke print. No app-origin mutation requests carrying notes/audio/transcripts and no page errors. Preview platform injects Cloudflare and Emergent telemetry POSTs; inspected separately, no fixture content observed. MOCKED: only deterministic Bharat demonstration and synthetic test microphone source; MediaRecorder is real, manual transcript editing is intentional, no speech/model integration expected. Scope limitations: Chromium only, no physical microphone/device, Firefox/Safari, full screen-reader or exhaustive WCAG audit. Previous source-ledger review of three resumes was used as context, not claimed as a new independent full resume audit. Installed Python playwright/pypdf test dependencies; no application dependency or source edits.",
+  "rca of the issue": "Canvas: load public page, confirm 720x720 populated canvas, toggle motion, inspect canvas -> 300x150 transparent; toggle back -> still transparent; Auto levels -> 720x720 populated. Root cause is Reveal subtree remount combined with unchanged draw-effect dependencies. Header: set viewport 320, inspect nav-menu-btn bounds in dark/light; right edge 321/324 exceeds 320. Fixed-width controls plus gaps/padding cause excess width masked by overflow clipping. Initial harness-only failures (uppercase tag text, async save timing, immediate print color transition, scroll clamping at final section, platform telemetry categorization) were corrected and retested; these are not application defects."
+}

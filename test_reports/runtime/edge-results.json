@@ -1,0 +1,84 @@
+[
+  {
+    "name": "reduced_motion_keyboard_navigation_320_menu_typewriter",
+    "passed": true,
+    "detail": {
+      "mobile_typewriter_height": 79.1875,
+      "menu_usable_despite_clipping": true
+    }
+  },
+  {
+    "name": "all_images_loaded_tablet_sections_print_buttons",
+    "passed": true,
+    "detail": {
+      "loaded_images": 4,
+      "print_buttons": 2
+    }
+  },
+  {
+    "name": "editor_explicit_only_oversize_rejection_all_steps_responsive",
+    "passed": true,
+    "detail": {
+      "no_implicit_mic": true,
+      "no_implicit_save": true,
+      "setup_widths": [
+        320,
+        768,
+        1024,
+        1440
+      ]
+    }
+  },
+  {
+    "name": "pending_microphone_permission_switch_stops_late_stream",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "name": "browser_decoder_unicode_crc_bounds_units",
+    "passed": true,
+    "detail": {
+      "round_trips": [
+        "Upload needed.",
+        "\u0928\u092e\u0938\u094d\u0924\u0947 \u0c24\u0c46\u0c32\u0c41\u0c17\u0c41 \u0b13\u0b21\u0b3c\u0b3f\u0b06",
+        "Out Loud \u2665"
+      ],
+      "malformed_frames": [
+        "invalid",
+        "invalid",
+        "invalid"
+      ]
+    }
+  },
+  {
+    "name": "autopsy_six_keyboard_accordions_about_details_receipts",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "name": "puzzle_canvas_retained_after_motion_toggle",
+    "passed": true,
+    "detail": {
+      "initial": {
+        "width": 720,
+        "height": 720,
+        "alpha": 132192000
+      },
+      "motion_on": {
+        "width": 720,
+        "height": 720,
+        "alpha": 132192000
+      },
+      "motion_off": {
+        "width": 720,
+        "height": 720,
+        "alpha": 132192000
+      },
+      "after_auto_levels": {
+        "width": 720,
+        "height": 720,
+        "alpha": 132192000
+      }
+    }
+  }
+]

@@ -1,12 +1,13 @@
 import { useRef, useState } from "react";
-import { FileImage, Lock, RotateCcw, ShieldCheck } from "lucide-react";
+import { FileImage, RotateCcw } from "lucide-react";
+import { decodeSecret } from "../lib/steganography";
 
 const STATES = {
-  idle: "Pick a source, add the passphrase, and decode — all of it stays in your browser.",
+  idle: "",
   loading: "Loading the image…",
-  invalid: "That file does not work as a puzzle image — use the master plate or another stego image.",
-  badkey: "The pixels decoded, but the text is scrambled — the passphrase is not right yet.",
-  error: "Decoding failed unexpectedly — try again.",
+  invalid: "No valid hidden message found. Choose a lossless PNG.",
+  badkey: "Wrong passphrase or damaged image. Try again.",
+  error: "Decoding failed. Try again.",
 };
 
 /*
@@ -84,40 +85,11 @@ const Decoder = () => {
       const d = cx.getImageData(0, 0, W, H).data;
       setProgress("Reading the least-significant bits…");
       await wait(350);
-      const total = W * H;
-      const bytes = new Uint8Array(Math.floor(total / 8));
-      let byteI = 0;
-      let cur = 0;
-      let bitI = 0;
-      for (let i = 0; i < total; i++) {
-        cur = (cur << 1) | (d[i * 4] & 1);
-        bitI++;
-        if (bitI === 8) {
-          bytes[byteI++] = cur & 255;
-          bitI = 0;
-          cur = 0;
-          if (byteI >= bytes.length) break;
-        }
-      }
-      setProgress("Unscrambling with your passphrase…");
-      await wait(350);
-      const len = ((bytes[0] << 24) | (bytes[1] << 16) | (bytes[2] << 8) | bytes[3]) >>> 0;
-      if (!(len > 0 && len < 100000) || 4 + len > bytes.length) {
-        setStatus("invalid");
-        return;
-      }
-      const key = new TextEncoder().encode(pass.trim().toLowerCase());
-      const payload = new Uint8Array(len);
-      for (let i = 0; i < len; i++) payload[i] = bytes[4 + i] ^ key[i % key.length];
-      const text = new TextDecoder("utf-8", { fatal: false }).decode(payload);
-      if (/[\u0000-\u0008\u000E-\u001F]/.test(text)) {
-        setStatus("badkey");
-        return;
-      }
+      const text = decodeSecret(d, pass.trim().toLowerCase());
       setMessage(text);
       setStatus("success");
     } catch (e) {
-      setStatus("error");
+      setStatus(["invalid", "badkey"].includes(e.message) ? e.message : "error");
     }
   };
 
@@ -134,16 +106,8 @@ const Decoder = () => {
   return (
     <div className="glass rounded-3xl p-5 sm:p-6" data-testid="decoder-panel">
       <div className="flex flex-wrap items-center justify-between gap-2">
-        <p className="font-display text-lg font-bold text-tx-hi">The decoder — phase two</p>
-        <span className="inline-flex items-center gap-1.5 rounded-full border border-emer/40 bg-emer/10 px-2.5 py-1 font-mono text-[9px] font-semibold uppercase tracking-widest2 text-emer-soft">
-          <Lock className="h-3 w-3" />
-          Runs in your browser
-        </span>
+        <p className="font-display text-lg font-semibold text-tx-hi">Image decoder</p>
       </div>
-      <p className="mt-2 text-sm leading-relaxed text-tx-low">
-        The plates you deciphered are the warm-up. One master plate on this site carries a whole message in its
-        least-significant bits. Solve the three plates, feed the word they spelled to the decoder, and read it.
-      </p>
 
       <div className="mt-4 grid gap-4">
         <div className="flex flex-wrap items-center gap-2">
@@ -162,7 +126,7 @@ const Decoder = () => {
             data-testid="decoder-source-file-btn"
             className="inline-flex items-center gap-1.5 rounded-full border border-line/15 px-3.5 py-2 text-xs font-semibold text-tx-low hover:text-tx-hi"
           >
-            Upload an image
+            Choose local image
           </button>
           <input
             ref={fileRef}
@@ -182,7 +146,7 @@ const Decoder = () => {
 
         <div>
           <label htmlFor="decoder-pass" className="field-label">
-            Passphrase — try what the plates spelled
+            Passphrase
           </label>
           <input
             id="decoder-pass"
@@ -221,18 +185,12 @@ const Decoder = () => {
           {status !== "decoding" && status !== "loading" && status !== "success" && (
             <p className={status === "idle" ? "text-tx-faint" : "text-tan-soft"}>{STATES[status]}</p>
           )}
-          {status === "success" && <p className="font-semibold text-emer-soft">Decoded — the hidden message is real.</p>}
+          {status === "success" && <p className="font-semibold text-emer-soft">Decoded. Checksum matches.</p>}
         </div>
 
         {status === "success" && (
           <div className="rounded-2xl border border-emer/40 bg-emer/[0.06] p-4" data-testid="decoder-result">
             <p className="text-sm leading-relaxed text-tx">{message}</p>
-            <p className="mt-3 flex items-start gap-1.5 text-[11px] leading-relaxed text-tx-faint">
-              <ShieldCheck className="mt-0.5 h-3.5 w-3.5 flex-none text-emer-soft" />
-              How it worked: every pixel of the image hides one bit of the message in its least-significant red value.
-              The decoder read those bits in order, took the length header, unscrambled the payload with your
-              passphrase, and rebuilt the text — all locally. The passphrase is part of the puzzle, not security.
-            </p>
           </div>
         )}
       </div>

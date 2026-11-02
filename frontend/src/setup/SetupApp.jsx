@@ -1,265 +1,55 @@
-import { useEffect, useMemo, useState } from "react";
-import {
-  ArrowLeft,
-  ArrowRight,
-  ClipboardList,
-  Download,
-  Eye,
-  Lock,
-  RotateCcw,
-  Save,
-} from "lucide-react";
-import Logo from "../components/Logo";
+import { useEffect, useState } from "react";
+import { ArrowLeft, ArrowRight, Download, Eye, Save, RotateCcw } from "lucide-react";
 import { useProfile } from "../context/profile-context";
+import { BASE_PROFILE } from "../lib/profile-data";
 import { STEPS } from "./questions";
-import { QuestionField, StatusChip } from "./Fields";
-import { IntroAudio } from "./VoiceNote";
-import {
-  clearDraft,
-  downloadJson,
-  get,
-  loadDraft,
-  saveDraft,
-  set as setPath,
-  statusOf,
-} from "./utils";
-import { emptyProfile } from "../context/profile-context";
+import { QuestionField } from "./Fields";
+import { VoiceNote } from "./VoiceNote";
+import { downloadJson, get, set as setPath } from "./utils";
+import { loadLocalDraft, saveLocalDraft } from "./storage";
 
-const SetupApp = () => {
-  const { profile, applyProfile, clearProfile } = useProfile();
+const fresh = () => ({ ...structuredClone(BASE_PROFILE), voiceNotes: {} });
+export default function SetupApp() {
+  const { applyProfile, clearProfile } = useProfile();
   const [step, setStep] = useState(0);
-  const [draft, setDraft] = useState(() => loadDraft() || emptyProfile);
-  const [applied, setApplied] = useState(false);
-
+  const [draft, setDraft] = useState(fresh);
+  const [ready, setReady] = useState(false);
+  const [status, setStatus] = useState("");
+  const [error, setError] = useState("");
   useEffect(() => {
-    saveDraft(draft);
-  }, [draft]);
-
-  const upd = (path, v) => setDraft((d) => setPath(d, path, v));
-
-  const stepStatus = (s) => {
-    let missing = 0;
-    let awaiting = 0;
-    s.questions.forEach((q) => {
-      const st = statusOf(get(draft, q.path), q.evidencePath ? get(draft, q.evidencePath) : undefined);
-      if (st === "missing") missing++;
-      if (st === "awaiting") awaiting++;
-    });
-    if (missing && !awaiting) return { tone: "missing", label: `${missing} missing` };
-    if (awaiting) return { tone: "awaiting", label: `${awaiting} awaiting evidence` };
-    if (missing) return { tone: "missing", label: `${missing} missing` };
-    return { tone: "complete", label: "Complete" };
+    let active = true;
+    loadLocalDraft().then((saved) => {
+      if (active && saved) setDraft(saved);
+    }).catch(() => { if (active) setError("Local storage is unavailable. Download your draft before closing this page."); })
+      .finally(() => { if (active) setReady(true); });
+    return () => { active = false; };
+  }, []);
+  const update = (path, value) => { setDraft((d) => setPath(d, path, value)); setStatus("Unsaved local changes"); };
+  const save = async () => {
+    try { await saveLocalDraft(draft); setError(""); setStatus("Draft saved on this device, including recordings and transcripts."); }
+    catch { setError("Could not save locally. Download your draft to keep recordings and transcripts."); }
   };
-
   const current = STEPS[step];
-  const isReview = step === STEPS.length;
-  const totalAnswers = useMemo(
-    () => STEPS.reduce((n, s) => n + s.questions.length, 0),
-    []
-  );
-  const filled = useMemo(
-    () =>
-      STEPS.reduce(
-        (n, s) => n + s.questions.filter((q) => get(draft, q.path)?.toString().trim()).length,
-        0
-      ),
-    [draft]
-  );
-
-  return (
-    <div className="min-h-screen bg-bg pb-24 font-body text-tx" data-testid="setup-app">
-      <div className="mx-auto max-w-3xl px-4 py-8 sm:px-6">
-        <div className="glass rounded-3xl p-5 sm:p-6">
-          <div className="flex flex-wrap items-center gap-3">
-            <Logo className="h-8 w-8" />
-            <div className="flex-1">
-              <p className="font-display text-lg font-bold text-tx-hi">Content Setup</p>
-              <p className="flex items-center gap-1.5 text-[11px] text-tx-faint">
-                <Lock className="h-3 w-3 text-emer-soft" />
-                Private — nothing appears on the public page until you apply it on this device
-              </p>
-            </div>
-            <a
-              href="#/"
-              data-testid="setup-back-link"
-              className="inline-flex items-center gap-1.5 rounded-full border border-line/15 px-4 py-2 text-xs font-semibold text-tx-low hover:text-tx-hi"
-            >
-              <Eye className="h-3.5 w-3.5" />
-              View public page
-            </a>
-          </div>
-          <p className="mt-3 text-xs leading-relaxed text-tx-faint">
-            Answers stay in this browser. You can save a draft, download them as a file, and review everything before
-            applying it. This setup tool is separate from the public portfolio.
-          </p>
-        </div>
-
-        <div className="mt-5 flex flex-wrap gap-2" data-testid="setup-progress">
-          {STEPS.map((s, i) => {
-            const st = stepStatus(s);
-            return (
-              <button
-                key={s.id}
-                onClick={() => setStep(i)}
-                data-testid={`setup-step-${s.id}`}
-                className={`rounded-full border px-3 py-1.5 font-mono text-[10px] font-semibold uppercase tracking-widest2 transition-colors ${
-                  i === step
-                    ? "border-acc bg-acc/10 text-acc-soft"
-                    : st.tone === "complete"
-                      ? "border-emer/40 bg-emer/5 text-emer-soft"
-                      : st.tone === "awaiting"
-                        ? "border-amb/40 bg-amb/5 text-amb-soft"
-                        : "border-line/15 bg-fill/5 text-tx-faint"
-                }`}
-              >
-                {s.title} · {st.label}
-              </button>
-            );
-          })}
-          <button
-            onClick={() => setStep(STEPS.length)}
-            data-testid="setup-step-review"
-            className={`rounded-full border px-3 py-1.5 font-mono text-[10px] font-semibold uppercase tracking-widest2 transition-colors ${
-              isReview ? "border-acc bg-acc/10 text-acc-soft" : "border-line/15 bg-fill/5 text-tx-faint"
-            }`}
-          >
-            Review &amp; export
-          </button>
-        </div>
-
-        {!isReview ? (
-          <div className="mt-5">
-            <div className="glass rounded-3xl p-5 sm:p-6">
-              <p className="font-mono text-[10px] uppercase tracking-widest2 text-acc-soft">
-                Step {step + 1} of {STEPS.length} · {filled}/{totalAnswers} answers started
-              </p>
-              <h2 className="mt-2 font-display text-2xl font-bold text-tx-hi">{current.title}</h2>
-              <p className="mt-1 text-sm text-tx-low">{current.blurb}</p>
-              <div className="mt-5 grid gap-4">
-                {current.questions.map((q) => (
-                  <QuestionField
-                    key={q.path}
-                    q={q}
-                    value={get(draft, q.path)}
-                    evidenceValue={q.evidencePath ? get(draft, q.evidencePath) : undefined}
-                    onChange={upd}
-                    onEvidenceChange={upd}
-                  />
-                ))}
-                {current.id === "intro" && (
-                  <IntroAudio value={draft.intro.audio} onChange={(v) => upd("intro.audio", v)} />
-                )}
-              </div>
-            </div>
-            <div className="mt-5 flex items-center justify-between gap-3">
-              <button
-                onClick={() => setStep((s) => Math.max(0, s - 1))}
-                disabled={step === 0}
-                data-testid="setup-back-btn"
-                className="inline-flex items-center gap-2 rounded-full border border-line/15 px-5 py-2.5 text-sm font-semibold text-tx-low disabled:opacity-40"
-              >
-                <ArrowLeft className="h-4 w-4" />
-                Back
-              </button>
-              <button
-                onClick={() => setStep((s) => Math.min(STEPS.length, s + 1))}
-                data-testid="setup-next-btn"
-                className="inline-flex items-center gap-2 rounded-full bg-acc px-5 py-2.5 text-sm font-bold text-white transition-transform hover:-translate-y-0.5"
-              >
-                {step === STEPS.length - 1 ? "Review answers" : "Next section"}
-                <ArrowRight className="h-4 w-4" />
-              </button>
-            </div>
-          </div>
-        ) : (
-          <div className="mt-5" data-testid="setup-review">
-            <div className="glass rounded-3xl p-5 sm:p-6">
-              <p className="font-mono text-[10px] uppercase tracking-widest2 text-acc-soft">Final step</p>
-              <h2 className="mt-2 flex items-center gap-2 font-display text-2xl font-bold text-tx-hi">
-                <ClipboardList className="h-5 w-5 text-acc-soft" />
-                Review &amp; export
-              </h2>
-              <p className="mt-2 text-sm text-tx-low">
-                {filled} of {totalAnswers} answers started. Jump back to any section to edit — nothing is published
-                until you apply it below.
-              </p>
-              <div className="mt-4 grid gap-2">
-                {STEPS.map((s, i) => {
-                  const st = stepStatus(s);
-                  return (
-                    <button
-                      key={s.id}
-                      onClick={() => setStep(i)}
-                      data-testid={`setup-review-edit-${s.id}`}
-                      className="flex items-center justify-between gap-3 rounded-xl border border-line/10 bg-fill/[0.03] px-4 py-3 text-left transition-colors hover:border-acc/40"
-                    >
-                      <span className="font-display text-sm font-bold text-tx-hi">{s.title}</span>
-                      <StatusChip status={st.tone === "missing" ? "missing" : st.tone === "awaiting" ? "awaiting" : "complete"} />
-                    </button>
-                  );
-                })}
-              </div>
-
-              <div className="mt-6 grid gap-3 sm:grid-cols-2">
-                <button
-                  onClick={() => {
-                    applyProfile(draft);
-                    setApplied(true);
-                  }}
-                  data-testid="setup-apply-btn"
-                  className="rounded-full bg-emer px-5 py-3 text-sm font-bold text-[#04211B] transition-transform hover:-translate-y-0.5"
-                >
-                  Apply to page (this device only)
-                </button>
-                <button
-                  onClick={() => downloadJson(draft, "out-loud-content-setup.json")}
-                  data-testid="setup-download-btn"
-                  className="inline-flex items-center justify-center gap-2 rounded-full border border-line/20 px-5 py-3 text-sm font-semibold text-tx hover:bg-fill/5"
-                >
-                  <Download className="h-4 w-4" />
-                  Download responses (JSON)
-                </button>
-                <button
-                  onClick={() => {
-                    saveDraft(draft);
-                    setApplied(false);
-                  }}
-                  data-testid="setup-save-btn"
-                  className="inline-flex items-center justify-center gap-2 rounded-full border border-line/20 px-5 py-3 text-sm font-semibold text-tx hover:bg-fill/5"
-                >
-                  <Save className="h-4 w-4" />
-                  Save draft locally
-                </button>
-                <button
-                  onClick={() => {
-                    clearDraft();
-                    clearProfile();
-                    setDraft(emptyProfile);
-                    setApplied(false);
-                  }}
-                  data-testid="setup-clear-btn"
-                  className="inline-flex items-center justify-center gap-2 rounded-full border border-tan/40 px-5 py-3 text-sm font-semibold text-tan-soft hover:bg-tan/10"
-                >
-                  <RotateCcw className="h-4 w-4" />
-                  Clear all responses
-                </button>
-              </div>
-              {applied && (
-                <p className="mt-4 rounded-xl border border-emer/40 bg-emer/10 p-3 text-xs text-emer-soft" data-testid="setup-applied-note">
-                  Applied to this device's public page. Nothing left your browser — to move it elsewhere, use the
-                  download and import it on that device.
-                </p>
-              )}
-              <p className="mt-4 text-xs text-tx-faint">
-                Applied content lives in this browser only. The public portfolio shows it only on this device, and
-                clear all responses removes it everywhere here.
-              </p>
-            </div>
-          </div>
-        )}
+  const review = !current;
+  const button = "inline-flex items-center justify-center gap-2 rounded-full border border-line/20 px-4 py-2.5 text-sm font-medium transition-colors hover:border-acc";
+  return <div className="min-h-screen bg-bg px-4 py-8 font-body text-tx sm:px-6" data-testid="setup-app"><div className="mx-auto max-w-4xl">
+    <div className="flex flex-wrap items-center justify-between gap-4"><h1 className="font-display text-3xl font-semibold text-tx-hi">Content Setup</h1><a href="#/" data-testid="setup-back-link" className={button}><ArrowLeft className="h-4 w-4" />Portfolio</a></div>
+    <p className="mt-4 max-w-3xl text-sm leading-relaxed text-tx-low" data-testid="setup-privacy">Local editor, not a password-protected account. Use a trusted device: anyone with this browser profile can open saved drafts. Recordings and transcripts never appear in the public portfolio or leave this device. Save locally or download explicitly. Transcripts are edited manually; no speech service is connected.</p>
+    {!ready ? <p className="mt-8" data-testid="setup-loading">Loading local draft…</p> : <>
+      <div className="my-6 flex flex-wrap gap-2" data-testid="setup-progress">{STEPS.map((s, i) => <button key={s.id} data-testid={`setup-step-${s.id}`} onClick={() => setStep(i)} aria-pressed={step === i} className={`${button} ${step === i ? "border-acc bg-acc/10 text-acc-soft" : "text-tx-low"}`}>{s.title}</button>)}<button data-testid="setup-step-review" onClick={() => setStep(STEPS.length)} className={button}>Review & export</button></div>
+      {!review ? <div><h2 className="mb-4 font-display text-lg font-semibold text-tx-hi">{current.title}</h2>
+        <div className="mb-8" data-testid={`setup-recordings-${current.id}`}>{current.notes.map((note) => <VoiceNote key={note.id} id={note.id} label={note.label} value={draft.voiceNotes?.[note.id]} onChange={(v) => update(`voiceNotes.${note.id}`, v)} />)}</div>
+        <div className="grid gap-6">{current.questions.map((q) => <QuestionField key={q.path} q={q} value={get(draft, q.path)} onChange={update} />)}</div>
+        <div className="mt-8 flex justify-between gap-3"><button disabled={step === 0} data-testid="setup-back-btn" onClick={() => setStep(Math.max(0, step - 1))} className={`${button} disabled:opacity-40`}><ArrowLeft className="h-4 w-4" />Back</button><button data-testid="setup-next-btn" onClick={() => setStep(step + 1)} className={button}>Next<ArrowRight className="h-4 w-4" /></button></div>
+      </div> : <div data-testid="setup-review"><h2 className="font-display text-lg font-semibold text-tx-hi">Review & export</h2><div className="my-5 divide-y divide-line/10">{STEPS.map((s, i) => <button key={s.id} data-testid={`setup-review-edit-${s.id}`} onClick={() => setStep(i)} className="flex w-full items-center justify-between py-4 text-left"><span>{s.title}</span><span className="text-sm text-tx-low">{s.notes.filter((n) => draft.voiceNotes?.[n.id]?.audio).length}/{s.notes.length} recordings</span></button>)}</div>
+        <button onClick={() => { applyProfile(draft); setStatus("Text preview applied on this device until reload. Audio and transcripts remain private."); }} data-testid="setup-apply-btn" className={button}><Eye className="h-4 w-4" />Preview text on this device</button>
+        <p className="mt-4 text-sm text-tx-low" data-testid="setup-preview-privacy">Preview includes edited portfolio text only. Audio, transcripts and original Flow text are excluded. No publishing or sharing service is connected.</p>
+      </div>}
+      <div className="mt-8 flex flex-wrap gap-3 border-t border-line/15 pt-6"><button onClick={save} data-testid="setup-save-btn" className={button}><Save className="h-4 w-4" />Save draft locally</button>
+        <button onClick={() => downloadJson(draft, "out-loud-private-draft.json")} data-testid="setup-download-btn" className={button}><Download className="h-4 w-4" />Download private draft</button>
+        <button onClick={async () => { if (!window.confirm("Remove all local edits, recordings and transcripts and restore the supplied résumé content?")) return; const reset = fresh(); try { await saveLocalDraft(reset); localStorage.removeItem("outloud-profile-v1"); localStorage.removeItem("outloud-profile-draft-v1"); clearProfile(); setDraft(reset); setError(""); setStatus("Local draft reset to source content."); } catch { setError("Could not clear the local draft. Please retry."); } }} data-testid="setup-clear-btn" className={`${button} text-tan-soft`}><RotateCcw className="h-4 w-4" />Reset local draft</button>
       </div>
-    </div>
-  );
-};
-
-export default SetupApp;
+      <p className="mt-4 text-sm text-emer-soft" role="status" data-testid="setup-save-status">{status}</p><p className="mt-2 text-sm text-tan-soft" role="alert" data-testid="setup-storage-error">{error}</p>
+    </>}
+  </div></div>;
+}

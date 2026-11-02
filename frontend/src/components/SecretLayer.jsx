@@ -13,6 +13,7 @@ const SecretLayer = () => {
   const { profile } = useProfile();
   const story = profile.secret.story?.trim() ? profile.secret.story : SECRET.story;
   const [plateIdx, setPlateIdx] = useState(0);
+  const [reload, setReload] = useState(0);
   const [threshold, setThreshold] = useState(128);
   const [status, setStatus] = useState("loading");
   const [hintLevel, setHintLevel] = useState(0);
@@ -54,7 +55,7 @@ const SecretLayer = () => {
     return () => {
       cancelled = true;
     };
-  }, [plateIdx, plate.src]);
+  }, [plateIdx, plate.src, reload]);
 
   useEffect(() => {
     if (status !== "ready") return;
@@ -119,9 +120,7 @@ const SecretLayer = () => {
           desc={story}
         />
 
-        <Reveal className="mt-6">
-          <p className="max-w-2xl text-sm italic leading-relaxed text-tx-low">{SECRET.howTo}</p>
-        </Reveal>
+        <p className="mt-4 text-xs text-tx-low" data-testid="secret-evidence">Source: supplied résumés, Edunet internship. Original repository or demo: Upload needed.</p>
 
         <Reveal className="mt-6">
           <div className="flex flex-wrap gap-2" role="tablist" aria-label="Choose a plate" data-testid="plate-selector">
@@ -172,7 +171,7 @@ const SecretLayer = () => {
                           <p className="text-sm text-tx-low">The plate failed to load.</p>
                           <button
                             type="button"
-                            onClick={() => setPlateIdx((i) => i)}
+                            onClick={() => setReload((value) => value + 1)}
                             data-testid="decipher-retry-btn"
                             className="mt-3 rounded-full border border-line/20 px-4 py-2 text-xs font-semibold text-tx-low hover:text-tx-hi"
                           >
@@ -184,14 +183,14 @@ const SecretLayer = () => {
                   )}
                 </div>
                 <p className="mt-3 text-center text-xs text-tx-faint">
-                  {plate.label} — {plate.alt.replace(/^Grayscale plate [a-z ]+ — /, "")}
+                  {plate.label}: {plate.alt}
                 </p>
               </div>
 
               <div className="grid content-start gap-5">
                 <div>
                   <label htmlFor="levels" className="field-label">
-                    Levels threshold — {threshold}
+                    Levels threshold: {threshold}
                   </label>
                   <input
                     id="levels"
@@ -201,12 +200,9 @@ const SecretLayer = () => {
                     value={threshold}
                     onChange={(e) => setThreshold(+e.target.value)}
                     data-testid="decipher-slider"
-                    aria-label="Levels threshold — sweep to separate the ghost from the grain"
+                    aria-label="Levels threshold"
                     className="mt-2 w-full accent-acc"
                   />
-                  <p className="mt-1 text-[11px] leading-relaxed text-tx-faint">
-                    Left: all shadow. Right: all light. The ghost hides in between.
-                  </p>
                 </div>
 
                 <div className="flex flex-wrap gap-2">
@@ -236,7 +232,7 @@ const SecretLayer = () => {
                     className="inline-flex items-center gap-1.5 rounded-full border border-line/15 px-4 py-2 text-xs font-semibold text-tx-low transition-colors hover:text-tx-hi"
                   >
                     <Ear className="h-3.5 w-3.5" />
-                    Solve by ear
+                    Text clues
                   </button>
                 </div>
 
@@ -257,7 +253,7 @@ const SecretLayer = () => {
 
                 {textRoute && (
                   <div className="rounded-2xl border border-line/10 bg-fill/[0.03] p-4" data-testid="decipher-text-route">
-                    <p className="field-label">Three riddles — one per plate, in order</p>
+                    <p className="field-label">Three riddles, in plate order</p>
                     <ol className="mt-2 grid gap-2 text-xs leading-relaxed text-tx-low">
                       {PLATES.map((p) => (
                         <li key={p.id} className="flex gap-2">
@@ -329,7 +325,7 @@ const SecretLayer = () => {
                   <span className="font-display text-4xl font-extrabold tracking-[0.3em] text-emer-soft" data-testid="easter-egg-answer">
                     OUT
                   </span>
-                  <Tag tone={spoiler ? "amber" : "emerald"} className="ml-auto">
+                  <Tag data-testid="easter-egg-solve-status" tone={spoiler ? "amber" : "emerald"} className="ml-auto">
                     {spoiler ? "Revealed with spoiler" : "Solved"}
                   </Tag>
                 </div>
@@ -337,7 +333,8 @@ const SecretLayer = () => {
                   {spoiler ? SECRET.spoilerAnswer : SECRET.feedbackCorrect}
                 </p>
                 <p className="mt-2 text-sm leading-relaxed text-tx-low">{SECRET.solveExplain}</p>
-                <p className="mt-2 text-xs leading-relaxed text-tx-faint">{SECRET.unlockBody}</p>
+                <p className="mt-3 text-sm text-tx-low" data-testid="secret-bonus-story">Bonus story: {profile.secret.message || "Upload needed."}</p>
+                <p className="mt-2 text-sm text-tx-low" data-testid="secret-grant-answer">The $3,000 work requirement: {profile.secret.grant || "Upload needed."}</p>
               </div>
             )}
 

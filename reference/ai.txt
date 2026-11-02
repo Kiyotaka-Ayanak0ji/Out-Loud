@@ -1,0 +1,106 @@
+PAGE 1
+Ansik Aryan Samal
+ Hyderabad, Telangana, India | +91-7032156925 | aryanansik@gmail.com
+ LinkedIn: linkedin.com/in/ansik-aryan-1aa731250 | GitHub: github.com/Kiyotaka-Ayanak0ji
+ Portfolio: personalportfolio-theta-sable.vercel.app
+PROFESSIONAL SUMMARY
+Computer Science graduate (B.Tech, 2025, CGPA 7.83) and AI Engineer intern at Clyptus Software Solutions,
+Hyderabad. Builds AI tools and full-stack applications in Python, JavaScript and SQL. Took a client's product from
+requirements to launch (about 10,000 views in 3-4 months), built secure APIs with role-based access control, and created
+a job authenticity checker with 95% accuracy on unseen data. Hands-on with prompt engineering and
+retrieval-augmented generation (RAG); currently completing a Data Science and Artificial Intelligence program with IIT
+Roorkee and Masai School.
+TECHNICAL SKILLS
+Programming Languages: Python, JavaScript, TypeScript, SQL
+Generative AI and Agents: OpenAI API (chat completions, function calling, structured outputs), prompt engineering
+(one-shot, few-shot, chain-of-thought, role-based prompting), retrieval-augmented generation (RAG), embeddings and
+vector search, LLM evaluation, agentic workflows; learning large language models (LLMs) and Model Context Protocol
+(MCP)
+AI and Machine Learning: Scikit-learn, regression, classification, feature engineering, Hugging Face inference models
+Back End and APIs: Node.js, Express.js, Flask, FastAPI, RESTful APIs, API integration, WebSockets, authentication
+(Passport.js, bcrypt, JWT), role-based access control (RBAC)
+Security and Privacy: OAuth 2.0 and single sign-on (SSO) basics, encryption, API security basics, data privacy basics,
+cybersecurity basics
+Databases: PostgreSQL, MySQL, MongoDB, Supabase, Redis; data modelling, query optimization, SQL for data
+retrieval and reporting
+Front End: React.js, HTML, CSS, Tailwind CSS, responsive design
+Cloud and Developer Tools: AWS fundamentals, Docker, Git, GitHub, Postman, Linux, VS Code, unit testing;
+deployment on Railway, Render, Vercel and Cloudflare (custom domains)
+AI-Assisted Development: Codex, Cursor, Claude Code, ChatGPT, Lovable, Emergent, Replit, Perplexity
+Data Science: Pandas, NumPy, exploratory data analysis (EDA), data cleaning, statistical analysis, trend analysis
+Computer Science Fundamentals: Data Structures and Algorithms, object-oriented programming (OOP), SOLID
+principles, software development life cycle (SDLC)
+Currently Learning: Cloud deployment, CI/CD (automated testing and releases), low-level design (LLD), caching
+Professional Skills: Requirements gathering, solution design, technical documentation, demos and presentations,
+stakeholder communication, analytical thinking, problem solving, teamwork, adaptability, leadership
+WORK EXPERIENCE
+Clyptus Software Solutions Pvt Ltd, Hyderabad | AI Engineer Intern | [Start date] - Present
+NxtWave Disruptive Technologies | Associate Aptitude Instructor | 24th August 2026 - 13th October 2026
+  Trained to teach quantitative aptitude and math modules for computer science learners accurately and clearly,
+following company guidelines and ethics.
+ Worked in a corporate setting with limited resources, staying punctual and raising issues early with the team.
+Edunet Foundation (IBM SkillBuild) | Cybersecurity Intern | 15th January 2025 - 26th February 2025
+  Learned core cybersecurity concepts, network security and threat mitigation techniques.
+ Studied steganography methods for hiding and retrieving data within images using bit-level manipulation.
+ Built an interactive GUI application that encodes and decodes hidden data within image files.
+PROJECTS
+Stock Screener SaaS Web App (Client Project) | React.js, Tailwind CSS, Node.js, Flask, Axios, MongoDB
+  Turned a client's requirements into a customizable stock screener covering 5,300+ NSE and BSE stocks, with live
+prices, watchlists, portfolio tracking and real-time analysis.
+ Designed Free, Pro ($20/month) and Premium ($40/month) plans with discounted yearly rates, and linked features
+such as stock search, number of watchlists and automatic price refresh to each plan.
+ Chose the pricing and payment integration approach and wrote the project documentation.
+ Launched on a custom domain through Cloudflare, reaching about 10,000 views in 3-4 months.
+
+PAGE 2
+Job and Company Verification Tool | Python, Flask, React.js, TypeScript, Supabase, Tailwind CSS, TanStack,
+Firecrawl
+  Engineered a tool that checks a single job link, gathers company reviews and online presence data through Firecrawl,
+and flags warning signs in the posting.
+ Gives each job an authenticity score from 0 to 100, reaching 95% accuracy on unseen data.
+ Delivered the first version with a Flask REST API, a nine-signal weighted scoring system, a unit test suite and a
+39-page PDF report (ReportLab), deployed on Render, Railway and Vercel.
+ Added a bulk self-training feature that trains the model on batches of 30-40 company links, with predictions verified
+through Firecrawl.
+ Rebuilt the app around an in-house machine learning model that classifies job listings, after applying feature
+engineering (preparing data for the model) learned in the Data Science course.
+Finance Data Processing Backend | Node.js, Express.js, PostgreSQL
+  Built secure REST APIs for user management, transactions and dashboard reports.
+ Set up role-based access control with three permission levels: Viewer, Analyst and Admin.
+ Created endpoints that report income, expenses, balances and spending trends.
+ Optimized the database structure and queries so dashboard summaries load quickly in real time.
+Secure Notes Sharing App (In Progress)
+  Building a note-taking application where users create notes and share them through restricted links.
+ Protecting notes from unwanted viewing, with user-defined expiry settings for shared links.
+ Enforcing access control and privileges to determine who can open each note.
+ Developed an in-house URL shortener to create compact note-sharing links.
+Secure Image Messaging App | React, Flask, Tailwind CSS
+  Designed a web app that encrypts text messages into image files and decrypts them for the receiver.
+ Applied pixel-based encryption to secure data transmission.
+ Added dark mode and client-side routing (fast page navigation) to a responsive React and Tailwind CSS interface.
+Stock Price Prediction Tool | Python, Pandas, Scikit-learn, Yahoo Finance API
+  Wrote a price trend estimation tool using historical and real-time market data from the Yahoo Finance API.
+ Cleaned and analyzed 5,000+ data points per stock, applying feature engineering to surface patterns and trends.
+ Used statistical and machine learning techniques to estimate price trends.
+EDUCATION
+Institute of Aeronautical Engineering (JNTUH), Dundigal, Hyderabad | B.Tech, Computer Science and Engineering |
+2021 - 2025 | CGPA: 7.83 (out of 10)
+Trividyaa Junior College, Hyderabad | Intermediate (MPC) | 2019 - 2021 | 98%
+St. Michael's School, Old Alwal, Hyderabad | Secondary School | 2018 - 2019 | 94%
+CERTIFICATIONS
+  Data Science and Artificial Intelligence | IIT Roorkee and Masai School | Ongoing, 2026
+ Python, SQL and Problem Solving | HackerRank
+ Web Development (WD101) and Node Development (WD201) | Pupilfirst (AICTE-based curriculum)
+ SEBI Investor Awareness | SEBI/NISM | 2025
+ In preparation: Oracle AI, Microsoft Fabric Analytics Engineer, Anthropic, and Google AI and Cloud certifications
+ACHIEVEMENTS AND LEADERSHIP
+  Selected through the University of Hyderabad (UoH) entrance examination; ranked 162nd in the Common Rank List
+(CRL) and 4th in the Armed Personnel Category.
+ Event Manager, Entrepreneurship Cell (E-Cell), IARE, for the National Entrepreneurship Challenge (NEC) E-Summit
+2024 at IIT Bombay; the team's startup pitch ranked 4th in India.
+ Pitched a job-matching app for daily-wage and off-season workers, with regional language support, salary negotiation
+help and planned tie-ups with government welfare schemes for fair wages.
+ Scored 95.2 percentile in JEE Mains 2021.
+ Qualified for the final mock interview round in LEEE 2023.
+LANGUAGES
+English (Professional), Hindi (Native), Telugu (Conversational), Odia (Conversational)

@@ -1,75 +1,16 @@
-import { ShieldCheck } from "lucide-react";
-import { Reveal, SectionHeader } from "./Reveal";
-import { Tag } from "./Tags";
+import { ArrowUpRight, Mail } from "lucide-react";
+import { SectionHeader } from "./Reveal";
 import { useProfile } from "../context/profile-context";
-import { OWNER_NAME } from "../lib/content";
+import { MISSING } from "../lib/profile-data";
+import { safeUrl } from "../lib/safe-url";
 
-const ContactMe = () => {
+export default function ContactMe() {
   const { profile } = useProfile();
   const c = profile.contact;
-  const published = !!c.publish;
-  const hasAny = c.email?.trim() || c.location?.trim() || c.profiles?.trim();
-
-  const ROWS = published
-    ? [
-        { label: "Name", value: OWNER_NAME },
-        { label: "Email", value: c.email?.trim() || null },
-        { label: "Location", value: c.location?.trim() || null },
-        { label: "Profiles", value: c.profiles?.trim() || null },
-      ].filter((r) => r.value)
-    : [
-        { label: "Name", value: `[${OWNER_NAME}]` },
-        { label: "Email", value: "[you@example.com]" },
-        { label: "Location", value: "[City, Country]" },
-        { label: "Profiles", value: "[LinkedIn] · [GitHub] · [X]" },
-      ];
-
-  return (
-    <section id="contact" className="py-16 sm:py-24" data-testid="contact-section">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <SectionHeader
-          no="07"
-          kicker="Contact Me"
-          title="Say it back."
-          desc={
-            published && hasAny
-              ? "Published by the owner through Content Setup — nothing here is collected or stored."
-              : "[Placeholder details below — real links land here when supplied and approved. Nothing on this page is collected or stored.]"
-          }
-        />
-        <Reveal className="mt-8">
-          <div className="glass rounded-3xl p-6 sm:p-8" data-testid="contact-card">
-            <div className="flex flex-wrap items-center justify-between gap-2">
-              <Tag tone={published ? "emerald" : "amber"}>
-                {published ? "Published by owner" : "Private until approved in Content Setup"}
-              </Tag>
-            </div>
-            <div className="mt-4 grid divide-y divide-line/10">
-              {ROWS.map((r) => (
-                <div
-                  key={r.label}
-                  className="flex flex-wrap items-baseline justify-between gap-2 py-4"
-                  data-testid={`contact-row-${r.label.toLowerCase()}`}
-                >
-                  <span className="field-label">{r.label}</span>
-                  <span className="text-sm font-medium text-tx">{r.value}</span>
-                </div>
-              ))}
-            </div>
-            {!published && hasAny ? (
-              <p className="mt-4 text-xs text-tan-soft" data-testid="contact-held-note">
-                You have contact details saved in Content Setup, but they stay private until you tick "publish" there.
-              </p>
-            ) : null}
-            <p className="mt-5 flex items-center gap-2 text-xs text-tx-faint" data-testid="privacy-note">
-              <ShieldCheck className="h-4 w-4 text-emer-soft" />
-              No data collected — this page stores nothing about you.
-            </p>
-          </div>
-        </Reveal>
-      </div>
-    </section>
-  );
-};
-
-export default ContactMe;
+  return <section id="contact" className="py-16 sm:py-24" data-testid="contact-section"><div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <SectionHeader no="07" kicker="Contact Me" title="Let’s talk." />
+    {c.publish && <div className="mt-8" data-testid="contact-card"><a href={`mailto:${c.email}`} className="inline-flex max-w-full items-center gap-3 break-all font-display text-xl font-semibold text-acc-soft hover:underline sm:text-3xl" data-testid="contact-email"><Mail className="h-6 w-6 flex-none" />{c.email}</a><p className="mt-4 text-sm text-tx-low" data-testid="contact-location">{c.location}</p></div>}
+    <div className="mt-6 flex flex-wrap gap-5">{[["LinkedIn", profile.about.linkedin], ["GitHub", profile.about.github], ["Previous portfolio", profile.about.other]].filter(([, url]) => safeUrl(url)).map(([label, url]) => <a key={label} href={safeUrl(url)} target="_blank" rel="noopener noreferrer" data-testid={`contact-link-${label.toLowerCase().replaceAll(" ", "-")}`} className="inline-flex items-center gap-1 text-sm font-semibold text-tx hover:text-acc-soft">{label}<ArrowUpRight className="h-4 w-4" /></a>)}</div>
+    <div className="mt-8 grid gap-4 border-t border-line/10 pt-6 sm:grid-cols-2 lg:grid-cols-4">{[["Availability", c.availability], ["Bangalore / travel", c.travel], ["Submission video", c.video], ["Challenge post", c.post]].map(([label, value], i) => <div key={label} data-testid={`contact-extra-${i + 1}`}><p className="field-label">{label}</p>{i > 1 && safeUrl(value) ? <a href={safeUrl(value)} target="_blank" rel="noopener noreferrer" data-testid={`contact-submission-link-${i}`} className="mt-2 block break-all text-sm text-acc-soft">{value}</a> : <p className="mt-2 text-sm text-tx-low">{value || MISSING}</p>}</div>)}</div>
+  </div></section>;
+}

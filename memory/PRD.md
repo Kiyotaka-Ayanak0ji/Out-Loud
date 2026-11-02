@@ -1,48 +1,100 @@
-# Out Loud — PRD
+# Out Loud: product requirements and handoff
 
-## Original problem statement
-Build a polished, mobile-first portfolio web app called **Out Loud** — memorable, explorable in ~3 minutes. Build ONLY the first demo: one scrolling page with 8 sections (Hero / The Autopsy / Voice-First Bharat / The Secret Layer / Voice Receipts / Projects & Skills / About Me / Contact Me), clearly-marked placeholders everywhere, no backend, no invented facts, global animation toggle (motion-only, respects OS reduced-motion by default), trust + accessibility rules (Evidence needed badges, no data collection, keyboard operable, transcripts for audio). Stop after the demo and wait for approval before adding real content, evidence-backed Autopsy, voice recordings or the steganography decoder.
+## Original goal
+Build a polished, mobile-first portfolio called **Out Loud**: memorable, explorable in about three minutes, and organised into Hero, The Autopsy, Voice-First Bharat, The Secret Layer, Voice Receipts, Projects & Skills, About Me, and Contact Me. Frontend-only, no backend data persistence. Include dark/light themes, a motion toggle, browser-based steganography, a printable summary, and a local content setup tool.
 
-## User decisions (from conversation)
-- Hero audio: real short placeholder audio clip (generated TTS sample) + animated waveform + visible transcript labelled "Sample — no recording yet"; no autoplay.
-- Easter egg hidden word: **OUT** (3 clue images hide O, U, T).
-- Owner name "Ansik Aryan Samal" may be used sparingly (About + Contact rows only); everything else stays placeholder.
-- Design round: user reviewed 4 skeleton directions (design-lab.html, still served at /design-lab.html) then asked for a fresh, unique, premium, modern-professional direction not bound to the original brief's palette → design_agent produced "Swiss Tactical Modern" system (Syne / Plus Jakarta Sans / JetBrains Mono, ink #0A0D14 base, indigo #6366F1 primary, emerald/tangerine/amber chapter accents).
+## Current user requirements (2026-11-02)
+- Use the supplied three résumés and application concept/delivery plan as the source of truth. Fill every relevant section, without unsupported claims or invented numbers.
+- Missing facts, files, evidence and recordings must read exactly **Upload needed.**
+- Concise professional copy, no generic AI filler, explanatory section commentary, promotional tags such as Built by Voice, or double-dash prose.
+- Record/replay/replace audio and edit associated transcripts for every spoken-input section, only in a private editing area. Never automatically publish, upload or share recordings/transcripts.
+- Without server-side access control, use an unlisted local editor and remove it from public navigation. Do not claim it is an authenticated owner account.
+- Modern, professional, readable, slightly edgy font. Preserve the existing premium feel, palette, page structure, themes and design lab. No new visual concepts.
+- Navbar handles section navigation; remove redundant hero chapter links.
+- User approved **email and professional links**, not phone publication.
+- User explicitly cancelled the GPT-Astra request: **no model integration**.
+
+## Source materials
+Four supplied PDFs and exact extracted text live in `/app/reference/`, outside public assets:
+- `software.pdf` / `.txt`: Software Developer résumé.
+- `data.pdf` / `.txt`: Data Science résumé.
+- `ai.pdf` / `.txt`: AI Architect résumé.
+- `plan.pdf` / `.txt`: Out Loud Application Concept and Delivery Plan, v1.0, 31 October 2026.
+
+`/app/memory/SOURCES.md` records source locations, reconciliation decisions and claim limits. No original résumé PDF is linked publicly because it includes the non-approved phone number.
 
 ## Architecture
-- Frontend-only React (CRA + craco) + Tailwind; NO backend calls (privacy rule: nothing stored or sent). FastAPI backend from template left untouched.
-- `src/context/motion-context.js` — global motion state (default = !prefers-reduced-motion), sets `data-motion="off"` on <html>.
-- `src/lib/scroll.js` — lenis smooth scrolling (created only when motion on); anchor scrolling falls back to native.
-- `src/lib/content.js` — ALL copy/data centralized for easy later editing (single content source).
-- `src/lib/media.js` — generated artwork URLs (hero wave, 3 clue letters, 4 project thumbs).
-- Components: Nav (+ MotionToggle, mobile overlay), Hero (masked line-by-line reveal, real <audio> player, waveform, transcript), Marquee (slow editorial loop), Autopsy (6 expandable decision cards + mistakes panel + 3 "Proposal" cards), BharatDemo (3 sample chips, editable transcript, deterministic sample results, mic permission flow with granted/denied/unsupported states), SecretLayer (clue tracker, answer check, retry feedback, hint after 2 attempts, always-visible spoiler, reset), Receipts (3 placeholder cards), ProjectsSkills (filter tabs + placeholder cards + skill groups), AboutMe, ContactMe, Footer.
-- Audio asset: `/audio/intro-sample.mp3` generated via emergentintegrations OpenAI TTS (tts-1-hd, voice "fable") — clearly labelled sample.
-- Favicon/logo: original "O + sound arcs" SVG mark.
+- React CRA/craco, Tailwind, Framer Motion, Lenis. Frontend-only; template backend is not used by the app.
+- `src/lib/profile-data.js`: source-backed public baseline, seven projects, six decisions, three proposals, skill groups, work experience, education, achievements, certifications and missing content.
+- `src/lib/content.js`: navbar structure, hero copy, source-derived illustrative Bharat samples, puzzle clues.
+- `src/context/profile-context.js`: public profile starts from `BASE_PROFILE`, never from localStorage or private drafts. Explicit text preview is in-memory until reload and strips all audio, voice transcripts and original receipt Flow text.
+- `src/setup/SetupApp.jsx`, `questions.js`, `Fields.jsx`: unlisted hash route `/#/setup`, source-filled text fields, eight editor steps, review, explicit local save/download/reset, temporary local text preview.
+- `src/setup/VoiceNote.jsx`: 34 section/decision/mistake/language/project/receipt recording groups. Browser MediaRecorder, local audio file selection, playback, replacement, per-recording manual transcript editor and audio download. Audio encoded as data URLs, 10 MB per-recording limit. Tracks stop when recording stops or controls unmount, including late permission responses.
+- `src/setup/storage.js`: IndexedDB `outloud-owner-local`, store `drafts`, key `owner`. Explicit save includes recordings and transcripts; no automatic cloud upload or publishing. Local save errors surface and JSON export stays available.
+- Existing legacy localStorage drafts are not loaded into public content or silently deleted. Explicit confirmed reset removes legacy local keys as well as resetting the current IndexedDB draft.
+- `src/components/*`: eight public sections, responsive nav, footer, one-page print summary.
+- `src/lib/steganography.js`: local RGB LSB decoding with 32-bit length, XOR passphrase and CRC-32, matching the supplied reference format. `backend/gen_master_plate.py` is an offline asset utility, not an API.
+- `src/context/theme-context.js`, `motion-context.js`: existing dark/light and reduced-motion behaviour preserved.
+- `src/components/Reveal.jsx`: stable motion.div wrapper across animation toggles, preventing canvas/child remounts.
+- `public/fonts/`: self-hosted variable Space Grotesk and OFL license; one consistent font family across public UI, editor and print.
+- `public/design-lab.html`: preserved unchanged, accessible by direct URL.
 
-## Implemented (2026-11-02)
-- All 8 sections in order, mobile-first (390px) → desktop, no horizontal overflow.
-- Verified: nav links scroll to sections; decision cards expand/collapse; sample→"Build my profile" produces editable labelled sample result; empty-input error feedback; mic button requests permission only on click with clear feedback; easter egg accepts "out" (case-insensitive), retry feedback, hint, spoiler, reset; animation toggle flips motion site-wide with content/controls fully usable in both modes; audio plays on click.
-- Honesty: every personal field is [bracketed placeholder]; "Evidence needed" tags; "Not measured" notes; receipts marked placeholder; no metrics claimed anywhere.
+## Implemented history
+### Earlier rounds, 2026-11-02
+- Premium custom portfolio after four design-lab variants.
+- Stable title typewriter, dark/light themes, motion setting.
+- Three grayscale clue plates containing O/U/T, local threshold tool, hints, spoiler and browser decoder.
+- Local content setup and printable summary.
 
-## Update 2026-11-02 (v2 — polish round)
-- Fixed title glitch: the old headline component was defined inline in Hero, so every audio timeupdate re-render remounted it. Replaced with a self-contained Typewriter (own timer state, immune to parent re-renders) rotating three phrases: type → hold → erase → next. Static full phrase when motion off / reduced motion.
-- Added dark/light themes: semantic CSS-variable tokens (`--c-*`) mapped through Tailwind (bg/surface/panel/fill/line/tx/acc/emer/tan/amb), applied to every section, card, control, tag and focus ring; inline pre-paint script in index.html prevents theme flash; choice persisted in localStorage; clearly labelled theme toggle in the nav, separate from the motion toggle.
-- Rebuilt The Secret Layer as a deciphering bench: three grayscale real-world plates (concrete/metal/wood) with O, U, T genuinely embedded at build time as +30-luminance ghosts on contrast-flattened textures (gen_clue_plates.py); an in-browser canvas levels tool (slider + auto levels) recovers each letter — the method really works on the served pixels. Story, 3 progressive hints + per-plate strong hint, answer input, wrong-answer feedback, reset, spoiler, solve explanation, aria-live feedback, non-visual "solve by ear" riddle route.
-- Finish pass: marquee removed, section dividers, consistent tokens in both themes, mobile input width fix, nowrap nav logo.
+### Source refresh and privacy work, 2026-11-02
+- Replaced generic portfolio placeholders with source-backed content for all eight sections and all seven distinct projects.
+- Added full experience, education, certifications, achievements, self-assessed languages and grouped skills. Learning/in-progress qualifications preserved.
+- Stock Screener decisions use only supported facts; missing reasons, lessons, screenshots and analytics marked Upload needed.
+- Metrics attributed as résumé-reported, not independently verified. No blanket Verified badges. 10,000 views remain views, 95% accuracy is reported not independently measured, and zero SQL safety violations remains a target.
+- Three India growth proposals taken from the plan, with explicitly illustrative thresholds.
+- Public Bharat inputs/results match the reference's illustrative Hindi/Telugu/Odia examples. Exact samples only; arbitrary/altered input yields unfilled fields, never keyword-based invented values. No fake confidence values or public recording control.
+- Four voice-receipt slots, three timing rows, build log, work-requirement answer and missing materials marked Upload needed.
+- Removed old placeholder project artwork, public setup links, Built by Voice claims/tags, hero chapter buttons and generic commentary.
+- Source email and professional links published as approved. Phone excluded.
+- Replaced typography with self-hosted Space Grotesk and refined spacing/heading hierarchy without changing the existing visual direction.
+- Added local section-linked recordings, transcript editing, explicit save, JSON/audio downloads, replacement/reset and lifecycle cleanup.
+- Private audio/transcripts excluded from public page, local text preview and print. Local editor clearly warns about shared-browser access and has no authentication claim.
+- Updated master PNG to decode to Upload needed. instead of a fabricated bonus story; corrected decoder to reference CRC format.
+- Fixed failed-image Retry, motion-toggle blank canvas, and 320px navbar clipping.
 
-## Update 2026-11-02 (v3 — personalization + decoder round)
-- Content Setup (private, at /#/setup, linked from footer): 7 step-by-step question groups covering Voice Intro, The Autopsy (project, role, 6 decisions with context/decision/reason/result/evidence-check/lesson, mistakes), Voice-First Bharat (origin/users/languages/learned), Secret Layer (story + hidden message), Voice Receipts (said/transcribed/built/evidence ×3), Projects & Skills (4 projects + 4 skill groups), About & Contact. Every prompt carries a generic example (no fabricated personal facts), optional session-only voice notes (record/upload, never uploaded anywhere), status chips (Complete / Evidence attached / Awaiting evidence / Missing), review step, download-as-JSON, save-draft-locally, apply-to-page (this device only), clear-all.
-- Real Voice Intro: hero replaces the removed TTS sample with a "Voice recording needed" state; once a recording is applied from setup, the real audio plays on tap with waveform + transcript. No voice generation, no fake transcripts, no autoplay.
-- Print summary: print-only one-page A4 sheet (intro, projects, skills, decisions, links, contact — omissions labelled "not yet provided"; contact only when owner approves publishing), triggered by the footer "Print summary" button; the interactive app is hidden in print.
-- Steganography decoder (Secret Layer phase two): real LSB stego master plate (built by gen_master_plate.py, PNG, XOR-scrambled with passphrase "out"); browser decoder reads pixel LSBs on canvas — success / invalid-image / wrong-passphrase / retry states, all local; round-trip verified in Python and in the browser.
-- Personalization: public sections (Hero, Autopsy, Projects, Skills, Receipts, About, Contact, Bharat origin, Secret story) render applied Content Setup data when present, with "Verified" only on owner-confirmed evidence, "Evidence needed" otherwise, and placeholders retained until content is supplied.
+## Verification
+- Production build: `yarn --cwd /app/frontend build` passed.
+- Initial browser smoke screenshot passed.
+- Testing report: `/app/test_reports/iteration_1.json`. Initial 24/26 grouped tests exposed two UI defects; both fixed and full scripts rerun.
+- Final results: **26/26 Chromium grouped runtime checks passed** (19 core + 7 edge).
+- Scripts: `/app/tests/portfolio_runtime.py`, `/app/tests/portfolio_edges.py`.
+- Detailed final results: `/app/test_reports/runtime/results.json`, `edge-results.json`, `responsive.json`.
+- Verified navigation, seven project filters/details, eight sections, loaded font, 320/768/1024/1440 in both themes, stable typewriter, preserved design lab.
+- Verified all recording control groups, representative audio/transcript round trips in all eight sections, actual MediaRecorder with synthetic input, playback/replacement/download, IndexedDB save/reload, denied/unsupported/late mic permissions, track cleanup, file and storage errors, confirmed reset.
+- Verified private content never appears on public page or print, including same-browser preview, fresh context, and legacy localStorage injection. No application-origin uploads/mutation requests or private fixture data in observed requests. Platform-injected requests were distinguished from app behaviour.
+- Puzzle/hints/spoiler/retry, CRC near-wrong passphrase, Unicode/bounds and PNG hash tested. Canvas remains 720×720 with nontransparent pixels through both motion toggle directions.
+- Print: exactly one A4 page in both themes, white backgrounds, no private transcripts or editing/navigation UI.
+- Limits: Chromium automation only; real physical microphone/device and Safari/Firefox not tested. No full accessibility/security audit claimed.
 
-## Prioritized backlog
-- P0 (after approval): real personal content, résumé-based About, real decision cards with evidence, real voice recordings + receipts.
-- P1: hidden-image steganography decoder (PNG LSB, browser-based) in Secret Layer; real intro recording replacing TTS sample.
-- P2: evidence drawer per decision card; print view; language switcher for hero pitch.
+## Deliberate limitations
+- **MOCKED / sample-only:** Bharat profile extraction uses precomputed illustrative examples; no live AI or speech-to-text integration, per user instruction.
+- Owner transcript editing is manual. No real owner audio supplied or published.
+- `/#/setup` is local and unlisted, not password-protected; anyone with the same browser profile can access explicitly saved drafts.
+- Public audio and receipts remain Upload needed. Local exports do not publish files.
+- No backend, accounts, analytics integration, payment integration or live extraction added.
 
-## Next tasks
-1. Fill placeholders from résumé + project materials (content.js is the single edit point).
-2. Add steganography decoder phase.
-3. Replace sample audio with the real voice note.
+## Prioritised next actions
+### P0
+- None. All implemented flows passed the defined Chromium checks.
+
+### P1: owner-supplied content
+- Real recordings and checked transcripts; save/export them in the local editor.
+- Actual decision rationales, three mistakes, lessons, original Flow text, build log and measured speed tests.
+- Stock Screener analytics/pricing/dataset evidence; job-verification evaluation and report; SQL evaluation; project links/screenshots; pitch certificate; internship repository.
+- Clyptus start date/contributions, personal voice/growth motivation, $3,000 answer, availability/travel preference, submission video/post.
+
+### P2: verification and later visual edits
+- Real-device microphone and Safari/Firefox checks; native-speaker validation of reference language samples.
+- Owner visual edits using the preserved design lab, only when requested.
+
+Suggested next material: a Stock Screener analytics export and pricing screenshot would strengthen the main case study without adding features.

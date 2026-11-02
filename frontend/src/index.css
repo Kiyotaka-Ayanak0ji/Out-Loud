@@ -2,6 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
+
 @layer base {
   :root {
     --background: 0 0% 100%;
@@ -39,7 +40,7 @@
     --c-t1: 248 250 252;
     --c-t2: 226 232 240;
     --c-t3: 148 163 184;
-    --c-t4: 100 116 139;
+    --c-t4: 148 163 184;
     --c-acc: 99 102 241;
     --c-accb: 129 140 248;
     --c-accs: 165 180 252;
@@ -85,6 +86,9 @@
     margin: 0;
     transition: background-color 0.3s ease, color 0.3s ease;
   }
+  *, *::before, *::after { letter-spacing: 0 !important; }
+  button, input, textarea, select { font-family: inherit; }
+  p, h1, h2, h3, h4, a { overflow-wrap: anywhere; }
   section[id] {
     scroll-margin-top: 92px;
   }
@@ -192,13 +196,14 @@
     background: #ffffff !important;
   }
   #print-root h1 {
-    font-family: "Syne", sans-serif;
+    font-family: "Space Grotesk", sans-serif;
+    font-size: 22pt;
+    font-weight: 700;
   }
   #print-root h2 {
-    font-family: "JetBrains Mono", monospace;
+    font-family: "Space Grotesk", sans-serif;
     font-size: 10pt;
     text-transform: uppercase;
-    letter-spacing: 0.14em;
     margin: 11pt 0 4pt;
     border-bottom: 0.5pt solid #bbb;
     padding-bottom: 2pt;
@@ -216,6 +221,8 @@
   #print-root a {
     color: #000;
   }
+  #print-root { font-family: "Space Grotesk", sans-serif; }
+  #print-root .print-project { margin-bottom: 5pt; break-inside: avoid; }
   @page {
     size: A4;
     margin: 13mm;

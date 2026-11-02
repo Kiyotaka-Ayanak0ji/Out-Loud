@@ -1,258 +1,74 @@
-import { useRef, useState } from "react";
-import { Mic, Square, Trash2, Upload } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
+import { Download, Mic, Square, Trash2, FolderOpen } from "lucide-react";
 
-/*
- * Optional voice note for a setup answer. Recordings and uploads live in this
- * browser session only — nothing is uploaded anywhere. Typed answers always work.
- */
-export const VoiceNote = ({ id }) => {
-  const [recording, setRecording] = useState(false);
-  const [url, setUrl] = useState(null);
-  const [err, setErr] = useState("");
-  const recRef = useRef(null);
-  const chunksRef = useRef([]);
-  const fileRef = useRef(null);
+const MAX_BYTES = 10 * 1024 * 1024;
+const toDataUrl = (blob) => new Promise((resolve, reject) => {
+  const r = new FileReader(); r.onload = () => resolve(r.result); r.onerror = reject; r.readAsDataURL(blob);
+});
 
-  const start = async () => {
-    setErr("");
-    if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia || typeof MediaRecorder === "undefined") {
-      setErr("Recording is not supported in this browser — type your answer instead.");
-      return;
-    }
+export const VoiceNote = ({ id, label, value = {}, onChange }) => {
+  const [state, setState] = useState("idle");
+  const [error, setError] = useState("");
+  const recorder = useRef(null);
+  const stream = useRef(null);
+  const file = useRef(null);
+  const mounted = useRef(false);
+  const latest = useRef({ value, onChange });
+  latest.current = { value, onChange };
+  const update = (patch) => latest.current.onChange({ ...latest.current.value, ...patch });
+  useEffect(() => {
+    mounted.current = true;
+    return () => {
+      mounted.current = false;
+      if (recorder.current?.state === "recording") recorder.current.stop();
+      stream.current?.getTracks().forEach((t) => t.stop());
+    };
+  }, []);
+  const accept = async (blob, name) => {
+    if (!blob.size || blob.size > MAX_BYTES) { if (mounted.current) setError("Use an audio file between 1 byte and 10 MB."); return; }
     try {
-      const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-      const rec = new MediaRecorder(stream);
-      recRef.current = rec;
-      chunksRef.current = [];
-      rec.ondataavailable = (e) => chunksRef.current.push(e.data);
-      rec.onstop = () => {
-        const blob = new Blob(chunksRef.current, { type: rec.mimeType || "audio/webm" });
-        setUrl((old) => {
-          if (old) URL.revokeObjectURL(old);
-          return URL.createObjectURL(blob);
-        });
-        stream.getTracks().forEach((t) => t.stop());
-      };
-      rec.start();
-      setRecording(true);
-    } catch (e) {
-      setErr("Microphone permission was denied — type your answer instead.");
-    }
+      const audio = await toDataUrl(blob);
+      update({ audio, name, transcript: "" });
+    } catch { if (mounted.current) setError("Could not read that recording. Please choose it again."); }
   };
-
-  const stop = () => {
-    recRef.current?.stop();
-    setRecording(false);
-  };
-
-  const onFile = (e) => {
-    const f = e.target.files && e.target.files[0];
-    if (!f) return;
-    if (!f.type.startsWith("audio/")) {
-      setErr("That file is not audio — pick a voice note or type your answer.");
-      return;
-    }
-    setErr("");
-    setUrl((old) => {
-      if (old) URL.revokeObjectURL(old);
-      return URL.createObjectURL(f);
-    });
-  };
-
-  return (
-    <div className="mt-3" data-testid={`voice-note-${id}`}>
-      <div className="flex flex-wrap items-center gap-2">
-        {!recording ? (
-          <button
-            type="button"
-            onClick={start}
-            data-testid={`voice-note-record-btn-${id}`}
-            className="inline-flex items-center gap-1.5 rounded-full border border-line/15 px-3 py-1.5 text-[11px] font-semibold text-tx-low transition-colors hover:text-tx-hi"
-          >
-            <Mic className="h-3.5 w-3.5" />
-            Record a voice note
-          </button>
-        ) : (
-          <button
-            type="button"
-            onClick={stop}
-            data-testid={`voice-note-stop-btn-${id}`}
-            className="inline-flex items-center gap-1.5 rounded-full bg-tan px-3 py-1.5 text-[11px] font-bold text-[#2A0F04]"
-          >
-            <Square className="h-3 w-3" />
-            Stop recording
-          </button>
-        )}
-        <button
-          type="button"
-          onClick={() => fileRef.current?.click()}
-          data-testid={`voice-note-upload-btn-${id}`}
-          className="inline-flex items-center gap-1.5 rounded-full border border-line/15 px-3 py-1.5 text-[11px] font-semibold text-tx-low transition-colors hover:text-tx-hi"
-        >
-          <Upload className="h-3.5 w-3.5" />
-          Upload audio
-        </button>
-        <input
-          ref={fileRef}
-          type="file"
-          accept="audio/*"
-          className="hidden"
-          onChange={onFile}
-          data-testid={`voice-note-upload-input-${id}`}
-          aria-label="Upload an audio file"
-        />
-        {url && (
-          <>
-            <audio src={url} controls className="h-8 max-w-[220px]" data-testid={`voice-note-player-${id}`} />
-            <button
-              type="button"
-              onClick={() => {
-                setUrl((old) => {
-                  URL.revokeObjectURL(old);
-                  return null;
-                });
-              }}
-              aria-label="Remove voice note"
-              data-testid={`voice-note-remove-btn-${id}`}
-              className="grid h-7 w-7 place-items-center rounded-full border border-line/15 text-tx-faint hover:text-tan-soft"
-            >
-              <Trash2 className="h-3.5 w-3.5" />
-            </button>
-          </>
-        )}
-      </div>
-      {recording && <p className="mt-1.5 text-[11px] text-tan-soft">Recording… tap stop when done.</p>}
-      {err && <p className="mt-1.5 text-[11px] text-tan-soft">{err}</p>}
-      <p className="mt-1 text-[10px] text-tx-faint">
-        Voice notes stay in this browser session only — nothing is uploaded. Typed answers always work.
-      </p>
-    </div>
-  );
-};
-
-/*
- * Intro audio for the public page: record or upload, stored as a data URL in
- * the local draft so it can be applied to this device's public page.
- */
-const MAX_AUDIO_BYTES = 3.5 * 1024 * 1024;
-
-export const IntroAudio = ({ value, onChange }) => {
-  const [recording, setRecording] = useState(false);
-  const [err, setErr] = useState("");
-  const recRef = useRef(null);
-  const chunksRef = useRef([]);
-  const fileRef = useRef(null);
-
-  const blobToDataUrl = (blob) =>
-    new Promise((resolve, reject) => {
-      const r = new FileReader();
-      r.onload = () => resolve(r.result);
-      r.onerror = reject;
-      r.readAsDataURL(blob);
-    });
-
   const start = async () => {
-    setErr("");
-    if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia || typeof MediaRecorder === "undefined") {
-      setErr("Recording is not supported in this browser — upload an audio file instead.");
-      return;
-    }
+    setError("");
+    if (!navigator.mediaDevices?.getUserMedia || typeof MediaRecorder === "undefined") { setError("Recording is unavailable in this browser. Choose a local audio file instead."); return; }
+    setState("asking");
     try {
-      const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-      const rec = new MediaRecorder(stream);
-      recRef.current = rec;
-      chunksRef.current = [];
-      rec.ondataavailable = (e) => chunksRef.current.push(e.data);
+      const media = await navigator.mediaDevices.getUserMedia({ audio: true });
+      if (!mounted.current) { media.getTracks().forEach((t) => t.stop()); return; }
+      stream.current = media;
+      const rec = new MediaRecorder(media);
+      recorder.current = rec;
+      const chunks = []; let size = 0;
+      rec.ondataavailable = (e) => { chunks.push(e.data); size += e.data.size; if (size > MAX_BYTES && rec.state === "recording") rec.stop(); };
       rec.onstop = async () => {
-        stream.getTracks().forEach((t) => t.stop());
-        const blob = new Blob(chunksRef.current, { type: rec.mimeType || "audio/webm" });
-        if (blob.size > MAX_AUDIO_BYTES) {
-          setErr("That recording is too large to keep on this device — keep the intro under about a minute.");
-          return;
-        }
-        onChange(await blobToDataUrl(blob));
+        media.getTracks().forEach((t) => t.stop());
+        if (mounted.current) setState("idle");
+        const mime = rec.mimeType || chunks[0]?.type || "audio/webm";
+        await accept(new Blob(chunks, { type: mime }), `${id}.${mime.includes("mp4") ? "m4a" : mime.includes("ogg") ? "ogg" : "webm"}`);
       };
-      rec.start();
-      setRecording(true);
-    } catch (e) {
-      setErr("Microphone permission was denied — upload an audio file instead.");
+      rec.onerror = () => { media.getTracks().forEach((t) => t.stop()); if (mounted.current) { setError("Recording failed. Choose a local file or try again."); setState("idle"); } };
+      rec.start(1000); setState("recording");
+    } catch {
+      stream.current?.getTracks().forEach((t) => t.stop());
+      if (mounted.current) { setError("Microphone access was denied or unavailable. Choose a local audio file instead."); setState("idle"); }
     }
   };
-
-  const onFile = async (e) => {
-    const f = e.target.files && e.target.files[0];
-    if (!f) return;
-    if (!f.type.startsWith("audio/")) {
-      setErr("That file is not audio.");
-      return;
-    }
-    if (f.size > MAX_AUDIO_BYTES) {
-      setErr("That file is too large — keep the intro under about a minute.");
-      return;
-    }
-    setErr("");
-    onChange(await blobToDataUrl(f));
-  };
-
-  return (
-    <div className="rounded-2xl border border-line/10 bg-fill/[0.03] p-4" data-testid="intro-audio-tool">
-      <p className="field-label">Voice recording for the public page (optional)</p>
-      <div className="mt-2 flex flex-wrap items-center gap-2">
-        {!recording ? (
-          <button
-            type="button"
-            onClick={start}
-            data-testid="intro-audio-record-btn"
-            className="inline-flex items-center gap-1.5 rounded-full border border-line/15 px-3 py-1.5 text-[11px] font-semibold text-tx-low hover:text-tx-hi"
-          >
-            <Mic className="h-3.5 w-3.5" />
-            Record intro
-          </button>
-        ) : (
-          <button
-            type="button"
-            onClick={() => {
-              recRef.current?.stop();
-              setRecording(false);
-            }}
-            data-testid="intro-audio-stop-btn"
-            className="inline-flex items-center gap-1.5 rounded-full bg-tan px-3 py-1.5 text-[11px] font-bold text-[#2A0F04]"
-          >
-            <Square className="h-3 w-3" />
-            Stop recording
-          </button>
-        )}
-        <button
-          type="button"
-          onClick={() => fileRef.current?.click()}
-          data-testid="intro-audio-upload-btn"
-          className="inline-flex items-center gap-1.5 rounded-full border border-line/15 px-3 py-1.5 text-[11px] font-semibold text-tx-low hover:text-tx-hi"
-        >
-          <Upload className="h-3.5 w-3.5" />
-          Upload audio file
-        </button>
-        <input ref={fileRef} type="file" accept="audio/*" className="hidden" onChange={onFile} aria-label="Upload intro audio" data-testid="intro-audio-upload-input" />
-        {value && (
-          <>
-            <audio src={value} controls className="h-8 max-w-[240px]" data-testid="intro-audio-player" />
-            <button
-              type="button"
-              onClick={() => onChange(null)}
-              aria-label="Remove intro recording"
-              data-testid="intro-audio-remove-btn"
-              className="grid h-7 w-7 place-items-center rounded-full border border-line/15 text-tx-faint hover:text-tan-soft"
-            >
-              <Trash2 className="h-3.5 w-3.5" />
-            </button>
-          </>
-        )}
-      </div>
-      {recording && <p className="mt-1.5 text-[11px] text-tan-soft">Recording… tap stop when done.</p>}
-      {err && <p className="mt-1.5 text-[11px] text-tan-soft">{err}</p>}
-      <p className="mt-1 text-[10px] text-tx-faint">
-        Kept on this device only. Nothing is uploaded, and no voice is generated for you — the page plays your real
-        recording, or clearly says a recording is needed.
-      </p>
+  const busy = state !== "idle";
+  const btn = "inline-flex items-center gap-2 rounded-full border border-line/20 px-4 py-2 text-sm transition-colors hover:border-acc disabled:opacity-50";
+  return <div className="border-t border-line/15 py-5" data-testid={`voice-note-${id}`}>
+    <h3 className="font-semibold text-tx-hi">{label}</h3>
+    <div className="mt-3 flex flex-wrap items-center gap-2">
+      {state === "recording" ? <button onClick={() => { if (recorder.current?.state === "recording") recorder.current.stop(); }} data-testid={`voice-note-stop-btn-${id}`} className={btn}><Square className="h-4 w-4 text-tan-soft" />Stop recording</button> : <button disabled={busy} onClick={start} data-testid={`voice-note-record-btn-${id}`} className={btn}><Mic className="h-4 w-4" />{state === "asking" ? "Waiting for permission…" : value.audio ? "Record replacement" : "Record"}</button>}
+      <button disabled={busy} onClick={() => file.current?.click()} data-testid={`voice-note-upload-btn-${id}`} className={btn}><FolderOpen className="h-4 w-4" />{value.audio ? "Replace audio" : "Choose audio file"}</button>
+      <input ref={file} type="file" accept="audio/*" aria-label={`Choose audio for ${label}`} className="hidden" data-testid={`voice-note-upload-input-${id}`} onChange={async (e) => { const f = e.target.files?.[0]; e.target.value = ""; if (!f) return; setError(""); if (!f.type.startsWith("audio/")) { setError("Choose a supported audio file."); return; } await accept(f, f.name); }} />
+      {value.audio && <><a className={btn} href={value.audio} download={value.name || `${id}.webm`} data-testid={`voice-note-download-${id}`}><Download className="h-4 w-4" />Download audio</a><button disabled={busy} aria-label={`Remove recording for ${label}`} title="Remove recording" onClick={() => update({ audio: null, name: "", transcript: "" })} className={btn} data-testid={`voice-note-remove-btn-${id}`}><Trash2 className="h-4 w-4" /></button></>}
     </div>
-  );
+    {value.audio && <audio controls src={value.audio} preload="metadata" className="mt-4 h-10 w-full max-w-md" data-testid={`voice-note-player-${id}`} />}
+    <p className="mt-2 text-sm text-amb-soft" role="status" data-testid={`voice-note-status-${id}`}>{state === "recording" ? "Recording locally…" : error || (!value.audio ? "Recording: Upload needed." : "")}</p>
+    <label htmlFor={`transcript-${id}`} className="field-label mt-4 block">Transcript</label>
+    <textarea id={`transcript-${id}`} value={value.transcript || ""} onChange={(e) => update({ transcript: e.target.value })} data-testid={`voice-note-transcript-${id}`} rows={3} placeholder="Upload needed." className="mt-2 w-full rounded-lg border border-line/20 bg-bg/50 p-3 text-base" />
+  </div>;
 };

@@ -42,13 +42,12 @@ const Typewriter = () => {
   return (
     <h1
       data-testid="hero-typewriter"
-      className="min-h-[2.05em] font-display text-5xl font-extrabold leading-[1.02] tracking-tight sm:text-6xl lg:text-7xl"
+      className="min-h-[2.2em] font-display text-4xl font-semibold leading-[1.1] sm:text-5xl lg:text-6xl"
     >
       <span className="bg-gradient-to-r from-acc-bright via-acc-soft to-fuchsia-500 bg-clip-text text-transparent">
         {text}
       </span>
       {motionOn && <span className="caret caret-blink" aria-hidden="true" />}
-      <span className="sr-only"> — a portfolio built by voice.</span>
     </h1>
   );
 };

@@ -1,65 +1,19 @@
 import { createContext, useContext, useState } from "react";
-import { OWNER_NAME } from "../lib/content";
+import { BASE_PROFILE, OWNER_NAME } from "../lib/profile-data";
 
-export const emptyProfile = {
-  intro: { audio: null, transcript: "", updated: null },
-  autopsy: {
-    projectName: "",
-    role: "",
-    mistakes: { happened: "", cost: "", change: "" },
-    decisions: Array.from({ length: 6 }, () => ({
-      title: "",
-      context: "",
-      decision: "",
-      reason: "",
-      result: "",
-      evidence: "",
-      evidenceOk: false,
-      lesson: "",
-    })),
-  },
-  bharat: { origin: "", users: "", languages: "", learned: "" },
-  secret: { story: "", message: "" },
-  receipts: Array.from({ length: 3 }, () => ({ title: "", said: "", transcribed: "", built: "", evidence: "" })),
-  projects: Array.from({ length: 4 }, () => ({ title: "", summary: "", work: "", tools: "", link: "", evidenceOk: false })),
-  skills: Array.from({ length: 4 }, () => ({ name: "", items: "" })),
-  about: { role: "", bio: "", resume: "", linkedin: "", github: "", other: "" },
-  contact: { email: "", location: "", profiles: "", publish: false },
-};
-
+export const emptyProfile = BASE_PROFILE;
 export const PROFILE_KEY = "outloud-profile-v1";
-
-const ProfileContext = createContext({ profile: emptyProfile, applyProfile: () => {}, clearProfile: () => {} });
-
+const ProfileContext = createContext(null);
 export const ProfileProvider = ({ children }) => {
-  const [profile, setProfile] = useState(() => {
-    try {
-      const raw = localStorage.getItem(PROFILE_KEY);
-      if (raw) return { ...emptyProfile, ...JSON.parse(raw) };
-    } catch (e) {}
-    return emptyProfile;
-  });
-
-  const applyProfile = (p) => {
-    setProfile(p);
-    try {
-      localStorage.setItem(PROFILE_KEY, JSON.stringify(p));
-    } catch (e) {}
+  // Public content never hydrates from private drafts or the old applied localStorage key.
+  const [profile, setProfile] = useState(BASE_PROFILE);
+  const applyProfile = (draft) => {
+    const { voiceNotes, ...text } = draft;
+    // Transcripts and audio are kept in the private draft even during local text preview.
+    setProfile({ ...text, intro: BASE_PROFILE.intro,
+      receipts: text.receipts.map((r) => ({ ...r, said: "", transcribed: "" })) });
   };
-
-  const clearProfile = () => {
-    setProfile(emptyProfile);
-    try {
-      localStorage.removeItem(PROFILE_KEY);
-    } catch (e) {}
-  };
-
-  return (
-    <ProfileContext.Provider value={{ profile, applyProfile, clearProfile }}>
-      {children}
-    </ProfileContext.Provider>
-  );
+  return <ProfileContext.Provider value={{ profile, applyProfile, clearProfile: () => setProfile(BASE_PROFILE) }}>{children}</ProfileContext.Provider>;
 };
-
 export const useProfile = () => useContext(ProfileContext);
 export { OWNER_NAME };

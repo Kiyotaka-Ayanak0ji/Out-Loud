@@ -84,12 +84,12 @@ module.exports = {
         }
       },
       fontFamily: {
-        display: ['Syne', 'ui-sans-serif', 'system-ui', 'sans-serif'],
-        body: ['"Plus Jakarta Sans"', 'ui-sans-serif', 'system-ui', 'sans-serif'],
-        mono: ['"JetBrains Mono"', 'ui-monospace', 'monospace']
+        display: ['"Space Grotesk"', 'sans-serif'],
+        body: ['"Space Grotesk"', 'sans-serif'],
+        mono: ['"Space Grotesk"', 'sans-serif']
       },
       letterSpacing: {
-        widest2: '0.22em'
+        widest2: '0'
       }
     }
   },

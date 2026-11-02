@@ -1,0 +1,1566 @@
+PAGE 1
+W I S P R   F L O W   H I R I N G   C H A L L E N G E   ·   G R O W T H   T E A M ,   I N D I A
+Out Loud
+A voice-built growth portfolio
+Application concept, specification and delivery plan
+PREPARED FOR
+Ansik Aryan Samal
+CHALLENGE
+Wispr Flow Hiring Challenge with Emergent
+VERSION
+1.0  ·  31 October 2026
+STATUS
+Build-ready specification
+Emergent
+Wispr Flow
+Voice-built
+Growth
+
+PAGE 2
+OUT LOUD
+Application concept, specification and delivery plan
+v1.0  ·  31 Oct 2026
+Prepared for Ansik Aryan Samal  ·  Wispr Flow Hiring Challenge
+2
+DOCUMENT CONTROL
+Contents
+ .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 3
+1. Executive summary
+ .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 4
+2. Challenge brief analysis
+ .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 5
+3. Product concept
+ .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 7
+4. Information architecture and UX
+ .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 8
+5. Module specifications
+ .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 15
+6. Voice-driven build strategy
+ .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 17
+7. Technical architecture
+ .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 19
+8. Delivery plan
+ .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 20
+9. Quality assurance and launch checklist
+ .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 21
+10. Risk register
+ .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 22
+11. Submission package
+ .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 24
+12. Success criteria and open inputs
+ .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 26
+Appendix A · Voice content-capture questions
+ .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 26
+Appendix B · Reference encoder and decoder
+ .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 28
+Appendix C · Glossary
+ .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 29
+Appendix D · Sources
+Document
+Out Loud: application concept, specification and delivery plan
+Version
+1.0, build-ready · 31 October 2026 (Saturday)
+Prepared for
+Ansik Aryan Samal
+Prepared with
+Claude (Anthropic)
+Challenge
+Wispr Flow Hiring Challenge with Emergent, growth team India. Opens 28 Oct, submissions close 4 Nov
+2026.
+Inputs
+The challenge page (re-read on 31 Oct), three résumé versions supplied by Ansik, and earlier ideation in
+this conversation.
+How to use it
+Sections 1–3 decide what to build. Sections 4–7 specify it. Sections 8–10 plan and de-risk it. Section 11
+packages the submission. Section 12 lists what is still needed from you.
+
+PAGE 3
+OUT LOUD
+Application concept, specification and delivery plan
+v1.0  ·  31 Oct 2026
+Prepared for Ansik Aryan Samal  ·  Wispr Flow Hiring Challenge
+3
+THE DECISION
+1. Executive summary
+More than 2,000 people applied to Wispr Flow’s India roles in the week before this challenge, and the
+team says the applications were hard to tell apart: the same over-polished PDF résumés. So the format
+changed. The new brief is to build the most creative portfolio of yourself, with your voice, and to show the
+chances you took, the mistakes you learned from, what you care about and how you think.
+Out Loud is a build-ready answer to that brief. It is a single-page interactive portfolio with three chapters and one
+proof layer, built on Emergent and spoken into existence with Wispr Flow.
+ 3 + 1
+ chapters plus a proof layer
+ 5 days
+ 31 Oct to 4 Nov, one builder
+ < 3 min
+ to walk the whole site
+ ≤ 3:00
+ submission video
+Figure 1. Out Loud at a glance: three chapters, each proving something different, sitting on one proof-of-voice layer.
+What the visitor gets
+
+The Autopsy (spine). A decision-by-decision teardown of a real product launch, the stock screener that reached
+about 10,000 views. Wins, misses, evidence badges on every number, and three proposals for growing Wispr
+Flow in India.
+
+Voice-First Bharat (wow). Speak, or dictate with Flow, in Hindi, Telugu or Odia and watch a structured job profile
+appear. It is the daily-wage-worker pitch from IIT Bombay, rebuilt with voice at the front door.
+
+The Secret Layer (flair). A message hidden in an image, three clues to find it, and a decoder that runs in the
+browser. Behind it sits the answer to the $3,000 question.
+
+Voice Receipts (proof). For each chapter: the audio, what Flow typed, what Emergent built, and a personal
+typing-versus-talking test with real timings.
+
+PAGE 4
+OUT LOUD
+Application concept, specification and delivery plan
+v1.0  ·  31 Oct 2026
+Prepared for Ansik Aryan Samal  ·  Wispr Flow Hiring Challenge
+4
+The idea in one sentence
+A portfolio you can walk through in under three minutes that proves ownership (a real launch, honestly dissected),
+insight (voice for people who cannot or will not type) and craft (a message you can decode), and that was itself built
+by speaking.
+Why this combination wins
+ Reviewer’s question
+How Out Loud answers it
+Can this person own an outcome?
+The Autopsy shows decisions, trade-offs and results from a real launch, with
+verifiable numbers and honest gaps.
+Do they understand our market?
+Voice-First Bharat shows why voice matters where typing is hardest: regional
+languages, long forms, small screens.
+Do they use voice naturally?
+Every chapter ships with voice receipts, and the site’s own copy was dictated in the
+author’s words.
+Is this memorable among 2,000
+applicants?
+A hidden-message puzzle is something people remember, screenshot and talk
+about, and it fits the creativity criterion.
+Scope boundaries
+ In scope
+Out of scope (deliberately)
+One public page on Emergent; three chapters and the proof
+layer; a small server function for profile extraction; a 3-minute
+video; a LinkedIn or X post.
+User accounts, storing visitor data, a general-purpose chatbot,
+payments, native apps, and any claim about Wispr Flow’s
+internal data or metrics.
+WHAT THEY ASKED FOR
+2. Challenge brief analysis
+The brief was re-read in full on 31 October. This section separates what is required from what is merely hinted at,
+then derives the design principles.
+2.1 Requirements and the design response
+ Requirement
+What the page says
+Design response
+A portfolio of you,
+built with voice
+An interactive window into the chances you took,
+mistakes you learned from, what you care about,
+and how you think.
+Chances and thinking: Autopsy decisions. Mistakes:
+the Mistakes panel. What you care about: Voice-First
+Bharat.
+Public link, new
+build
+Built on Emergent using Wispr Flow. No old
+portfolios. Publicly accessible.
+A fresh project named Out Loud. Incognito and
+second-device checks before submitting.
+Video, 3 minutes
+max
+What you built, why, and the value you saw in
+voice. Clear communication is judged.
+2:55 storyboard with a measured speed-test result
+(Section 11).
+$3,000 grant
+answer
+Your most oddly specific work requirement.
+Unlocked by the Secret Layer, and also stated
+plainly in the About section (Section 11).
+Proof of voice
+Your recording, plus a check that your Flow
+account was active during the challenge.
+Voice Receipts. Use Flow from day one, signed in
+with the same email you put on the form.
+Evaluation
+Creativity, use of voice, extreme ownership, work
+over credentials; independent building.
+Coverage matrix in Section 12.
+Logistics
+Ideally start in November. Bangalore-based or
+willing to travel.
+You are in Hyderabad today. Decide and state your
+availability honestly (Section 12).
+
+PAGE 5
+OUT LOUD
+Application concept, specification and delivery plan
+v1.0  ·  31 Oct 2026
+Prepared for Ansik Aryan Samal  ·  Wispr Flow Hiring Challenge
+5
+2.2 Timeline
+ Date (2026)
+Milestone
+Implication
+28 Oct
+Challenge opens
+Credits arrive at your registered email within 10 hours of registering.
+Sat 31 Oct
+Today
+Four calendar days remain after today. Treat Tue 3 Nov night as the real
+deadline.
+4 Nov
+Submissions closed
+The page lists a date but no time or time zone. Do not rely on the last day.
+5 Nov
+Shortlist contacted
+Keep your phone and email reachable. Pin the portfolio link.
+20 Nov
+Hire announced
+Keep improving quietly; do not change the submitted build without need.
+2.3 Reading between the lines
+
+Sameness is the enemy. The first filter is distinctiveness. A clean but conventional portfolio loses to a specific,
+odd, memorable one.
+
+It is a growth role. The page says they want people who turn creative ideas into campaigns. The portfolio should
+show campaign thinking, not only engineering.
+
+Voice is the product. They will notice whether voice shaped the work or was bolted on. Show the process, not
+just the claim.
+
+Interns need no channel history. The FAQ says interns are judged in the context of their experience. Initiative,
+learning and follow-through carry the weight.
+
+The page names formats it likes: interactive timelines, choose-your-own-path stories, simulators, quizzes and
+ask-me-anything apps. Out Loud uses a timeline, a live demo and a puzzle.
+2.4 Design principles
+ Principle
+Meaning in practice
+Specific over polished
+Real decisions, real numbers, real mistakes. Rough edges are acceptable; vagueness is not.
+Evidence over adjectives
+Every number carries a badge: verified with a source, or marked not measured.
+Voice as method
+Dictate the copy, the prompts and the fixes. Keep the receipts.
+One scroll, three minutes
+A reviewer should reach the secret and the contact link in under three minutes.
+Honest by default
+Proposals are labelled as proposals. Samples are labelled as samples. No invented data.
+WHAT OUT LOUD IS
+3. Product concept
+3.1 Vision and positioning
+Positioning statement
+For the Wispr Flow India growth team, who need to find one exceptional person among thousands of similar
+applications, Out Loud is an interactive portfolio that proves ownership, market insight and craft in three minutes.
+Unlike a résumé or a template site, it was built entirely by voice and lets the visitor test the ideas, not just read about
+them.
+Tagline: A portfolio you can walk through in three minutes, built by speaking.
+
+PAGE 6
+OUT LOUD
+Application concept, specification and delivery plan
+v1.0  ·  31 Oct 2026
+Prepared for Ansik Aryan Samal  ·  Wispr Flow Hiring Challenge
+6
+3.2 Audience
+ Persona
+Needs
+What Out Loud gives
+Success signal
+Primary: growth lead at
+Wispr Flow India
+Fast proof of initiative and
+judgement; a reason to
+remember one applicant.
+Evidence-badged decisions, a
+working voice demo, a puzzle worth
+screenshotting.
+Reaches the Secret
+Layer or the contact link.
+Secondary: founders and
+senior reviewers
+Taste, authenticity, signs of
+independent building.
+Plain-spoken copy, honest mistakes,
+a clean mobile experience.
+Reads at least two
+Autopsy cards.
+Tertiary: peers and the
+public on LinkedIn or X
+Something shareable and fun.
+A teaser image and a decode
+moment.
+Shares, or tries the
+decoder.
+3.3 Visitor journey
+Figure 2. The intended three-minute journey. Times are targets for a first-time visitor; emotions are design intent.
+3.4 Voice and tone of the copy
+
+First person, short sentences, spoken rhythm. If it sounds odd when read aloud, rewrite it.
+
+Numbers come with a badge and a source. Adjectives (“passionate”, “driven”) are banned.
+
+Mistakes are told as stories with a cost and a change, not as humble-brags.
+
+A few Hindi, Telugu or Odia phrases are welcome where natural, always with a plain-English gloss.
+
+PAGE 7
+OUT LOUD
+Application concept, specification and delivery plan
+v1.0  ·  31 Oct 2026
+Prepared for Ansik Aryan Samal  ·  Wispr Flow Hiring Challenge
+7
+HOW IT IS ORGANISED
+4. Information architecture and UX
+Figure 3. Site map. One page with anchored chapters keeps the journey short and the link easy to share.
+4.1 Page-by-page specification
+ Section
+Purpose
+Key elements
+Primary call to action
+0 · Hero
+Hook in ten
+seconds.
+One-line pitch, a 10-second voice intro with captions,
+“built by voice” badge, chapter links.
+Scroll to The Autopsy.
+1 · The Autopsy
+Prove ownership.
+Six decision cards, Mistakes panel, three Wispr India
+experiment cards.
+Open a card; reach the
+next chapter.
+2 · Voice-First
+Bharat
+Prove market
+insight.
+Origin story, language switcher, text box, sample
+chips, result card.
+Run the demo.
+3 · The Secret
+Layer
+Be memorable;
+show craft.
+Three clue breadcrumbs, decoder, spoiler path,
+unlocked content.
+Decode the image.
+4 · Voice Receipts
+Prove use of voice.
+Four to six receipts, personal speed test,
+how-it-was-built timeline.
+Play a receipt.
+5 · About and
+contact
+Convert interest.
+Five-line story, the $3,000 answer, email, LinkedIn,
+links to the video and post.
+Contact.
+
+PAGE 8
+OUT LOUD
+Application concept, specification and delivery plan
+v1.0  ·  31 Oct 2026
+Prepared for Ansik Aryan Samal  ·  Wispr Flow Hiring Challenge
+8
+4.2 Visual design system
+The palette below is a proposal for the portfolio, not Wispr Flow’s brand. A restrained dark base with four accent
+colours lets each chapter have its own identity while the whole stays coherent.
+Ink
+#0F172A
+Base, text on light
+Indigo
+#4F46E5
+The Autopsy
+Teal
+#0E9F9A
+Voice-First Bharat
+Coral
+#F2603F
+The Secret Layer
+Amber
+#F5A524
+Voice Receipts
+Area
+Guideline
+Typography
+At most two families: a clear sans for text and one expressive weight for headings. Provide system-font
+fallbacks. Body text 16 px minimum on mobile.
+Layout
+Design at 390 px width first, since many reviewers open links on phones. One column on mobile, two
+columns from tablet width.
+Motion
+Small and purposeful: card expand, decode reveal. Honour the reduced-motion setting. No autoplay audio.
+Accessibility
+Contrast of at least 4.5:1, visible focus states, keyboard access to every control, transcripts or captions for
+all audio, alt text for images.
+Imagery
+No stock photos. Use your own screenshots, simple shapes and a waveform motif that echoes voice.
+WHAT EACH CHAPTER DOES
+5. Module specifications
+5.1 Chapter 1 · The Autopsy (spine)
+Reader question: can this person own an outcome? Subject: the Stock Screener SaaS client project. Known facts
+from the résumé: a customisable screener covering 5,300+ NSE and BSE stocks with live prices, watchlists and
+portfolio tracking; Free, Pro ($20/month) and Premium ($40/month) plans with discounted yearly rates; features such
+as stock search, watchlist count and automatic price refresh tied to each plan; payment approach chosen and
+documentation written; launched on a custom domain through Cloudflare; about 10,000 views in 3–4 months.
+
+PAGE 9
+OUT LOUD
+Application concept, specification and delivery plan
+v1.0  ·  31 Oct 2026
+Prepared for Ansik Aryan Samal  ·  Wispr Flow Hiring Challenge
+9
+Figure 4. Anatomy of a decision card. Each card is built from the same five parts so it can be read in under 20 seconds.
+Decision cards: draft outline
+ #
+Decision
+Known facts
+Capture by voice
+1
+Scope and audience
+5,300+ NSE and BSE stocks; live prices,
+watchlists, portfolio tracking.
+Who the user was; what you cut and why.
+2
+Plans and pricing
+Free, Pro $20, Premium $40; discounted
+yearly.
+Options you rejected; how you chose the
+numbers; what you would test.
+3
+Feature gating
+Search, watchlist count and auto-refresh tied to
+plans.
+Why those features; any user reaction.
+4
+Payments approach
+Approach chosen; documentation written.
+Alternatives, trade-offs, what went wrong.
+5
+Launch
+Custom domain via Cloudflare.
+Launch steps, channels, first-week actions.
+6
+Traffic
+About 10,000 views in 3–4 months.
+What drove views and what did not; what you
+would measure next. Attach the analytics
+export.
+Mistakes panel
+Three entries, each with: what happened, what it cost (time, money or users), and what you now do differently.
+Choose mistakes with real consequences; avoid disguised strengths.
+Three proposals for Wispr Flow in India
+These are hypotheses framed as small experiments, clearly labelled as proposals with assumptions, not data.
+Thresholds are illustrative and should be set before any test.
+
+PAGE 10
+OUT LOUD
+Application concept, specification and delivery plan
+v1.0  ·  31 Oct 2026
+Prepared for Ansik Aryan Samal  ·  Wispr Flow Hiring Challenge
+10
+Proposal
+Two-week test
+Success metric
+Kill criterion
+H1 · Type versus Talk on
+campus, using Hinglish and
+regional passages
+Run at two or three colleges with
+a tracked link and a result card.
+Share rate of result cards;
+installs per 100
+participants.
+Under 5 installs per 100
+participants (illustrative).
+H2 · Write it by voice for
+freshers: cover letters, LinkedIn
+summaries
+Offer through one placement cell
+and one bootcamp community.
+Share of sign-ups who
+dictate within 24 hours.
+Under 30 percent first-day
+activation (illustrative).
+H3 · “I built it by talking”
+creator template
+Brief five micro-creators with one
+60-second format.
+Cost per activated user.
+Above a ceiling set before
+the test.
+Requirements and acceptance
+ ID
+Requirement
+Acceptance check
+A1
+Six decision cards, keyboard and touch operable, each expandable
+and deep-linkable.
+All cards open and close by keyboard; each
+has its own anchor.
+A2
+Every number carries an evidence badge: Verified (with source) or
+Not measured.
+Zero unbadged numbers on the page.
+A3
+Mistakes panel with at least three entries.
+Each entry states event, cost and change.
+A4
+Three experiment cards labelled as proposals.
+Each has hypothesis, test, metric and kill
+criterion.
+A5
+Each card has a 20–40 second voice clip with transcript.
+Audio plays on mobile; transcript is visible.
+5.2 Chapter 2 · Voice-First Bharat (wow)
+Reader question: does this person understand our market? Origin story: at the National Entrepreneurship
+Challenge E-Summit 2024 at IIT Bombay, the team’s pitch ranked 4th in India. Ansik pitched a job-matching app for
+daily-wage and off-season workers with regional-language support, salary-negotiation help and planned tie-ups with
+government welfare schemes. Out Loud shows what that idea looks like when speech is the front door.
+
+PAGE 11
+OUT LOUD
+Application concept, specification and delivery plan
+v1.0  ·  31 Oct 2026
+Prepared for Ansik Aryan Samal  ·  Wispr Flow Hiring Challenge
+11
+Figure 5. The voice demo pipeline. Three input paths converge on an editable transcript; a validator guarantees the model never
+invents a value.
+Input modes
+ Mode
+How it works
+Strength
+Limit
+A · Flow dictation
+(primary)
+The page offers a plain text box. A visitor
+with Wispr Flow dictates into it, because
+Flow works wherever you can type.
+No custom speech code.
+Shows Flow’s value in its
+natural setting.
+Needs Flow installed on
+the visitor’s device.
+B · In-page mic
+(optional)
+Browser speech recognition fills the same
+text box where supported.
+Works without installing
+anything.
+Support varies by browser
+and language; audio may
+go to the browser vendor.
+C · Sample clips
+(always)
+Pre-recorded clips with pre-computed
+results.
+Always works, even offline
+from the model.
+Not live; clearly labelled
+as samples.
+Language policy
+Hindi is the primary demo language (native). Telugu and Odia are conversational per the résumé, so label them
+“beta” and have a native speaker verify each sample. Before building around them, test ten sentences per language
+in Flow. If accuracy is poor, ship Hindi and Telugu live, keep Odia as sample-only, and say so on the page.
+
+PAGE 12
+OUT LOUD
+Application concept, specification and delivery plan
+v1.0  ·  31 Oct 2026
+Prepared for Ansik Aryan Samal  ·  Wispr Flow Hiring Challenge
+12
+Profile schema returned by the extractor
+ Field
+Type
+Rule
+full_name
+string or null
+Only if spoken. Never guessed.
+primary_trade
+string or null
+Normalised to English (for example mistri to
+mason).
+skills
+string list
+Only what was said.
+experience_years
+number or null
+Spoken number words are converted and flagged
+as converted.
+location_city
+string or null
+As spoken.
+availability
+full_day, part_day, seasonal or
+unknown
+Unknown unless stated.
+expected_wage
+amount, unit (day, hour, month,
+unknown), currency INR
+Null unless stated. Never inferred.
+source_language,
+field_confidence, flags
+enum, map, list
+Flags include converted_number and
+low_confidence. Phone numbers and IDs are
+masked.
+Sample utterances (illustrative: replace with native-verified recordings)
+ Language
+Spoken (romanised)
+Expected extraction
+Hindi
+“Mera naam Ramesh hai. Main das saal se mistri ka kaam kar raha
+hoon, Hyderabad mein. Rozana paanch sau rupaye leta hoon.”
+Ramesh; mason; 10 years; Hyderabad;
+500 INR per day (converted from words).
+Telugu
+“Naa peru Suresh. Nenu aidu years nundi electrician ga
+panichestunnanu, Hyderabad lo.”
+Suresh; electrician; 5 years; Hyderabad;
+wage null (not stated).
+Odia
+“Mo naa Bijay. Mu pancha barsa dhari mason kama karuchi,
+Bhubaneswar re.”
+Bijay; mason; 5 years; Bhubaneswar;
+wage null. Verify spelling with a native
+speaker.
+Requirements and acceptance
+ ID
+Requirement
+Acceptance check
+B1
+Text box accepts typed or dictated input; mic button appears only
+where supported; sample chips always available.
+Works on Android Chrome, iPhone Safari and
+desktop.
+B2
+Language selector sets the extraction hint; Hindi, Telugu and Odia,
+with English fallback.
+Wrong-language input still returns a valid,
+mostly-null profile.
+B3
+Result card is editable, shows per-field confidence and flags
+converted values.
+A visitor can fix any field in one tap.
+B4
+Validator rejects invented values; missing fields stay null and prompt
+the visitor to confirm.
+Ten adversarial inputs with a missing wage
+produce zero invented wages.
+B5
+Privacy: nothing stored after the visit; disclaimer that this is a concept
+demo, not a hiring product; no real workers’ data.
+No visitor text appears in logs or storage.
+B6
+Accuracy: at least 8 of 10 scripted samples per live language return
+correct name, trade, experience and city.
+Recorded in the QA sheet.
+
+PAGE 13
+OUT LOUD
+Application concept, specification and delivery plan
+v1.0  ·  31 Oct 2026
+Prepared for Ansik Aryan Samal  ·  Wispr Flow Hiring Challenge
+13
+5.3 Chapter 3 · The Secret Layer (flair)
+Reader question: is there something here worth coming back to? The chapter turns your steganography internship
+project into a puzzle. A short message is hidden in the lowest bit of the colour values of a PNG. Visitors collect three
+clues, load the image into a browser decoder, enter a short passphrase, and unlock a bonus story and your answer
+to the $3,000 question.
+Figure 6. How the hidden message is written and read. The worked example hides one letter in eight bytes; the real message uses the
+same method.
+Mechanic and clue trail
+ Step
+What the visitor sees
+Where it lives
+Clue 1
+A line in the hero or first card: “One picture on this page is heavier than it
+looks.”
+The Autopsy
+Clue 2
+A passphrase word spoken near the end of a voice clip, noted in its
+transcript.
+Voice-First Bharat
+Clue 3
+A small “decode an image” tool appears in the footer of the receipts.
+Voice Receipts
+Spoiler path
+A visible “skip the puzzle” link reveals the answer immediately.
+Secret Layer and About
+Design decision: never gate the essentials
+Reviewers are time-poor. The $3,000 answer must also be readable without solving the puzzle, in the About section
+and the video. The puzzle rewards curiosity; it must never block information the brief asks for.
+Technical specification
+
+PAGE 14
+OUT LOUD
+Application concept, specification and delivery plan
+v1.0  ·  31 Oct 2026
+Prepared for Ansik Aryan Samal  ·  Wispr Flow Hiring Challenge
+14
+
+Carrier: a lossless PNG. JPEG recompression rewrites pixel values and destroys the hidden bits. Test on the
+deployed URL.
+
+Frame: a 32-bit length, the UTF-8 message bytes, then a CRC-32 of the message, written most-significant bit first
+into the lowest bit of each R, G and B byte (alpha is skipped).
+
+Lock: an optional passphrase XOR-ed over the message. It is a puzzle lock, not security; a wrong passphrase
+fails the CRC and shows a friendly message.
+
+Decoder: runs entirely in the browser using a canvas; the image is never uploaded.
+
+Reference code: an encoder (Python) and decoder (JavaScript) are in Appendix B and were tested for a round
+trip, including wrong-passphrase handling and non-ASCII text.
+Requirements and acceptance
+ ID
+Requirement
+Acceptance check
+C1
+The deployed PNG decodes correctly in three browsers on desktop
+and mobile.
+SHA-256 of the served file equals the original;
+message matches exactly.
+C2
+Wrong passphrase gives a friendly retry; three failures offer a hint.
+No error codes or stack traces visible.
+C3
+Reveal animation under 1.5 seconds, with a reduced-motion fallback.
+Tested with the OS setting on and off.
+C4
+Hidden content: bonus story (up to 120 words), the $3,000 answer (up
+to 80 words), a one-line invitation.
+Reads well aloud.
+5.4 Proof layer · Voice Receipts
+This layer answers the “use of voice” criterion directly. It shows, with evidence, that speaking shaped the work and
+what it added.
+Element
+Content
+Rule
+Receipts (4–6)
+Short audio clip (up to 20 s), the text Flow produced, the Emergent
+result (screenshot or description), and one line on what changed.
+Every audio has a transcript.
+Personal speed test
+The same three prompts typed and then spoken, each timed by you.
+Columns: prompt, words, typing time, speaking time, ratio.
+Report only measured values
+and state the method. No
+borrowed multipliers.
+How it was built
+A day-by-day timeline of prompts and fixes, taken from the build log.
+Plain and honest; include one
+thing voice did badly and how
+you handled it.
+ID
+Requirement
+Acceptance check
+D1
+At least four receipts across at least two chapters.
+Each shows audio, Flow text and the build
+result.
+D2
+Speed test with n of at least 3 and a method note.
+Raw timings visible, not just the headline ratio.
+D3
+Flow account active on every build day, same email as on the form.
+Usage visible on each of the five days.
+
+PAGE 15
+OUT LOUD
+Application concept, specification and delivery plan
+v1.0  ·  31 Oct 2026
+Prepared for Ansik Aryan Samal  ·  Wispr Flow Hiring Challenge
+15
+HOW TO BUILD IT BY SPEAKING
+6. Voice-driven build strategy
+Figure 7. The build loop. Each pass produces a receipt, so the evidence for “use of voice” accumulates as a by-product.
+6.1 Setup checklist (do this first)
+ Item
+Why
+Done when
+Wispr Flow installed and signed in
+with the form email
+They check that the account was active
+during the challenge.
+A test dictation works in a browser text field
+and in Emergent.
+Personal dictionary entries
+Names and jargon are where dictation
+fails first.
+Added: Emergent, Wispr, Out Loud, Autopsy,
+Bharat, NSE, BSE, place and trade names in
+your languages.
+Emergent account on the same
+email, credits received
+Credits arrive at the registered email
+within 10 hours.
+You can start a new project.
+Quiet room and a close
+microphone
+Clean audio improves transcripts and
+the video.
+A 30-second test is clear.
+Screen-plus-audio recorder
+Receipts and the video need raw
+captures.
+A test file plays back.
+Receipt folders by day
+Evidence is easy to lose mid-build.
+Folders day-1 to day-5 exist.
+6.2 Dictation protocol
+
+Order of a prompt: goal, behaviour, content, constraints, acceptance check. One component per prompt, 60–90
+seconds of speech.
+
+Dictate the copy itself in your own words (decision stories, mistakes, About). The site’s text then is your voice,
+which is the point of the brief.
+
+Review on a phone-sized viewport, then speak the fix list in one pass instead of retyping edits.
+
+After each step save a receipt: the audio, the Flow text, and a screenshot of the result.
+
+PAGE 16
+OUT LOUD
+Application concept, specification and delivery plan
+v1.0  ·  31 Oct 2026
+Prepared for Ansik Aryan Samal  ·  Wispr Flow Hiring Challenge
+16
+
+Do not dictate the final passphrase or any private data into shared tools.
+6.3 Prompt sequence for Emergent
+Prompts specify behaviour, not libraries; let Emergent choose the scaffolding. Paste real content instead of
+placeholder text.
+Step
+Goal
+Spoken prompt (condensed)
+P0
+Brief
+“Build a single-page portfolio called Out Loud for a growth internship application at Wispr Flow
+India. Honest, curious, plain-spoken. Chapters: The Autopsy, Voice-First Bharat, The Secret
+Layer, Voice Receipts, About. Mobile first.”
+P1
+Design system
+“Dark ink base, accents indigo, teal, coral and amber, one per chapter. Two font families with
+system fallbacks. Respect reduced motion. No stock photos.”
+P2
+Hero
+“One-line pitch, a captioned 10-second voice intro, a built-by-voice badge, and links to each
+chapter.”
+P3
+Autopsy timeline
+“Create six expandable decision cards from this JSON. Show context, options, decision, result
+with an evidence badge, and what I would change. Use only the content I provide.”
+P4
+Mistakes and
+proposals
+“Add a mistakes panel and three experiment cards labelled as proposals, with hypothesis, test,
+metric and kill criterion.”
+P5
+Voice demo UI
+“A text box that accepts typed or dictated text, a language selector, sample chips, an optional mic
+button shown only if supported, and an editable result card.”
+P6
+Extraction endpoint
+“A server function that takes text and a language hint and returns this JSON schema. Unknown
+means null. Never invent a name or a wage. Cap input length and rate-limit.”
+P7
+Secret Layer
+“A decoder that loads this PNG into a canvas, reads the lowest bit of R, G and B, rebuilds length,
+message and CRC-32, and checks an optional passphrase. Include a skip-the-puzzle link.”
+P8
+Receipts
+“A receipts section: audio player, transcript, Flow text, build result, and a speed-test table filled
+from this data.”
+P9
+Polish and
+accessibility
+“Keyboard navigation, focus states, contrast of 4.5 to 1, alt text, captions, reduced-motion fallback,
+and a social share image.”
+P10
+QA and deploy
+“List everything you changed. Fix console errors. Confirm the PNG is served unmodified.”
+6.4 Prompting rules of thumb
+
+One outcome per prompt, and ask Emergent to list what it changed.
+
+Give it your real content and say “do not invent facts”.
+
+Ask for explicit error and empty states in every interactive part.
+
+Keep a running decisions note; it becomes the how-it-was-built timeline.
+
+PAGE 17
+OUT LOUD
+Application concept, specification and delivery plan
+v1.0  ·  31 Oct 2026
+Prepared for Ansik Aryan Samal  ·  Wispr Flow Hiring Challenge
+17
+HOW IT FITS TOGETHER
+7. Technical architecture
+The stack is deliberately left to Emergent. What matters is the shape: a static, fast client; a small server function for
+extraction; and all decoding on the client.
+Figure 8. Layered architecture. Only the extraction call leaves the app, and it carries typed or dictated text, never stored audio.
+7.1 Content data model
+Keeping all copy in structured data lets you dictate content once and have Emergent render it everywhere.
+Decision = { id, title, context, options[], decision, reason,
+             result: { text, evidence: { type: "verified"|"not_measured", label, url? } },
+             change, audio_url?, transcript? }
+Mistake  = { id, what_happened, cost, change }
+Proposal = { id, hypothesis, test, metric, kill_criterion, label: "proposal" }
+Receipt  = { id, title, audio_url, flow_text, build_result, screenshot_url?, note }
+SpeedTest= { prompt, words, typing_seconds, speaking_seconds }   // ratio computed, never typed
+
+PAGE 18
+OUT LOUD
+Application concept, specification and delivery plan
+v1.0  ·  31 Oct 2026
+Prepared for Ansik Aryan Samal  ·  Wispr Flow Hiring Challenge
+18
+7.2 Extraction API contract
+ POST /api/extract
+Request : { "text": "<up to 1,000 characters>", "language_hint": "hi" | "te" | "or" | "en" }
+Response: { "profile": { "full_name": null, "primary_trade": "mason", "skills": [],
+                         "experience_years": 10, "location_city": "Hyderabad",
+                         "availability": "unknown",
+                         "expected_wage": { "amount": 500, "unit": "day", "currency": "INR" },
+                         "source_language": "hi" },
+            "field_confidence": { "primary_trade": 0.9, "experience_years": 0.8 },
+            "flags": ["converted_number"] }
+Errors  : 400 invalid input | 422 failed validation (ask visitor to confirm) | 429 rate limited
+7.3 Non-functional requirements
+ Area
+Target
+Performance
+Largest contentful paint of 2.5 s or better on throttled 4G (target); compress all images except the carrier
+PNG, which must stay lossless.
+Accessibility
+WCAG 2.1 AA as the target; keyboard-only walkthrough and a screen-reader smoke test before launch.
+Privacy
+No accounts, no stored visitor text or audio. Disclose that browser mic mode may use the browser vendor’s
+speech service.
+Security
+API key server-side only; input length cap; per-session rate limit; escape all rendered output; same-origin
+requests.
+Reliability
+Graceful degradation: if the model or mic is unavailable, sample clips and pre-computed results still work.
+Observability
+Counts only: chapter views, card opens, demo runs, decode successes. No personal data.
+Browsers
+Latest two versions of Chrome, Edge, Firefox and Safari; Android Chrome and iPhone Safari.
+Cost control
+Cache sample extractions; cap model calls per session so credits last through review.
+
+PAGE 19
+OUT LOUD
+Application concept, specification and delivery plan
+v1.0  ·  31 Oct 2026
+Prepared for Ansik Aryan Samal  ·  Wispr Flow Hiring Challenge
+19
+FIVE CALENDAR DAYS, ONE BUILDER
+8. Delivery plan
+Figure 9. Schedule from Saturday 31 October to Wednesday 4 November. The submit target is Tuesday night; Wednesday is buffer
+only.
+8.1 Day-by-day plan
+ Day
+Focus
+Output
+Exit check
+Sat 31 Oct
+(today)
+Setup, content capture,
+shell, and an early
+steganography test.
+Flow and Emergent ready; about 25 spoken answers
+captured (Appendix A); design system and hero live; a
+test PNG decoded from a deployed URL.
+You can open a deployed
+page and decode a test
+image.
+Sun 1 Nov
+The Autopsy in full.
+Six cards with evidence badges, mistakes panel,
+three proposals, voice clips attached.
+Every number has a badge.
+Mon 2 Nov
+Voice-First Bharat and
+the Secret Layer.
+Demo live in at least Hindi and one more language;
+real encoded image and decoder.
+The secret decodes on a
+phone from the live URL.
+Tue 3 Nov
+Receipts, QA, deploy,
+video, post.
+Four receipts and speed test; checklist passed; video
+recorded; link frozen by midday; submit by night.
+Public link opens in
+incognito on a second
+device.
+Wed 4 Nov
+Buffer only.
+Fix and resubmit if needed. No new features.
+Submission confirmed.
+8.2 Scope-cut order if time slips
+Cut strictly in this order, and never cut the items in the second list.
+
+PAGE 20
+OUT LOUD
+Application concept, specification and delivery plan
+v1.0  ·  31 Oct 2026
+Prepared for Ansik Aryan Samal  ·  Wispr Flow Hiring Challenge
+20
+Cut first to last
+Never cut
+1. Third experiment card · 2. Odia live support (keep as
+sample-only) · 3. In-page mic button (keep text box and
+samples) · 4. Reveal animation · 5. Language switcher polish
+Evidence badges on the Autopsy · Voice receipts and the
+speed test · Public-link and incognito check · The video · The
+spoiler path for the $3,000 answer
+8.3 Stretch backlog (only after the core is frozen)
+
+Ask Ansik Anything: a chat grounded only in your spoken answers, with source notes and a refuse-to-guess rule.
+
+Growth data copilot: your Text-to-SQL guardrails on a clearly simulated campaign dataset, queried by voice.
+
+Price Wispr for India: a simple simulator with explicit assumptions.
+
+Influencer fit scorer: a transparent weighted rubric on hypothetical profiles.
+Working agreements: time-box every module; log decisions by voice; freeze features on Tuesday at midday; after
+that, only fixes.
+PRODUCTION READINESS
+9. Quality assurance and launch checklist
+9.1 Test matrix
+ Area
+Test
+Pass condition
+Devices
+Mid-range Android Chrome, iPhone Safari, desktop Chrome
+and Edge.
+No layout breaks; all controls usable by
+touch.
+Network
+Throttle to 4G.
+Hero usable within about three seconds.
+Voice demo
+Ten scripted samples per live language; ten adversarial inputs;
+mic denied; unsupported browser.
+At least 8 of 10 correct; zero invented
+values; clear fallback messages.
+Secret Layer
+Decode on the live URL in three browsers; wrong passphrase;
+compare file hash with the original.
+Exact message; identical SHA-256.
+Accessibility
+Keyboard-only run; screen-reader smoke test; contrast check;
+captions present.
+Everything reachable and readable.
+Content
+Every number has a badge; names such as Wispr Flow and
+Emergent are spelled correctly; all links open.
+Zero unbadged numbers; zero dead links.
+Privacy
+Scan the page for personal details and employer-confidential
+information.
+No phone number, no private data, nothing
+confidential.
+Public access
+Open in incognito and on a different network and device; send
+to a friend.
+Loads without sign-in.
+9.2 Claims register
+Every public claim needs evidence you can produce on request. Fill the last column before you submit.
+Claim
+Evidence to hold
+Where shown
+Status
+About 10,000 views in 3–4 months
+Analytics export with the date range.
+Autopsy card 6
+Open
+5,300+ NSE and BSE stocks
+Dataset count or product screenshot.
+Autopsy card 1
+Open
+Free, Pro $20, Premium $40 plans
+Pricing page screenshot.
+Autopsy card 2
+Open
+4th in India, NEC E-Summit 2024
+pitch
+Certificate or results page.
+Voice-First Bharat origin
+story
+Open
+
+PAGE 21
+OUT LOUD
+Application concept, specification and delivery plan
+v1.0  ·  31 Oct 2026
+Prepared for Ansik Aryan Samal  ·  Wispr Flow Hiring Challenge
+21
+Claim
+Evidence to hold
+Where shown
+Status
+Steganography tool from the
+internship
+Repository or demo link.
+Secret Layer
+Open
+Language levels
+Self-assessed as on the résumé: English
+professional, Hindi native, Telugu and Odia
+conversational.
+Demo language labels
+Open
+Speed-test ratios
+Your own timing sheet.
+Voice Receipts
+Open
+9.3 Pre-submission checklist
+
+Portfolio is a new build, public, and opens without sign-in.
+
+Flow account active on all build days, same email as on the form.
+
+Video is 2:55 or shorter and plays when logged out.
+
+The $3,000 answer is readable without solving the puzzle.
+
+No phone number or confidential employer detail is on the page.
+
+Link, video and post URLs are saved in one note, ready to paste into the form.
+WHAT COULD GO WRONG
+10. Risk register
+Figure 10. Risk heat map. R2 (solo time overrun) is the only high-likelihood, high-impact item.
+ID
+Risk
+L
+I
+Mitigation
+R1
+Telugu or Odia accuracy is
+uneven.
+High
+Med
+Test ten sentences per language in Flow first; native-speaker
+check; ship sample-only if weak; label beta.
+R2
+Solo time overrun across five
+days.
+High
+High
+Scope-cut order (Section 8.2); freeze on Tuesday midday;
+Wednesday is buffer only.
+R3
+Hosting recompresses the PNG
+and breaks decoding.
+Med
+High
+Test on the deployed URL on Saturday; compare SHA-256; fall
+back to embedding the image as a data URI.
+
+PAGE 22
+OUT LOUD
+Application concept, specification and delivery plan
+v1.0  ·  31 Oct 2026
+Prepared for Ansik Aryan Samal  ·  Wispr Flow Hiring Challenge
+22
+ID
+Risk
+L
+I
+Mitigation
+R4
+Claims cannot be evidenced.
+Med
+High
+Claims register; mark “not measured” rather than estimate.
+R5
+Emergent credit or platform
+friction.
+Med
+Med
+Register early; keep prompts small; keep a copy of all content as
+JSON.
+R6
+The model invents profile details.
+High
+Med
+Strict schema, null for unknown, validator, adversarial tests.
+R7
+Browser mic unsupported or
+denied.
+High
+Low
+Mic is optional; text box and samples always work.
+R8
+Visitor voice-privacy concern.
+Low
+High
+Store nothing; plain disclosure; no mic by default.
+R9
+Public-link or “new build” rule
+breached.
+Low
+High
+New project only; incognito check on a second device.
+R10
+Weak proof of voice use.
+Med
+High
+Receipts every day; Flow active daily; speed test with raw timings.
+R11
+Personal or confidential data
+exposed.
+Med
+Med
+Privacy scan; omit phone number; avoid employer-confidential
+detail.
+WHAT YOU HAND IN
+11. Submission package
+11.1 Form fields (from the challenge page)
+ Field
+What to prepare
+Name; Flow account email
+Use the same email you use to sign in to Wispr Flow. This is how they verify voice use.
+Interest
+Internship, full-time role, or open to either. Decide before you fill the form.
+Start date
+Earliest realistic joining date; a later start is welcome for the right person.
+Portfolio URL
+The new Emergent build. Public. Tested in incognito.
+Recording URL
+The 3-minute video, with a link that works when logged out.
+LinkedIn profile
+Your profile link; align the headline with the portfolio.
+Oddly specific setup requirement
+The $3,000 answer (see 11.3).
+Okay to feature publicly?
+Yes or No. Your choice; say so deliberately.
+11.2 The 3-minute video
+
+PAGE 23
+OUT LOUD
+Application concept, specification and delivery plan
+v1.0  ·  31 Oct 2026
+Prepared for Ansik Aryan Samal  ·  Wispr Flow Hiring Challenge
+23
+Figure 11. Storyboard. The page says clear communication is judged, so plan beats rather than a word-for-word script.
+Time
+On screen
+Beat (say it in your own words)
+0:00–0:15
+You, then the hero
+Who you are in one line, and the one-sentence idea.
+0:15–0:40
+Hero and the brief
+Why you built this: you took the brief literally and made it about yourself.
+0:40–1:15
+One Autopsy card
+A real decision, what you chose, the result and what you would change.
+1:15–1:40
+Voice demo
+Speak a sentence; the profile appears. The IIT Bombay pitch in one line.
+1:40–1:50
+Secret Layer
+Decode it live; the reveal.
+1:50–2:30
+Receipts and speed test
+What voice added to the build, with your measured numbers and one honest
+limitation.
+2:30–2:55
+About
+The $3,000 answer in one sentence, then how to reach you.
+
+Record screen and voice in one pass; show Wispr Flow in use at least once.
+
+Rehearse twice. Add captions. Keep to 2:55 or less so you are safely under the limit.
+
+Upload and test the link while logged out before pasting it into the form.
+11.3 Framework for the $3,000 answer
+The page asks for your most oddly specific work requirement. The strongest answers are concrete, tied to the job,
+and justified by something you have shown. Use this structure: the requirement in one sentence, why it unlocks
+the work in two lines, an itemised cost under the cap, and what it enables in your first 90 days.
+Direction
+Why it can be defended
+Evidence in the build
+Field voice-capture kit for
+regional-language testing
+Voice-First Bharat shows regional accuracy is where
+growth is won or lost; a kit lets you gather and test real
+accents.
+The demo, the language policy
+and the QA results.
+Campus micro-campaign kit
+Proposal H1 needs travel, printed QR cards and small
+prizes for a Type versus Talk challenge.
+The experiment cards and the
+speed test.
+Creator trial fund
+Proposal H3 needs paid pilots with micro-creators to
+measure cost per activated user.
+The creator-template proposal.
+Decision needed: choose the one you can defend with a number, and write it in your own voice. These directions are prompts, not text
+to copy.
+
+PAGE 24
+OUT LOUD
+Application concept, specification and delivery plan
+v1.0  ·  31 Oct 2026
+Prepared for Ansik Aryan Samal  ·  Wispr Flow Hiring Challenge
+24
+11.4 LinkedIn or X post (optional but recommended)
+
+Hook: a teaser that mentions the hidden message without spoiling it.
+
+Story: two or three sentences on what you built and what speaking changed.
+
+Proof: a short clip or image of the decode moment.
+
+Link and tags: the portfolio URL, tagging Wispr Flow and Emergent. Post once the link is frozen.
+DEFINITION OF DONE
+12. Success criteria and open inputs
+Figure 12. Coverage of the four scored criteria. This shows design intent, not a prediction of scores.
+Criterion
+A reviewer should be able to say after three
+minutes
+Self-check question
+Creativity
+“I have not seen a portfolio like this.”
+Would I screenshot this and send it to a friend?
+Use of voice
+“Voice shaped the work and the product thinking.”
+Can I show audio, Flow text and result for at
+least four steps?
+Extreme ownership
+“They made real calls and learned from them.”
+Does every decision card show my choice, my
+reason and my change?
+Work over credentials
+“The work speaks; the résumé hardly mattered.”
+Could someone follow the whole story without
+opening a PDF?
+12.1 Definition of done
+
+Public Emergent link, new build, passes the incognito test on a second device.
+
+All three chapters and the proof layer live; the secret decodes on mobile; the spoiler path works.
+
+Every number has an evidence badge; claims register has no open items.
+
+Video of 2:55 or less recorded and tested logged out; post drafted.
+
+PAGE 25
+OUT LOUD
+Application concept, specification and delivery plan
+v1.0  ·  31 Oct 2026
+Prepared for Ansik Aryan Samal  ·  Wispr Flow Hiring Challenge
+25
+
+Form completed with the same email as the Flow account; submission confirmation saved.
+12.2 Inputs still needed from you
+ Input
+Why it matters
+Needed by
+Launch analytics export (views, sources, any
+sign-ups)
+Decides how strong the Autopsy can be; avoids
+over-claiming.
+Sat 31 Oct
+Ten test sentences per language run through
+Flow, ideally checked by native speakers
+Decides which languages go live.
+Sat 31 Oct
+Availability: Bangalore-based or willing to travel
+A stated requirement; answer it honestly in the form
+and video.
+Before submitting
+Interest type and earliest start date
+Required form fields.
+Tue 3 Nov
+Direction for the $3,000 answer
+Needed for the Secret Layer content and the video.
+Mon 2 Nov
+Certificate or results link for the E-Cell pitch;
+repository link for the steganography project
+Evidence for the claims register.
+Sun 1 Nov
+Permission choice for featuring the build publicly
+A required form field.
+Tue 3 Nov
+
+PAGE 26
+OUT LOUD
+Application concept, specification and delivery plan
+v1.0  ·  31 Oct 2026
+Prepared for Ansik Aryan Samal  ·  Wispr Flow Hiring Challenge
+26
+RECORD THESE TODAY
+Appendix A · Voice content-capture questions
+Answer each out loud, one to two minutes, in your own words. Keep the audio; the transcripts become the site’s copy
+and your receipts.
+Group
+Questions
+The Autopsy
+1. Who was the client and what did they ask for? 2. Why that scope and those 5,300+ stocks? 3. Walk
+me through how you chose the plans and prices. 4. What did you gate by plan, and why? 5. How did
+you decide on payments, and what went wrong? 6. How did you launch? 7. Where did the first 10,000
+views come from, and what did not work? 8. What would you do differently on day one?
+Mistakes
+9. Tell me about a mistake that cost real time or money. 10. A second one. 11. A third one. For each:
+what it cost and what you do now.
+Voice-First Bharat
+12. What was the pitch at IIT Bombay and who was it for? 13. Why does speech matter for that user?
+14. Say a sample sentence in Hindi, Telugu and Odia as a worker might. 15. What would break first in
+real life?
+Why Wispr Flow
+16. Where have you wished you could speak instead of type? 17. What would you try first to grow Flow
+in India, and how would you know it worked? 18. Why a growth role, after building software?
+Receipts
+19. Time yourself typing a 90-word prompt, then speaking the same prompt. 20. Repeat twice with
+different prompts. 21. What did voice do badly?
+TESTED CODE
+Appendix B · Reference encoder and decoder
+Both listings were run and verified: a Python encode followed by a Python decode, and the same PNG decoded by
+the JavaScript routine fed with RGBA pixel data, including a wrong-passphrase check and non-ASCII text. Always
+save the carrier as PNG.
+
+PAGE 27
+OUT LOUD
+Application concept, specification and delivery plan
+v1.0  ·  31 Oct 2026
+Prepared for Ansik Aryan Samal  ·  Wispr Flow Hiring Challenge
+27
+encode_secret.py (offline, run once)
+ """Hide a short message in the lowest bit of every R, G, B byte of a PNG.
+Usage: python encode_secret.py cover.jpg secret.png "Your message" [passphrase]
+"""
+import struct, sys, zlib
+from PIL import Image
+def encode(src, dst, message, passphrase=""):
+    data = message.encode("utf-8")
+    crc = zlib.crc32(data)
+    if passphrase:                                   # optional puzzle lock (not real security)
+        key = passphrase.encode("utf-8")
+        data = bytes(b ^ key[i % len(key)] for i, b in enumerate(data))
+    payload = struct.pack(">I", len(data)) + data + struct.pack(">I", crc)
+    bits = [(byte >> i) & 1 for byte in payload for i in range(7, -1, -1)]
+    img = Image.open(src).convert("RGB")
+    flat = bytearray(img.tobytes())
+    if len(bits) > len(flat):
+        raise ValueError("Image too small for this message")
+    for i, bit in enumerate(bits):
+        flat[i] = (flat[i] & 0xFE) | bit
+    Image.frombytes("RGB", img.size, bytes(flat)).save(dst, "PNG")   # lossless only
+def decode(src, passphrase=""):
+    flat = Image.open(src).convert("RGB").tobytes()
+    def read(n_bytes, offset_bits):
+        out = bytearray()
+        for b in range(n_bytes):
+            v = 0
+            for k in range(8):
+                v = (v << 1) | (flat[offset_bits + b * 8 + k] & 1)
+            out.append(v)
+        return bytes(out)
+    n = struct.unpack(">I", read(4, 0))[0]
+    data = read(n, 32)
+    crc = struct.unpack(">I", read(4, 32 + n * 8))[0]
+    if passphrase:
+        key = passphrase.encode("utf-8")
+        data = bytes(b ^ key[i % len(key)] for i, b in enumerate(data))
+    if zlib.crc32(data) != crc:
+        raise ValueError("Wrong passphrase or damaged image")
+    return data.decode("utf-8")
+if __name__ == "__main__":
+    encode(sys.argv[1], sys.argv[2], sys.argv[3], sys.argv[4] if len(sys.argv) > 4 else "")
+
+PAGE 28
+OUT LOUD
+Application concept, specification and delivery plan
+v1.0  ·  31 Oct 2026
+Prepared for Ansik Aryan Samal  ·  Wispr Flow Hiring Challenge
+28
+decode_secret.js (browser: pass the array from canvas getImageData)
+ // Browser-side decoder. `rgba` is ImageData.data from canvas.getImageData().
+function decodeSecret(rgba, passphrase = "") {
+  let idx = 0;                                  // position in the RGB-only stream
+  const lsb = () => {
+    const p = Math.floor(idx / 3) * 4 + (idx % 3);   // skip the alpha byte
+    idx++;
+    return rgba[p] & 1;
+  };
+  const readBytes = (n) => {
+    const out = new Uint8Array(n);
+    for (let i = 0; i < n; i++) {
+      let v = 0;
+      for (let k = 0; k < 8; k++) v = (v << 1) | lsb();
+      out[i] = v;
+    }
+    return out;
+  };
+  const u32 = (b) => ((b[0] << 24) | (b[1] << 16) | (b[2] << 8) | b[3]) >>> 0;
+  const n = u32(readBytes(4));
+  if (n > ((rgba.length / 4) * 3) / 8) throw new Error("No hidden message found");
+  let data = readBytes(n);
+  const crc = u32(readBytes(4));
+  if (passphrase) {
+    const key = new TextEncoder().encode(passphrase);
+    data = data.map((b, i) => b ^ key[i % key.length]);
+  }
+  // CRC-32 check (also detects a wrong passphrase)
+  let c = 0xFFFFFFFF;
+  for (const b of data) {
+    c ^= b;
+    for (let k = 0; k < 8; k++) c = c & 1 ? 0xEDB88320 ^ (c >>> 1) : c >>> 1;
+  }
+  if (((c ^ 0xFFFFFFFF) >>> 0) !== crc) throw new Error("Wrong passphrase or damaged image");
+  return new TextDecoder().decode(data);
+}
+module.exports = { decodeSecret };
+Usage: python encode_secret.py cover.jpg secret.png "Your message" passphrase. After deploying, download the
+served image and confirm that its SHA-256 matches your original.
+TERMS
+Appendix C · Glossary
+Term
+Meaning
+Emergent
+The vibe-coding tool the challenge provides credits for; it builds an app from spoken or typed
+prompts.
+Wispr Flow
+Voice dictation that works wherever you can type, on Mac, Windows, iOS and Android.
+LSB
+Least significant bit: the last binary digit of a byte, whose change is invisible in a colour value.
+CRC-32
+A checksum used here to confirm the decoded message is intact and the passphrase is right.
+Evidence badge
+A label on each number: Verified (with source) or Not measured.
+Voice receipt
+A bundle of audio, Flow text and build result proving a step was built by voice.
+Kill criterion
+A pre-agreed result at which an experiment is stopped.
+
+PAGE 29
+OUT LOUD
+Application concept, specification and delivery plan
+v1.0  ·  31 Oct 2026
+Prepared for Ansik Aryan Samal  ·  Wispr Flow Hiring Challenge
+29
+REFERENCES
+Appendix D · Sources
+
+Wispr Flow Hiring Challenge page: challenge.wisprflow.ai (read 31 October 2026): brief, submission requirements, evaluation
+criteria, timeline, FAQ and form fields.
+
+Wispr Flow product page for dictation use cases: wisprflow.ai (language coverage and personal dictionary, as seen in earlier
+research).
+
+Three résumé versions supplied by Ansik: project facts, languages and achievements used in Sections 5 and 9.
+
+Figures 1–12 were created for this report; numbers shown in them are design targets or illustrations unless stated otherwise.
