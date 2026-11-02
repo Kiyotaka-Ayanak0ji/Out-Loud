@@ -1,0 +1,468 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Out Loud — Design Lab</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='14' cy='16' r='7' fill='none' stroke='%23F5A524' stroke-width='3'/%3E%3Cpath d='M23 10a9 9 0 010 12' fill='none' stroke='%23F2603F' stroke-width='3' stroke-linecap='round'/%3E%3C/svg%3E"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;900&family=Fraunces:opsz,wght@9..144,600;9..144,900&family=JetBrains+Mono:wght@400;600&family=Sora:wght@500;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --ink:#0F172A; --ink2:#0B1120; --card:#131C36;
+  --indigo:#4F46E5; --teal:#0E9F9A; --coral:#F2603F; --amber:#F5A524;
+  --paper:#F4EFE6; --line:rgba(255,255,255,.09); --txt:#E8EDF8; --dim:#93A1BC;
+  --labbg:#080B14;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--labbg);color:var(--txt);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;-webkit-font-smoothing:antialiased}
+:focus-visible{outline:2px solid var(--amber);outline-offset:2px;border-radius:4px}
+
+/* ---------- lab chrome ---------- */
+.lab-top{position:sticky;top:0;z-index:50;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:14px 24px;background:rgba(8,11,20,.82);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.lab-top h1{font-size:15px;letter-spacing:.14em;text-transform:uppercase;font-weight:700}
+.lab-top h1 em{color:var(--amber);font-style:normal}
+.lab-nav{display:flex;gap:8px}
+.lab-nav a{color:var(--dim);text-decoration:none;font-size:12px;font-weight:600;letter-spacing:.08em;padding:7px 14px;border:1px solid var(--line);border-radius:999px;transition:.2s}
+.lab-nav a:hover{color:#fff;border-color:rgba(255,255,255,.35)}
+.lab-intro{max-width:760px;margin:0 auto;padding:56px 24px 8px;text-align:center}
+.lab-intro h2{font-size:clamp(26px,4vw,38px);font-weight:800;letter-spacing:-.02em}
+.lab-intro p{color:var(--dim);margin-top:12px;font-size:15px;line-height:1.6}
+.lab{max-width:1200px;margin:0 auto;padding:24px 20px 100px}
+.variant{padding:64px 0 24px;border-top:1px solid var(--line);margin-top:48px}
+.variant:first-of-type{border-top:0;margin-top:0}
+.v-head{max-width:620px;margin:0 auto 32px;text-align:center}
+.v-head .tag{display:inline-block;font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--dim);margin-bottom:12px}
+.v-head h3{font-size:clamp(24px,3.4vw,34px);font-weight:800;letter-spacing:-.01em}
+.v-head h3 b{font-weight:900}
+.v-head p{color:var(--dim);font-size:14.5px;line-height:1.65;margin-top:12px}
+.phone-wrap{display:flex;justify-content:center}
+
+/* ---------- phone frame ---------- */
+.phone{width:min(430px,94vw);border-radius:38px;border:1px solid rgba(255,255,255,.16);overflow:hidden;background:var(--ink);box-shadow:0 50px 100px -20px rgba(0,0,0,.75),0 0 0 8px rgba(255,255,255,.03)}
+.phone *{font-family:inherit}
+
+/* ---------- shared skin base ---------- */
+.skin{--f-b:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;--f-d:'Archivo',sans-serif;--radius:18px;--btn-r:999px;color:var(--txt);font-family:var(--f-b);font-size:15px;line-height:1.55}
+.skin .sec{padding:30px 22px 36px;position:relative}
+.skin .sec{--acc:var(--indigo);--acc-ink:#fff}
+.skin .sec-bharat{--acc:var(--teal);--acc-ink:#08201F}
+.skin .sec-secret{--acc:var(--coral);--acc-ink:#2A0B05}
+.skin .sec-receipts{--acc:var(--amber);--acc-ink:#2B1B03}
+.skin .sec-work,.skin .sec-about,.skin .sec-contact,.skin .sec-hero{--acc:#fff;--acc-ink:#0F172A}
+.skin .kicker{font-size:10.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--acc);font-weight:700;margin-bottom:10px;position:relative;z-index:1}
+.skin .h2{font-family:var(--f-d);font-size:27px;line-height:1.12;letter-spacing:-.01em;font-weight:800;position:relative;z-index:1}
+.skin .tb{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:14px 18px;border-bottom:1px solid var(--line);position:relative;z-index:2}
+.skin .logo{display:flex;align-items:center;gap:8px;font-family:var(--f-d);font-weight:800;font-size:15px;letter-spacing:-.01em}
+.skin .logo svg{width:22px;height:22px}
+.skin .tb-links{display:flex;gap:12px;font-size:11.5px;color:var(--dim)}
+.anim-toggle{display:inline-flex;align-items:center;gap:7px;background:rgba(255,255,255,.07);border:1px solid var(--line);color:var(--txt);font-size:10.5px;font-weight:700;letter-spacing:.06em;padding:6px 10px;border-radius:999px;cursor:pointer;font-family:var(--f-b)}
+.anim-toggle .knob{width:8px;height:8px;border-radius:50%;background:var(--teal);transition:.2s}
+.anim-toggle[aria-pressed="false"] .knob{background:#5B677F}
+.badge{display:inline-flex;align-items:center;gap:7px;font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;padding:7px 13px;border:1px solid rgba(245,165,36,.45);border-radius:999px;color:var(--amber);position:relative;z-index:1}
+.badge i{width:6px;height:6px;border-radius:50%;background:var(--amber);animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
+.skin .h1{font-family:var(--f-d);font-weight:900;font-size:52px;line-height:.98;letter-spacing:-.025em;margin:16px 0 14px;text-transform:uppercase}
+.skin .h1 .line{display:block;overflow:hidden}
+.skin .h1 .line>span{display:inline-block;animation:rise .8s cubic-bezier(.2,.7,.2,1) both}
+.skin .h1 .line:nth-child(2)>span{animation-delay:.09s}
+.skin .h1 .w-accent{color:var(--amber)}
+@keyframes rise{from{transform:translateY(112%)}to{transform:translateY(0)}}
+.skin .sub{color:var(--dim);font-size:14px;max-width:34ch;position:relative;z-index:1}
+.player{display:flex;align-items:center;gap:12px;margin:20px 0 10px;position:relative;z-index:1}
+.play{width:46px;height:46px;border-radius:50%;border:0;background:var(--acc);color:var(--acc-ink);display:grid;place-items:center;cursor:pointer;flex:none;transition:transform .2s}
+.play:hover{transform:scale(1.06)}
+.play svg{width:16px;height:16px;fill:currentColor}
+.wave{display:flex;align-items:center;gap:3px;height:34px;flex:1}
+.wave i{display:block;width:3px;border-radius:2px;height:var(--h,12px);background:linear-gradient(180deg,var(--amber),var(--coral));opacity:.85;animation:eq 1.3s ease-in-out infinite;animation-delay:calc(var(--i)*.08s);transform-origin:center}
+@keyframes eq{0%,100%{transform:scaleY(.55)}50%{transform:scaleY(1)}}
+.time{font-size:11px;color:var(--dim);font-variant-numeric:tabular-nums}
+.transcript{border:1px dashed rgba(255,255,255,.2);border-radius:12px;padding:12px 14px;background:rgba(255,255,255,.03);position:relative;z-index:1}
+.transcript .tag{font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--amber);font-weight:700;display:block;margin-bottom:6px}
+.transcript p{font-size:12.5px;color:var(--dim)}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px;position:relative;z-index:1}
+.chips a{font-size:11.5px;font-weight:600;color:var(--txt);text-decoration:none;border:1px solid var(--line);padding:8px 12px;border-radius:999px;background:rgba(255,255,255,.04);transition:.2s}
+.chips a:hover{border-color:var(--amber);color:#fff;transform:translateY(-1px)}
+.chips a b{color:var(--amber);font-weight:800;margin-right:5px}
+.marquee{overflow:hidden;border-top:1px solid var(--line);border-bottom:1px solid var(--line);margin-top:26px;padding:10px 0;position:relative;z-index:1}
+.mq-track{display:flex;gap:0;white-space:nowrap;animation:mq 26s linear infinite;font-family:var(--f-d);font-weight:800;font-size:13px;letter-spacing:.24em;text-transform:uppercase;color:var(--dim)}
+.mq-track span{padding-right:8px}
+.mq-track em{font-style:normal;color:var(--amber)}
+@keyframes mq{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.score{display:flex;gap:8px;margin:16px 0 18px;position:relative;z-index:1}
+.score span{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:7px 12px;border-radius:999px;border:1px solid rgba(79,70,229,.5);color:#B6B1F8}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:16px;margin-bottom:12px;position:relative;z-index:1;transition:border-color .2s,transform .2s}
+.card:hover{transform:translateY(-2px)}
+.dec>header{display:flex;align-items:center;gap:8px;font-family:var(--f-d);font-weight:700;font-size:14.5px;letter-spacing:-.01em}
+.dec .ev{margin-left:auto;font-style:normal;font-family:var(--f-b);font-size:9px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#C9CFDF;border:1px solid rgba(255,255,255,.25);padding:4px 8px;border-radius:999px;white-space:nowrap}
+.dec .chev{font-style:normal;color:var(--dim);transition:transform .25s}
+.dec.open .chev{transform:rotate(180deg)}
+.rows{margin-top:14px;border-top:1px solid var(--line);padding-top:12px;display:grid;gap:10px}
+.rows p{font-size:12.5px;color:var(--dim)}
+.rows b{display:inline-block;color:#fff;font-size:10px;letter-spacing:.14em;text-transform:uppercase;margin-right:8px;min-width:64px}
+.prop{border-left:3px solid var(--indigo)}
+.prop .tagp{font-size:9px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:#0F172A;background:var(--indigo);padding:3px 8px;border-radius:4px}
+.prop p{font-size:12.5px;color:var(--dim);margin-top:8px}
+.mistakes{border:1px solid rgba(242,96,63,.4)}
+.mistakes b{font-family:var(--f-d);font-size:14px}
+.mistakes p{font-size:12.5px;color:var(--dim);margin-top:6px}
+.note{font-size:11px;color:var(--dim);margin-top:14px;position:relative;z-index:1}
+.samples{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0 12px;position:relative;z-index:1}
+.samples button{font-family:var(--f-b);font-size:11.5px;font-weight:600;color:var(--txt);background:rgba(14,159,154,.12);border:1px solid rgba(14,159,154,.45);color:#8FE3DF;padding:8px 12px;border-radius:999px;cursor:pointer;transition:.2s}
+.samples button:hover{background:rgba(14,159,154,.25);color:#fff}
+textarea{width:100%;min-height:86px;resize:vertical;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.16);border-radius:14px;padding:12px 14px;color:var(--txt);font-family:var(--f-b);font-size:13px;position:relative;z-index:1}
+textarea::placeholder{color:#5E6C8A}
+.row{display:flex;gap:10px;align-items:center;margin-top:14px;flex-wrap:wrap;position:relative;z-index:1}
+.btn{display:inline-flex;align-items:center;gap:8px;font-family:var(--f-b);font-size:13px;font-weight:700;padding:12px 20px;border-radius:var(--btn-r);border:1px solid transparent;cursor:pointer;transition:transform .2s,box-shadow .2s,background .2s;position:relative;z-index:1}
+.btn:hover{transform:translateY(-1px)}
+.btn.primary{background:var(--acc);color:var(--acc-ink)}
+.btn.mic{background:transparent;border-color:rgba(14,159,154,.5);color:#8FE3DF}
+.btn.ghost{background:transparent;border-color:rgba(255,255,255,.28);color:var(--txt)}
+.confbar{display:flex;align-items:center;gap:10px;font-size:11px;color:var(--dim)}
+.confbar .track{flex:1;height:5px;border-radius:3px;background:rgba(255,255,255,.1);overflow:hidden}
+.confbar .fill{height:100%;border-radius:3px;background:var(--teal);width:var(--w,60%)}
+.clues{display:flex;gap:10px;margin:18px 0 16px;position:relative;z-index:1}
+.clue{flex:1;border-radius:14px;overflow:hidden;border:1px solid rgba(242,96,63,.35)}
+.clue .tile{height:78px;display:grid;place-items:center;background:
+  radial-gradient(120% 140% at 20% 15%,rgba(242,96,63,.55),transparent 55%),
+  radial-gradient(120% 140% at 85% 90%,rgba(245,165,36,.35),transparent 55%),#160B10}
+.clue .tile span{font-family:var(--f-d);font-weight:900;font-size:44px;color:rgba(255,255,255,.14);text-shadow:0 0 24px rgba(242,96,63,.4)}
+.clue figcaption{font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);padding:6px 8px;border-top:1px solid rgba(242,96,63,.2);text-align:center}
+.feedback{font-size:12.5px;color:#FF9B85;margin-top:12px;position:relative;z-index:1}
+.receipt{background:rgba(245,165,36,.07);border:1px solid rgba(245,165,36,.35);border-radius:14px;padding:14px;margin-bottom:12px;position:relative;z-index:1}
+.receipt .r-row{display:flex;gap:10px;font-size:12.5px;color:var(--dim);padding:6px 0;align-items:baseline}
+.receipt .r-row b{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--amber);min-width:86px}
+.receipt .ph{display:inline-block;font-size:9px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:#0F172A;background:var(--amber);padding:3px 8px;border-radius:4px;margin-top:4px}
+.pcard{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:16px;margin-bottom:12px;position:relative;z-index:1}
+.pcard b{font-family:var(--f-d);font-size:15px}
+.pcard p{font-size:12.5px;color:var(--dim);margin:8px 0 10px}
+.tools{display:flex;flex-wrap:wrap;gap:6px}
+.tools span{font-size:10px;font-weight:600;letter-spacing:.06em;color:var(--dim);border:1px solid var(--line);padding:4px 9px;border-radius:999px}
+.plink{font-size:11px;color:#B6B1F8;font-weight:600;margin-top:10px;display:block}
+.contact-row{display:flex;justify-content:space-between;gap:12px;padding:12px 0;border-bottom:1px solid var(--line);font-size:13px;position:relative;z-index:1}
+.contact-row b{font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--dim);align-self:center}
+.contact-row span{color:var(--txt)}
+.foot{padding:22px;text-align:center;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:#5E6C8A;border-top:1px solid var(--line)}
+
+/* ================= SKIN A — FREQUENCY ================= */
+.skin-a{--f-d:'Archivo',sans-serif}
+.skin-a .sec::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:linear-gradient(180deg,var(--acc),transparent);opacity:.8}
+.skin-a .sec{padding-left:25px}
+.skin-a .sec-bharat .samples button{background:rgba(14,159,154,.12)}
+.skin-a .btn.primary{box-shadow:0 8px 24px -8px var(--acc)}
+
+/* ================= SKIN B — DECODER ================= */
+.skin-b{--f-d:'Space Grotesk',sans-serif;--radius:4px;--btn-r:2px;--card:#0C1226}
+.skin-b,.skin-b .sec{background-image:linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);background-size:26px 26px}
+.skin-b .tb,.skin-b .marquee{border-color:rgba(94,234,212,.25)}
+.skin-b .kicker,.skin-b .chips a b,.skin-b .mq-track em{color:var(--coral)}
+.skin-b .h1,.skin-b .h2,.skin-b .logo,.skin-b .pcard b,.skin-b .dec>header,.skin-b .mistakes b{font-family:var(--f-d);letter-spacing:.01em}
+.skin-b .h1{font-size:46px}
+.skin-b .kicker,.skin-b .badge,.skin-b .transcript .tag,.skin-b .receipt .r-row b,.skin-b .rows b{font-family:'JetBrains Mono',monospace}
+.skin-b .badge{border-color:rgba(242,96,63,.6);color:var(--coral)}
+.skin-b .badge i{background:var(--coral)}
+.skin-b .card,.skin-b .pcard{border:1px solid rgba(94,234,212,.22);position:relative}
+.skin-b .card::after{content:"";position:absolute;top:-1px;right:-1px;width:9px;height:9px;border-top:2px solid var(--teal);border-right:2px solid var(--teal)}
+.skin-b .score span{border-color:rgba(79,70,229,.6);color:#A5B4FC;font-family:'JetBrains Mono',monospace;font-weight:400;text-transform:none}
+.skin-b .samples button,.skin-b .btn.mic{font-family:'JetBrains Mono',monospace;border-radius:2px;text-transform:uppercase;letter-spacing:.06em;font-size:10.5px}
+.skin-b .btn{font-family:'JetBrains Mono',monospace;text-transform:uppercase;letter-spacing:.08em;font-size:11px;border-radius:2px}
+.skin-b .btn.primary{box-shadow:4px 4px 0 rgba(79,70,229,.55)}
+.skin-b .btn.primary:hover{transform:translate(-1px,-1px);box-shadow:6px 6px 0 rgba(79,70,229,.55)}
+.skin-b .feedback::before{content:"> "}
+.skin-b .clue .tile{background:#120C12;border-radius:0}
+.skin-b .chips a{border-radius:2px;font-family:'JetBrains Mono',monospace;font-size:10.5px}
+.skin-b .anim-toggle{border-radius:2px;font-family:'JetBrains Mono',monospace}
+.skin-b .transcript{border-radius:2px;border-color:rgba(242,96,63,.4)}
+.skin-b .receipt{border-radius:2px}
+.skin-b .wave{gap:2px}
+.skin-b .wave i{width:2px;background:var(--teal)}
+.skin-b .mq-track{font-family:'JetBrains Mono',monospace;font-weight:400}
+
+/* ================= SKIN C — GLOW ================= */
+.skin-c{--f-d:'Sora',sans-serif;--radius:26px}
+.skin-c .sec{overflow:hidden}
+.skin-c .sec::before{content:"";position:absolute;width:290px;height:290px;border-radius:50%;top:-110px;right:-110px;background:radial-gradient(closest-side,var(--acc),transparent 72%);opacity:.17;filter:blur(10px);pointer-events:none}
+.skin-c .sec-secret::before,.skin-c .sec-receipts::before{right:auto;left:-120px}
+.skin-c .card,.skin-c .pcard{background:rgba(255,255,255,.055);border:1px solid rgba(255,255,255,.12);backdrop-filter:blur(14px);box-shadow:0 24px 50px -24px rgba(0,0,0,.6)}
+.skin-c .h1{font-weight:800;text-transform:none;font-size:50px;letter-spacing:-.03em}
+.skin-c .h1 .w-accent{color:var(--teal)}
+.skin-c .kicker{letter-spacing:.28em}
+.skin-c .badge{border-color:rgba(79,70,229,.6);color:#A5B4FC}
+.skin-c .badge i{background:#818CF8}
+.skin-c .btn.primary{box-shadow:0 12px 34px -10px var(--acc)}
+.skin-c .chips a{background:rgba(255,255,255,.06);backdrop-filter:blur(10px);border-radius:14px}
+.skin-c .chips a b{color:var(--amber)}
+.skin-c .wave i{background:linear-gradient(180deg,#5EEAD4,var(--teal))}
+.skin-c .transcript{border-radius:16px;background:rgba(255,255,255,.04)}
+.skin-c .transcript .tag{color:#5EEAD4}
+.skin-c .samples button{background:rgba(94,234,212,.1);border-color:rgba(94,234,212,.4);color:#7DE8E0}
+.skin-c .btn.mic{border-color:rgba(94,234,212,.4);color:#7DE8E0}
+.skin-c .clue{border-color:rgba(242,96,63,.4);border-radius:20px}
+.skin-c .clue .tile{border-radius:0}
+.skin-c .feedback{color:#FFB4A1}
+.skin-c .receipt{background:rgba(245,165,36,.08);border-color:rgba(245,165,36,.3);border-radius:20px}
+.skin-c .prop{border-left:0;border:1px solid rgba(129,140,248,.4)}
+.skin-c .prop .tagp{background:#818CF8;color:#fff;border-radius:999px}
+.skin-c .mistakes{border-color:rgba(242,96,63,.45);border-radius:20px}
+.skin-c .mq-track{font-family:'JetBrains Mono',monospace;font-weight:400;letter-spacing:.3em}
+.skin-c .score span{background:rgba(129,140,248,.14);border-color:rgba(129,140,248,.45);color:#C7D2FE}
+
+/* ================= SKIN D — PAPER & INK ================= */
+.skin-d{--f-d:'Fraunces',serif;--radius:6px;--btn-r:4px;--card:#16223E}
+.skin-d .sec-autopsy,.skin-d .sec-work,.skin-d .sec-about,.skin-d .sec-contact{background:var(--paper);color:#13233F}
+.skin-d .sec-autopsy .kicker,.skin-d .sec-work .kicker,.skin-d .sec-about .kicker,.skin-d .sec-contact .kicker{color:var(--indigo)}
+.skin-d .sec-autopsy{--acc:var(--indigo);--acc-ink:#fff}
+.skin-d .sec-autopsy .h2,.skin-d .sec-work .h2,.skin-d .sec-about .h2,.skin-d .sec-contact .h2{color:#13233F}
+.skin-d .sec-autopsy .card{background:#fff;border-color:rgba(19,35,63,.14);box-shadow:0 2px 0 rgba(19,35,63,.12)}
+.skin-d .sec-autopsy .card:hover{transform:none;box-shadow:0 4px 0 rgba(19,35,63,.16)}
+.skin-d .dec .ev{color:#5B677F;border-color:rgba(19,35,63,.3)}
+.skin-d .rows b{color:var(--indigo)}
+.skin-d .rows p{color:#44536E}
+.skin-d .sec-autopsy .score span{border-color:rgba(79,70,229,.45);color:var(--indigo)}
+.skin-d .prop{border-left:3px solid var(--indigo);background:#fff}
+.skin-d .mistakes{border:1px solid rgba(242,96,63,.5);background:#fff}
+.skin-d .mistakes b{color:#13233F}
+.skin-d .mistakes p,.skin-d .prop p{color:#44536E}
+.skin-d .chips a{color:#13233F;background:#fff;border-color:rgba(19,35,63,.2)}
+.skin-d .chips a b{color:var(--coral)}
+.skin-d .tb-links{color:#93A1BC}
+.skin-d .h1{font-family:var(--f-d);font-weight:900;text-transform:none;font-size:54px;letter-spacing:-.01em}
+.skin-d .h2{font-family:var(--f-d);font-weight:900}
+.skin-d .sec-receipts{background:transparent}
+.skin-d .receipt{background:#FFFDF7;color:#13233F;border:0;border-radius:0;box-shadow:0 10px 26px -12px rgba(0,0,0,.55);position:relative}
+.skin-d .receipt::before,.skin-d .receipt::after{content:"";position:absolute;left:0;right:0;height:7px;background:repeating-linear-gradient(90deg,#0F172A 0 7px,transparent 7px 14px);opacity:.16}
+.skin-d .receipt::before{top:0}
+.skin-d .receipt::after{bottom:0}
+.skin-d .receipt .r-row{color:#44536E}
+.skin-d .receipt .r-row b{color:#A06A00}
+.skin-d .pcard{background:#fff;color:#13233F;border-color:rgba(19,35,63,.14);box-shadow:0 2px 0 rgba(19,35,63,.12)}
+.skin-d .pcard b{color:#13233F}
+.skin-d .pcard p{color:#44536E}
+.skin-d .plink{color:var(--indigo)}
+.skin-d .tools span{color:#44536E;border-color:rgba(19,35,63,.2)}
+.skin-d .contact-row{border-color:rgba(19,35,63,.14)}
+.skin-d .contact-row b{color:#71809B}
+.skin-d .contact-row span{color:#13233F}
+.skin-d .btn{border-radius:4px;box-shadow:3px 3px 0 rgba(19,35,63,.9)}
+.skin-d .btn:hover{transform:translate(-1px,-1px);box-shadow:5px 5px 0 rgba(19,35,63,.9)}
+.skin-d .btn.ghost{box-shadow:none}
+.skin-d .sec-autopsy .btn.ghost,.skin-d .sec-work .btn.ghost,.skin-d .sec-about .btn.ghost,.skin-d .sec-contact .btn.ghost{color:#13233F;border-color:rgba(19,35,63,.4)}
+.skin-d .clue .tile{background:
+  radial-gradient(120% 140% at 20% 15%,rgba(242,96,63,.75),transparent 55%),
+  radial-gradient(120% 140% at 85% 90%,rgba(245,165,36,.5),transparent 55%),#1A0E12}
+.skin-d .clue .tile span{color:rgba(255,255,255,.2)}
+.skin-d .note{color:#71809B}
+.skin-d .sec-autopsy .note,.skin-d .sec-work .note,.skin-d .sec-contact .note{color:#71809B}
+.skin-d .mq-track{color:#71809B}
+.skin-d .mq-track em{color:var(--coral)}
+
+/* motion off + reduced motion */
+.motion-off *,.motion-off *::before,.motion-off *::after{animation:none!important;transition:none!important}
+@media (prefers-reduced-motion:reduce){
+  .skin *,.skin *::before,.skin *::after{animation:none!important;transition:none!important}
+  html{scroll-behavior:auto}
+}
+@media (max-width:640px){
+  .lab-top{flex-wrap:wrap}
+  .lab-top h1{font-size:12px}
+  .lab-intro{padding-top:40px}
+}
+</style>
+</head>
+<body>
+
+<header class="lab-top">
+  <h1>Out Loud <em>/</em> Design Lab</h1>
+  <nav class="lab-nav" aria-label="Jump to a design option">
+    <a href="#a">A · Frequency</a>
+    <a href="#b">B · Decoder</a>
+    <a href="#c">C · Glow</a>
+    <a href="#d">D · Paper &amp; Ink</a>
+  </nav>
+</header>
+
+<section class="lab-intro">
+  <h2>Four directions. One skeleton.</h2>
+  <p>Each option is a working miniature of the full Out Loud page — top bar with the animation toggle, hero with transcript player, chapter links, an expandable decision card, the voice-profile demo, the clue puzzle, receipts, projects, about and contact. All content is placeholder. Every option keeps your palette: ink #0F172A, indigo, teal, coral, amber.</p>
+</section>
+
+<main class="lab">
+
+  <section class="variant" id="a">
+    <div class="v-head">
+      <span class="tag">Option A</span>
+      <h3><b>Frequency</b> — kinetic editorial</h3>
+      <p>Heavyweight Archivo display type with a masked line-by-line hero reveal, a live waveform motif, colored chapter rails and one slow editorial marquee. Confident, loud, built for the "built by voice" story.</p>
+    </div>
+    <div class="phone-wrap"><div class="phone skin skin-a" id="phone-a" data-testid="design-variant-a"></div></div>
+  </section>
+
+  <section class="variant" id="b">
+    <div class="v-head">
+      <span class="tag">Option B</span>
+      <h3><b>Decoder</b> — terminal craft</h3>
+      <p>Space Grotesk headings with monospace chrome, a blueprint grid backdrop, sharp cards with corner ticks and hard offset buttons. Feels like cracking a code — the Secret Layer's native language.</p>
+    </div>
+    <div class="phone-wrap"><div class="phone skin skin-b" id="phone-b" data-testid="design-variant-b"></div></div>
+  </section>
+
+  <section class="variant" id="c">
+    <div class="v-head">
+      <span class="tag">Option C</span>
+      <h3><b>Glow</b> — soft premium glass</h3>
+      <p>Sora headings, rounded glass cards with ambient accent glows behind each chapter, floating pill buttons. Calm, modern and product-like — the friendliest of the four.</p>
+    </div>
+    <div class="phone-wrap"><div class="phone skin skin-c" id="phone-c" data-testid="design-variant-c"></div></div>
+  </section>
+
+  <section class="variant" id="d">
+    <div class="v-head">
+      <span class="tag">Option D</span>
+      <h3><b>Paper &amp; Ink</b> — print soul</h3>
+      <p>Fraunces serif display, warm paper panels set against the ink base, perforated thermal-receipt cards for Voice Receipts, and hard offset-shadow buttons. Warm, tactile and the most unexpected.</p>
+    </div>
+    <div class="phone-wrap"><div class="phone skin skin-d" id="phone-d" data-testid="design-variant-d"></div></div>
+  </section>
+
+</main>
+
+<script>
+const bars = Array.from({length:14},(_,i)=>{
+  const h = 8 + Math.round(18*Math.abs(Math.sin(i*1.9)));
+  return '<i style="--i:'+i+';--h:'+h+'px"></i>';
+}).join('');
+
+const playSvg = '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4 2.5v11l9-5.5-9-5.5z"/></svg>';
+
+const TPL =
+'<div class="tb">'+
+  '<div class="logo"><svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="13" cy="16" r="7" fill="none" stroke="currentColor" stroke-width="3"/><path d="M22 10a9 9 0 010 12" fill="none" stroke="#F5A524" stroke-width="3" stroke-linecap="round"/><path d="M26 6.5a14 14 0 010 19" fill="none" stroke="#F2603F" stroke-width="3" stroke-linecap="round"/></svg>Out Loud</div>'+
+  '<div class="tb-links"><span>Tour</span><span>Work</span><span>Contact</span></div>'+
+  '<button class="anim-toggle" aria-pressed="false" data-testid="anim-toggle"><i class="knob"></i><span>Animations on</span></button>'+
+'</div>'+
+
+'<header class="sec sec-hero">'+
+  '<span class="badge"><i></i>Built by voice</span>'+
+  '<h1 class="h1"><span class="line"><span>I build</span></span><span class="line"><span class="w-accent">out loud.</span></span></h1>'+
+  '<p class="sub">[Two-line first-person pitch placeholder — the real intro is supplied later.]</p>'+
+  '<div class="player">'+
+    '<button class="play" aria-label="Play sample intro" data-testid="hero-play">'+playSvg+'</button>'+
+    '<div class="wave" aria-hidden="true">'+bars+'</div>'+
+    '<span class="time">0:00 / 0:10</span>'+
+  '</div>'+
+  '<div class="transcript"><span class="tag">Sample — no recording yet</span><p>[Transcript of the 10-second intro appears here.]</p></div>'+
+  '<nav class="chips" aria-label="Chapters">'+
+    '<a href="#a"><b>01</b>The Autopsy</a><a href="#a"><b>02</b>Voice-First Bharat</a><a href="#a"><b>03</b>The Secret Layer</a><a href="#a"><b>04</b>Voice Receipts</a><a href="#a"><b>05</b>Projects &amp; Skills</a><a href="#a"><b>06</b>About</a><a href="#a"><b>07</b>Contact</a>'+
+  '</nav>'+
+  '<div class="marquee" aria-hidden="true"><div class="mq-track"><span>Built by voice <em>—</em> Out Loud <em>—</em> Listen first <em>—</em> </span><span>Built by voice <em>—</em> Out Loud <em>—</em> Listen first <em>—</em> </span></div></div>'+
+'</header>'+
+
+'<section class="sec sec-autopsy">'+
+  '<p class="kicker">Chapter 01 · The Autopsy</p>'+
+  '<h2 class="h2">Decisions, opened up.</h2>'+
+  '<div class="score"><span>Hit · [n]</span><span>Mixed · [n]</span><span>Miss · [n]</span></div>'+
+  '<article class="card dec open">'+
+    '<header>D-01 · [Decision title] <em class="ev">Evidence needed</em> <b class="chev">&#8964;</b></header>'+
+    '<div class="rows">'+
+      '<p><b>Context</b> [What was true when the call was made.]</p>'+
+      '<p><b>Decision</b> [What was chosen.]</p>'+
+      '<p><b>Reason</b> [Why it was chosen.]</p>'+
+      '<p><b>Outcome</b> [Result placeholder — not measured.]</p>'+
+      '<p><b>Lesson</b> [What carried forward.]</p>'+
+    '</div>'+
+  '</article>'+
+  '<article class="card dec"><header>D-02 · [Decision title] <em class="ev">Evidence needed</em> <b class="chev">&#8964;</b></header></article>'+
+  '<article class="card prop"><span class="tagp">Proposal</span><p>[Growth experiment placeholder — hypothesis, test, kill criterion.]</p></article>'+
+  '<article class="card mistakes"><b>Mistakes panel</b><p>[What happened · cost · what changes next time.]</p></article>'+
+'</section>'+
+
+'<section class="sec sec-bharat">'+
+  '<p class="kicker">Chapter 02 · Voice-First Bharat</p>'+
+  '<h2 class="h2">Speak. Get a profile.</h2>'+
+  '<div class="samples">'+
+    '<button data-testid="sample-1">Sample · Electrician · Hindi</button>'+
+    '<button data-testid="sample-2">Sample · Nurse · Telugu</button>'+
+    '<button data-testid="sample-3">Sample · Driver · Odia</button>'+
+  '</div>'+
+  '<textarea placeholder="[Spoken-style sentences appear here — editable]"></textarea>'+
+  '<div class="row"><button class="btn primary" data-testid="build-profile">Build my profile</button><button class="btn mic" data-testid="mic-btn">Mic — asks on tap</button></div>'+
+  '<article class="card" style="margin-top:16px">'+
+    '<div class="rows">'+
+      '<p><b>Sample result</b></p>'+
+      '<p><b>Role</b> [Not stated]</p>'+
+      '<p><b>Experience</b> [Not stated]</p>'+
+      '<p><b>Skills</b> [Not stated]</p>'+
+      '<div class="confbar"><span>Confidence</span><div class="track"><div class="fill" style="--w:64%"></div></div><span>64%</span></div>'+
+      '<div class="confbar"><span>Confidence</span><div class="track"><div class="fill" style="--w:38%"></div></div><span>38%</span></div>'+
+    '</div>'+
+  '</article>'+
+  '<p class="note">Concept demo — nothing you type is stored or sent.</p>'+
+'</section>'+
+
+'<section class="sec sec-secret">'+
+  '<p class="kicker">Chapter 03 · The Secret Layer</p>'+
+  '<h2 class="h2">Three clues. One word.</h2>'+
+  '<div class="clues">'+
+    '<figure class="clue"><div class="tile"><span>O</span></div><figcaption>Clue 01</figcaption></figure>'+
+    '<figure class="clue"><div class="tile"><span>U</span></div><figcaption>Clue 02</figcaption></figure>'+
+    '<figure class="clue"><div class="tile"><span>T</span></div><figcaption>Clue 03</figcaption></figure>'+
+  '</div>'+
+  '<div class="row"><input placeholder="Type the hidden word" aria-label="Your answer" style="flex:1;min-width:0;background:rgba(255,255,255,.05);border:1px solid rgba(242,96,63,.45);border-radius:12px;padding:12px 14px;color:inherit;font:inherit;font-size:13px"/><button class="btn primary" data-testid="try-answer">Try answer</button></div>'+
+  '<p class="feedback" data-testid="puzzle-feedback">Not quite — try again.</p>'+
+  '<div class="row"><button class="btn ghost" data-testid="spoiler">Show spoiler</button></div>'+
+  '<p class="note">The passphrase is part of the puzzle, not security. The image decoder arrives in a later phase.</p>'+
+'</section>'+
+
+'<section class="sec sec-receipts">'+
+  '<p class="kicker">Chapter 04 · Voice Receipts</p>'+
+  '<h2 class="h2">Proof the work was spoken.</h2>'+
+  '<div style="height:14px"></div>'+
+  '<div class="receipt"><div class="r-row"><b>Audio</b><span>[clip placeholder]</span></div><div class="r-row"><b>Transcript</b><span>[typed from speech]</span></div><div class="r-row"><b>Change</b><span>[project change placeholder]</span></div><span class="ph">Placeholder</span></div>'+
+  '<div class="receipt"><div class="r-row"><b>Audio</b><span>[clip placeholder]</span></div><div class="r-row"><b>Transcript</b><span>[typed from speech]</span></div><div class="r-row"><b>Change</b><span>[project change placeholder]</span></div><span class="ph">Placeholder</span></div>'+
+  '<div class="receipt"><div class="r-row"><b>Audio</b><span>[clip placeholder]</span></div><div class="r-row"><b>Transcript</b><span>[typed from speech]</span></div><div class="r-row"><b>Change</b><span>[project change placeholder]</span></div><span class="ph">Placeholder</span></div>'+
+'</section>'+
+
+'<section class="sec sec-work">'+
+  '<p class="kicker">05 · Projects &amp; Skills</p>'+
+  '<h2 class="h2">The work.</h2>'+
+  '<div style="height:14px"></div>'+
+  '<article class="pcard"><b>[Project title placeholder]</b><p>[One-line overview of the work completed.]</p><div class="tools"><span>[Tool]</span><span>[Tool]</span><span>[Tool]</span></div><span class="plink">Links pending — evidence needed</span></article>'+
+  '<article class="pcard"><b>[Project title placeholder]</b><p>[One-line overview of the work completed.]</p><div class="tools"><span>[Tool]</span><span>[Tool]</span><span>[Tool]</span></div><span class="plink">Links pending — evidence needed</span></article>'+
+  '<article class="pcard"><b>[Skill group placeholder]</b><div class="tools"><span>[Skill]</span><span>[Skill]</span><span>[Skill]</span><span>[Skill]</span></div></article>'+
+'</section>'+
+
+'<section class="sec sec-about">'+
+  '<p class="kicker">06 · About</p>'+
+  '<h2 class="h2">In short.</h2>'+
+  '<div style="height:12px"></div>'+
+  '<p style="position:relative;z-index:1;font-size:13.5px;color:inherit;opacity:.85">Ansik Aryan Samal — [professional summary placeholder, ready to be filled from a résumé and project materials.]</p>'+
+  '<p style="position:relative;z-index:1;font-size:13.5px;color:inherit;opacity:.6;margin-top:8px">[Second line placeholder.] [Third line placeholder.]</p>'+
+'</section>'+
+
+'<section class="sec sec-contact">'+
+  '<p class="kicker">07 · Contact</p>'+
+  '<h2 class="h2">Say it back.</h2>'+
+  '<div style="height:10px"></div>'+
+  '<div class="contact-row"><b>Email</b><span>[you@example.com]</span></div>'+
+  '<div class="contact-row"><b>Location</b><span>[City, Country]</span></div>'+
+  '<div class="contact-row"><b>Profiles</b><span>[LinkedIn] · [GitHub]</span></div>'+
+  '<div class="row"><button class="btn primary" data-testid="email-btn">Email me</button><button class="btn ghost" data-testid="linkedin-btn">LinkedIn</button></div>'+
+'</section>'+
+
+'<footer class="foot">Out Loud · demo build — all personal content is placeholder · nothing stored</footer>';
+
+document.querySelectorAll('.phone').forEach(p => { p.innerHTML = TPL; });
+
+document.querySelectorAll('.anim-toggle').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const phone = btn.closest('.phone');
+    const off = phone.classList.toggle('motion-off');
+    btn.setAttribute('aria-pressed', String(!off));
+    btn.querySelector('span').textContent = off ? 'Animations off' : 'Animations on';
+  });
+});
+</script>
+</body>
+</html>

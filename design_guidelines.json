@@ -1,0 +1,194 @@
+{
+  "project_name": "Out Loud",
+  "app_type": "Portfolio Web App (Single-Page, Mobile-First Interactive Experience)",
+  "owner": "Ansik Aryan Samal",
+  "design_archetype": "Swiss Tactical Modern Fusion (High-Density Modern Editorial with Sound-wave Aesthetic)",
+  "typography": {
+    "font_family_display": "'Syne', 'Outfit', sans-serif",
+    "font_family_body": "'Plus Jakarta Sans', sans-serif",
+    "font_family_mono": "'JetBrains Mono', monospace",
+    "hierarchy": {
+      "h1": "text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-none",
+      "h2": "text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight",
+      "h3": "text-xl sm:text-2xl font-semibold tracking-normal",
+      "h4": "text-lg sm:text-xl font-semibold",
+      "body": "text-sm sm:text-base leading-relaxed text-slate-300",
+      "mono_label": "text-xs font-mono uppercase tracking-widest text-indigo-400",
+      "caption": "text-xs text-slate-400"
+    }
+  },
+  "colors": {
+    "mode": "dark",
+    "background_primary": "#0A0D14",
+    "background_secondary": "#111726",
+    "background_surface": "#161E31",
+    "background_glass": "rgba(22, 30, 49, 0.75)",
+    "text_primary": "#F8FAFC",
+    "text_secondary": "#94A3B8",
+    "text_muted": "#64748B",
+    "accent_primary": "#6366F1",
+    "accent_primary_glow": "rgba(99, 102, 241, 0.3)",
+    "accent_tangerine": "#F97316",
+    "accent_emerald": "#10B981",
+    "accent_amber": "#F59E0B",
+    "border_subtle": "rgba(255, 255, 255, 0.1)",
+    "border_highlight": "rgba(99, 102, 241, 0.4)",
+    "warning_tag": "#EF4444"
+  },
+  "visual_enhancers": {
+    "glassmorphic_cards": "backdrop-blur-xl bg-[#161E31]/80 border border-white/10 rounded-2xl shadow-xl hover:border-indigo-500/40 transition-all duration-300",
+    "glowing_beam_border": "relative before:absolute before:inset-0 before:p-[1px] before:bg-gradient-to-r before:from-indigo-500 before:via-purple-500 before:to-pink-500 before:rounded-2xl before:-z-10",
+    "tactical_badges": "px-3 py-1 rounded-full text-xs font-mono border bg-slate-900/60 border-slate-700/60 text-slate-300 flex items-center gap-1.5",
+    "interactive_waveforms": "h-12 flex items-center gap-1 px-4 py-2 bg-slate-900/80 rounded-xl border border-indigo-500/20"
+  },
+  "layout_strategy": {
+    "mobile_first": true,
+    "max_container_width": "max-w-7xl mx-auto px-4 sm:px-6 lg:px-8",
+    "section_spacing": "py-16 sm:py-24 lg:py-32",
+    "grid_modes": {
+      "autopsy_grid": "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6",
+      "bento_projects": "grid grid-cols-1 md:grid-cols-12 gap-6",
+      "voice_bharat_layout": "grid grid-cols-1 lg:grid-cols-12 gap-8"
+    }
+  },
+  "sections_specifications": [
+    {
+      "section_number": 1,
+      "id": "hero",
+      "title": "Hero Section",
+      "elements": [
+        "Concise first-person introduction for Ansik Aryan Samal",
+        "Bold label: 'Built by voice'",
+        "Chapter navigation links (Quick jump to 8 sections)",
+        "Audio Play button with real placeholder audio playback, animated SVG waveform canvas, and visible transcript badge ('Sample — no recording yet')",
+        "Kinetic headline text reveal"
+      ]
+    },
+    {
+      "section_number": 2,
+      "id": "autopsy",
+      "title": "The Autopsy",
+      "elements": [
+        "6 expandable project decision cards (Context, Decision, Reason, Outcome/Evidence with 'Evidence needed' badges, Lesson)",
+        "Dedicated Mistakes & Failures Panel (Honesty log)",
+        "3 Growth Experiment Cards marked with 'Proposal' badge"
+      ]
+    },
+    {
+      "section_number": 3,
+      "id": "voice-bharat",
+      "title": "Voice-First Bharat",
+      "elements": [
+        "Sample job-profile voice input demo with preset Indian vernacular sample voice buttons (Hindi, Odia, English)",
+        "Editable transcript text box",
+        "Structured result card output (Extracted Skills, Salary expectation, Preferred Location, Experience Level)",
+        "Optional microphone trigger button (requests browser permission only when clicked with clear visual state)"
+      ]
+    },
+    {
+      "section_number": 4,
+      "id": "secret-layer",
+      "title": "The Secret Layer",
+      "elements": [
+        "Image-based interactive easter egg hunt with 3 visual clue cards hiding letters",
+        "Target hidden word: 'OUT'",
+        "Answer input field with instant check & reveal mechanism",
+        "Retry feedback animations on incorrect guess",
+        "Always-visible 'Reveal Spoiler' button for full accessibility"
+      ]
+    },
+    {
+      "section_number": 5,
+      "id": "voice-receipts",
+      "title": "Voice Receipts",
+      "elements": [
+        "Interactive timeline cards mapping Voice Input Audio -> Raw Transcript -> Resulting Product Change",
+        "All cards explicitly tagged with 'Placeholder — Demonstration Only' badge"
+      ]
+    },
+    {
+      "section_number": 6,
+      "id": "projects-skills",
+      "title": "Projects & Skills",
+      "elements": [
+        "Browsable placeholder project cards (Overview, Work Completed, Tech Tools, Interactive Modal/Links)",
+        "Skill matrix grouped by Voice AI Architecture, Product Strategy, UI/UX Engineering, and Research"
+      ]
+    },
+    {
+      "section_number": 7,
+      "id": "about-me",
+      "title": "About Me",
+      "elements": [
+        "Brief professional summary for Ansik Aryan Samal (owner name used deliberately & sparingly)",
+        "Core design philosophy cards and product principles"
+      ]
+    },
+    {
+      "section_number": 8,
+      "id": "contact-me",
+      "title": "Contact Me",
+      "elements": [
+        "Contact form placeholders for Name, Email, Location, Message",
+        "Social profile links (GitHub, LinkedIn, Twitter/X, Email)",
+        "Strict 'No Data Collected' privacy guarantee badge"
+      ]
+    }
+  ],
+  "motion_and_accessibility": {
+    "global_animation_toggle": "Sticky header toggle button for Motion ON/OFF site-wide",
+    "reduced_motion_default": "Detects window.matchMedia('(prefers-reduced-motion: reduce)') on initial load",
+    "honesty_rules": "No invented metric claims without 'Evidence needed' disclaimer tag",
+    "keyboard_nav": "Full visible focus rings (ring-2 ring-indigo-500 ring-offset-2 ring-offset-slate-900)"
+  },
+  "media": {
+    "developer_portrait": "https://images.unsplash.com/photo-1621609764180-2ca554a9d6f2?crop=entropy&cs=srgb&fm=jpg&q=85",
+    "audio_wave_bg": "https://images.unsplash.com/photo-1724185773486-0b39642e607e?crop=entropy&cs=srgb&fm=jpg&q=85",
+    "easter_egg_clues": [
+      {
+        "clue": "Clue 1: Circle of Sound (Letter O)",
+        "image_url": "https://images.unsplash.com/photo-1617994452722-4145e196248b?crop=entropy&cs=srgb&fm=jpg&q=85"
+      },
+      {
+        "clue": "Clue 2: Deep Vector Wave (Letter U)",
+        "image_url": "https://images.unsplash.com/photo-1704643770744-154e115d454d?crop=entropy&cs=srgb&fm=jpg&q=85"
+      },
+      {
+        "clue": "Clue 3: Pyramid Beam (Letter T)",
+        "image_url": "https://images.unsplash.com/photo-1511447333015-45b65e60f6d5?crop=entropy&cs=srgb&fm=jpg&q=85"
+      }
+    ],
+    "projects": [
+      {
+        "title": "Voice-First Vernacular OS",
+        "image_url": "https://images.unsplash.com/photo-1633218388467-539651dcf81f?crop=entropy&cs=srgb&fm=jpg&q=85"
+      },
+      {
+        "title": "Speech Analytics Dashboard",
+        "image_url": "https://images.unsplash.com/photo-1671519821564-ced7e41ee7ae?crop=entropy&cs=srgb&fm=jpg&q=85"
+      },
+      {
+        "title": "Tactical Multilingual Audio Engine",
+        "image_url": "https://images.unsplash.com/photo-1669829691079-4965265350c8?crop=entropy&cs=srgb&fm=jpg&q=85"
+      }
+    ]
+  },
+  "test_ids": {
+    "global_motion_toggle": "motion-toggle-btn",
+    "hero_audio_play": "hero-audio-play-btn",
+    "autopsy_card": "autopsy-card",
+    "voice_bharat_sample_btn": "voice-bharat-sample-btn",
+    "voice_bharat_mic_btn": "voice-bharat-mic-btn",
+    "easter_egg_input": "easter-egg-input",
+    "easter_egg_submit": "easter-egg-submit-btn",
+    "easter_egg_spoiler": "easter-egg-spoiler-btn",
+    "contact_submit": "contact-submit-btn"
+  },
+  "instructions_to_main_agent": [
+    "Ensure all 8 sections are rendered in exact sequential order on a single page",
+    "Implement the motion toggle state globally via React context or root state, passing motion-safe properties to framer-motion components",
+    "Include data-testid attributes on all interactive elements as mapped above",
+    "Maintain high APCA text contrast ratio using #0A0D14 background with #F8FAFC text and indigo/emerald accents",
+    "Never hide essential content when animation is toggled OFF — only disable CSS/Framer motion transitions"
+  ]
+}
