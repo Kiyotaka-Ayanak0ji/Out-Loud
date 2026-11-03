@@ -79,9 +79,10 @@ async def main():
                 await click(page, 'project-filter-'+category)
                 assert await page.locator('[data-testid^="project-card-"]').count() == count
             for id in PROJECTS:
+                if not await page.get_by_test_id('project-details-'+id).count(): continue  # details only on some projects now
                 await click(page, 'project-details-'+id)
                 assert await page.get_by_test_id('project-evidence-'+id).is_visible()
-                assert 'Source:' in await page.get_by_test_id('project-evidence-'+id).inner_text()
+                assert 'Source:' not in await page.get_by_test_id('project-evidence-'+id).inner_text()
             await click(page,'skills-toggle')
             assert not await page.get_by_test_id('skill-group-1').is_visible()
             await click(page,'skills-toggle')
@@ -181,11 +182,12 @@ async def main():
             await click(page,'easter-egg-submit-btn')
             await page.wait_for_timeout(200)
             assert 'Not quite' in await page.get_by_test_id('easter-egg-feedback').inner_text()
-            await page.get_by_test_id('easter-egg-input').fill('out loud')
+            await page.get_by_test_id('easter-egg-input').fill('find the whisper')
             await click(page,'easter-egg-submit-btn')
-            await page.get_by_test_id('easter-egg-reveal').wait_for()
+            await page.get_by_test_id('bonus-dialog').wait_for()
+            assert 'Upload needed.' in await page.get_by_test_id('bonus-story').inner_text()
+            await page.keyboard.press('Escape'); await page.get_by_test_id('bonus-dialog').wait_for(state='detached')
             assert await page.get_by_test_id('easter-egg-solve-status').text_content()=='Solved'
-            assert 'Upload needed.' in await page.get_by_test_id('secret-bonus-story').inner_text()
             await click(page,'easter-egg-reset-btn')
             assert await page.get_by_test_id('easter-egg-input').input_value()==''
             assert not await page.get_by_test_id('easter-egg-reveal').count()
@@ -203,29 +205,11 @@ async def main():
         await case('failed_plate_retry_recovers', retry)
 
         async def decoder():
-            await click(page,'decoder-source-master-btn')
-            await page.get_by_test_id('decoder-pass-input').fill('out loud')
-            await click(page,'decoder-run-btn')
-            await page.get_by_test_id('decoder-result').wait_for()
-            assert await page.get_by_test_id('decoder-result').inner_text()=='Upload needed.'
-            await page.get_by_test_id('decoder-pass-input').fill('out')
-            await click(page,'decoder-run-btn')
-            await page.wait_for_timeout(1200)
-            assert await page.get_by_test_id('decoder-status').inner_text()=='Wrong passphrase or damaged image. Try again.'
-            assert not await page.get_by_test_id('decoder-result').count()
-            await click(page,'decoder-reset-btn')
-            await page.get_by_test_id('decoder-file-input').set_input_files({'name':'bad.txt','mimeType':'text/plain','buffer':b'invalid'})
-            assert 'No valid hidden message' in await page.get_by_test_id('decoder-status').inner_text()
-            await page.get_by_test_id('decoder-file-input').set_input_files({'name':'bad.png','mimeType':'image/png','buffer':b'not an image'})
-            await page.get_by_test_id('decoder-pass-input').fill('outloud')
-            await click(page,'decoder-run-btn')
-            await page.wait_for_timeout(700)
-            assert 'Decoding failed' in await page.get_by_test_id('decoder-status').inner_text()
-            response=await ctx.request.get(URL+'/clues/master-plate.png')
-            remote=await response.body()
-            assert hashlib.sha256(remote).hexdigest()==hashlib.sha256((ROOT/'frontend/public/clues/master-plate.png').read_bytes()).hexdigest()
-            return {'master_sha256':hashlib.sha256(remote).hexdigest()}
-        await case('decoder_correct_wrong_crc_invalid_image_served_hash', decoder)
+            # Iteration 3: master-plate decoder removed
+            for tid in ['decoder-panel','decoder-source-master-btn','decoder-run-btn','decoder-pass-input']:
+                assert await page.get_by_test_id(tid).count()==0, tid
+            return 'removed'
+        await case('decoder_removed', decoder)
 
         async def editor_controls():
             await setup(page)
@@ -399,7 +383,7 @@ async def main():
                 await page.pdf(path=str(pdfpath),format='A4',print_background=True,prefer_css_page_size=True)
                 pdf=PdfReader(str(pdfpath)); text='\n'.join(p.extract_text() for p in pdf.pages)
                 findings.append({'theme':theme,'pages':len(pdf.pages),'styles':styles})
-                assert len(pdf.pages)==1,findings
+                assert len(pdf.pages)<=3,findings  # new Data Science resume: multi-page allowed
                 assert PRIVATE not in text and 'TEST_LEGACY_OVERRIDE' not in text
                 assert 'aryanansik@gmail.com' in text and 'Kiyotaka-Ayanak0ji' in text
                 assert 'Record replacement' not in text and 'Stop recording' not in text

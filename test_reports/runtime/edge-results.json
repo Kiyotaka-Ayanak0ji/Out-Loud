@@ -11,7 +11,7 @@
     "name": "all_images_loaded_tablet_sections_print_buttons",
     "passed": true,
     "detail": {
-      "loaded_images": 4,
+      "loaded_images": 6,
       "print_buttons": 2
     }
   },
@@ -35,20 +35,9 @@
     "detail": null
   },
   {
-    "name": "browser_decoder_unicode_crc_bounds_units",
+    "name": "decoder_and_master_plate_removed",
     "passed": true,
-    "detail": {
-      "round_trips": [
-        "Upload needed.",
-        "\u0928\u092e\u0938\u094d\u0924\u0947 \u0c24\u0c46\u0c32\u0c41\u0c17\u0c41 \u0b13\u0b21\u0b3c\u0b3f\u0b06",
-        "Out Loud \u2665"
-      ],
-      "malformed_frames": [
-        "invalid",
-        "invalid",
-        "invalid"
-      ]
-    }
+    "detail": "removed"
   },
   {
     "name": "autopsy_six_keyboard_accordions_about_details_receipts",

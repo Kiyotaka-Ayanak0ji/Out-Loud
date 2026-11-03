@@ -1,0 +1,35 @@
+{
+  "summary": "Frontend-only Playwright e2e of the iteration-3 Out Loud portfolio. All requested features work. New suite portfolio_secret_layer.py: 15/15, run 3 times, all green after one timing fix in the test. Updated legacy suites: portfolio_runtime.py 19/19, portfolio_edges.py 7/7. Checked: 'Find the Whisper' plates. Canvas LSB stats match the PNGs exactly. The letters show only at Plate01 blue / Plate02 red / Plate03 green, plane 0, and the screenshots read FIND / THE / WHISPER; plane 1 shows nothing. Empty and wrong answers ('out loud', '3000') are rejected. 'FINDTHEWHISPER' and '  Find the whisper ' open the bonus dialog, and open-bonus-btn reopens it. 'Show the method' never shows 'whisper'. The answer is not in the DOM before solving. No decoder, master plate or decipher-text-route-btn. Bonus dialog: audio src /audio/bonus-clip.mp3 (200, audio/mpeg) is paused with no autoplay; Replay plays; transcript toggles. Riddles give empty, wrong and 2-hint feedback; 'ACCESS' -> Access and ' point ' -> Point. The final-answer box appears only after both riddles; 'Point Access' is rejected and 'ACCESS POINT' wins. Share card is a 1200x630 PNG data URL. Download fires out-loud-access-point.png. Copy puts the caption on the clipboard. LinkedIn opens linkedin.com share-offsite (redirects to login) and copies the caption. The X href has twitter.com/intent/tweet, @WisprFlow and @emergentlabs. State survives reopening. The dialog scrolls at 390 and 320px. No banned meta labels anywhere, with every accordion/details opened; 'Upload needed.' remains only for voice/audio/video/story slots. Autopsy D-01..D-06 all 5 fields filled; Razorpay, Stripe, Hostinger, 17,000+, $5/$20/$40 present; D-06 has a 10-row chart and stats. Mistakes 1-3 filled (Goldman Sachs, Amazon, Uber). 5 projects with images loaded (2 jpg + 3 svg) and _blank links; the in-progress line is present. 4 receipts with flow text and no Evidence; speed shows 5m 20s / 1m 30s / 3.6x. Print emulation: #print-root block with the app hidden; name, email, LinkedIn, GitHub present; no +91 or 7032156925; Stock Screener line has about $5/month and 17,000+. Regression passed: nav links, theme toggle (data-theme, light dialog white bg), motion toggle, no overflow at 390/320, #/setup loads and is unlinked, no page errors.",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {
+    "ui_bugs": [
+      {"component": "share-card.js (drawShareCard)", "issue": "The footer line 'A portfolio by Ansik Aryan Samal · {host}' is drawn at a fixed 26px with no width check. On the preview host it runs past the 1200px canvas: the host is cut off at '...emergentagent' and crosses the inner border. This shows in both the downloaded PNG and the preview.", "selector": "[data-testid='bonus-share-card']", "priority": "MEDIUM"}
+    ],
+    "integration_issues": [],
+    "design_issues": [
+      {"screen": "Print résumé (A4)", "issues": ["Prints as 3 A4 pages; the brief said 'may be 2'. The 'PROJECTS' heading is stranded at the bottom of page 1 and 'EDUCATION' at the bottom of page 2. Fix with h2 { break-after: avoid } and .print-project { break-inside: avoid }, and slightly tighter print spacing."]},
+      {"screen": "Bonus dialog", "issues": ["The Riddle Hint button stays enabled after both hints are shown and gives no 'All hints shown' state (unlike the Secret Layer hint button)."]}
+    ]
+  },
+  "test_report_links": ["/app/tests/portfolio_secret_layer.py", "/app/tests/portfolio_runtime.py", "/app/tests/portfolio_edges.py", "/app/test_reports/runtime/it3-results.json"],
+  "action_items": [
+    "share-card.js: measure the footer text with ctx.measureText. Shrink the font or truncate the host so it fits inside x 80..1120, or draw only window.location.hostname with a size cap.",
+    "Print CSS: stop section headings being stranded at the bottom of a page (break-after: avoid on #print-root h2; break-inside: avoid on .print-project). Optionally tighten spacing to get to 2 pages.",
+    "Update /app/memory/test_credentials.md. It still says gen_master_plate.py and passphrase 'out' encode a master plate. The real scripts are now gen_lsb_plates.py and gen_bonus_audio.py, and the decoder is gone."
+  ],
+  "critical_code_review_comments": [
+    "ShareCard canNative checks only that navigator.canShare/share exist. It should call navigator.canShare({files:[file]}), otherwise desktop Chrome/Edge may show 'Share image' and then fail with the 'cancelled or unavailable' note.",
+    "BonusDialog replay calls audio.current.play() without .catch, so a playback rejection (e.g., decode failure) becomes an unhandled promise rejection.",
+    "The puzzle answers are hashed, but 'Access Point', 'whisper' and the riddle hints appear in plain text in the JS bundle (caption, share-card text, success text). This is acceptable for an easter egg; just be aware.",
+    "easter-egg-answer shows the raw guess uppercased (for example '  FIND THE WHISPER ' or 'FINDTHEWHISPER'). Consider showing a canonical 'FIND THE WHISPER' after solving.",
+    "The window.open(..., 'noopener') LinkedIn share works. LinkedIn redirects logged-out users to login, which is expected."
+  ],
+  "updated_files": ["/app/tests/portfolio_secret_layer.py (rewritten for iteration 3)", "/app/tests/portfolio_runtime.py (old OUT LOUD, decoder, Source: and 1-page print expectations updated)", "/app/tests/portfolio_edges.py (decoder unit test replaced with a removal check)"],
+  "success_rate": {"backend": "N/A (frontend only)", "frontend": "100% of functional checks (41/41 across 3 suites); 1 medium visual bug (share card text clipping)"},
+  "test_credentials": "No auth. /app/memory/test_credentials.md exists but is stale on Secret Layer build scripts and passphrase.",
+  "seed_data_creation": "None",
+  "flaky_tests": ["The Escape-closes-dialog assertion was timing-sensitive because of the Radix exit animation. Fixed in the test with wait_for(state='detached'); this was not an app bug."],
+  "retest_needed": false,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "Run: python3 /app/tests/portfolio_secret_layer.py | portfolio_runtime.py | portfolio_edges.py. They are standalone async Playwright scripts that need PLAYWRIGHT_CHROME_EXECUTABLE_PATH and write results to /app/test_reports/runtime/it3-*.json and screenshots. Answers: Secret 'find the whisper'; riddles Access and Point; final 'Access Point'. Plate channels: 1 blue, 2 red, 3 green, all plane 0. Print is currently 3 A4 pages; the runtime test allows up to 3."
+}

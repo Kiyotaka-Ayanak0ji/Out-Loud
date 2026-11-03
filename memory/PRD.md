@@ -111,3 +111,11 @@ Suggested next material: a Stock Screener analytics export and pricing screensho
 - D-06 has a CSS bar chart of Cloudflare pageviews by country (top 10).
 - R-01 spoken record and Bharat origin updated from user-pasted narrative.
 - Pending phase 2: user will supply a tailored résumé for Print summary plus remaining data (mistake 3, costs/changes, pricing & payment reasons). Note: the answer phrase matches the site brand name.
+
+## 2026-06 Content completion + Find the Whisper + Bonus Section (approved plan, phase 1 DONE)
+- Narrative/evidence report applied site-wide; meta labels removed; Upload needed only for voice/recordings/video/post/bonus story.
+- Secret Layer: plates FIND/THE/WHISPER (blue/red/green, plane 0); passphrase decoder removed. Correct phrase opens Bonus dialog: AI-voice clip (/audio/bonus-clip.mp3, OpenAI TTS tts-1-hd coral, labelled AI), riddles Access + Point, final Access Point, share card PNG + caption + LinkedIn/X/native share.
+- Projects: EquityIQ + TrustHire screenshots, SVG art for others, live/GitHub/Postman links. Print = tailored Data Science resume (2 A4 pages, no phone).
+- Tested: iteration_3 41/41; share card footer fit, print page breaks, riddle hint state fixed after.
+- Gaps: full typing test passage + word count (for WPM) not supplied; Scope voice note; voice intro; receipts recordings; submission video; challenge post; bonus story; Cloudflare chart shows France top for pageviews while narrative says mostly US (US leads requests).
+- Phase 2: owner voice intro, video, post, recordings, screenshots. Phase 3: optional STT in private editor.

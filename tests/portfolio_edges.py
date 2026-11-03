@@ -93,22 +93,11 @@ async def main():
         await check('pending_microphone_permission_switch_stops_late_stream',late_permission)
 
         async def decode_unit():
-            code=(Path('/app/frontend/src/lib/steganography.js').read_text().replace('export function','function'))
-            await p.evaluate('() => {'+code+'\nwindow.__decodeSecret=decodeSecret;}')
-            outputs=[]
-            for message in ['Upload needed.','नमस्ते తెలుగు ଓଡ଼ିଆ', 'Out Loud ♥']:
-                raw=message.encode();key=b'out';data=bytes(b^key[i%3] for i,b in enumerate(raw))
-                payload=len(raw).to_bytes(4,'big')+data+zlib.crc32(raw).to_bytes(4,'big')
-                pixels=[128,128,128,255]*1000
-                for idx,bit in enumerate([(b>>k)&1 for b in payload for k in range(7,-1,-1)]):pixels[(idx//3)*4+idx%3]|=bit
-                result=await p.evaluate('(pixels)=>window.__decodeSecret(new Uint8ClampedArray(pixels),"out")',pixels)
-                assert result==message
-                bad=await p.evaluate('(pixels)=>{try{return window.__decodeSecret(new Uint8ClampedArray(pixels),"ouu")}catch(e){return e.message}}',pixels)
-                assert bad=='badkey';outputs.append(result)
-            invalid=await p.evaluate('''()=>[[],[0,0,0,255],[255,255,255,255]].map(p=>{try{return __decodeSecret(new Uint8ClampedArray(p),'out')}catch(e){return e.message}})''')
-            assert invalid==['invalid']*3,invalid
-            return {'round_trips':outputs,'malformed_frames':invalid}
-        await check('browser_decoder_unicode_crc_bounds_units',decode_unit)
+            # Iteration 3: steganography decoder and master plate removed
+            assert not Path('/app/frontend/src/lib/steganography.js').exists()
+            assert not Path('/app/frontend/public/clues/master-plate.png').exists()
+            return 'removed'
+        await check('decoder_and_master_plate_removed',decode_unit)
         async def public_accordions():
             await p.goto(URL); await p.get_by_test_id('hero-section').wait_for()
             for i in range(1,7):

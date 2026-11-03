@@ -1,0 +1,284 @@
+[
+  {
+    "name": "answer_absent_pre_solve_and_no_decoder",
+    "passed": true,
+    "detail": "ok"
+  },
+  {
+    "name": "plates_reveal_word_only_right_channel_plane0",
+    "passed": true,
+    "detail": {
+      "p1-red": 0.498,
+      "p1-green": 0.498,
+      "p1-blue": 0.709,
+      "p2-red": 0.737,
+      "p2-green": 0.504,
+      "p2-blue": 0.504,
+      "p3-red": 0.502,
+      "p3-green": 0.66,
+      "p3-blue": 0.502
+    }
+  },
+  {
+    "name": "secret_empty_wrong_variants_open_and_reopen_bonus",
+    "passed": true,
+    "detail": {
+      "status_after_method": "Solved with the method"
+    }
+  },
+  {
+    "name": "bonus_dialog_audio_riddles_final_share",
+    "passed": true,
+    "detail": {
+      "src": "/audio/bonus-clip.mp3",
+      "paused": true,
+      "autoplay": false,
+      "ct": 0,
+      "clip_status": 200,
+      "clip_type": "audio/mpeg",
+      "after_replay": {
+        "paused": false,
+        "ct": 1.364474,
+        "err": null
+      },
+      "story": "Bonus story: Upload needed.",
+      "r1_hints": [
+        "Not quite. Try again or take a hint.",
+        "Think about what role-based access control actually controls.",
+        "Identity and ___ Management."
+      ],
+      "r1_word": "Access",
+      "r2_hints": [
+        "Not quite. Try again or take a hint.",
+        "Geometry begins with me.",
+        "Computers handle fractions with floating ___ arithmetic."
+      ],
+      "r2_word": "Point",
+      "download_name": "out-loud-access-point.png",
+      "copy_note": "Caption copied.",
+      "linkedin_url": "https://www.linkedin.com/uas/login?session_redirect=https%3A%2F%2Fwww.linkedin.com%2FshareArticle%2F%3Furl%3Dhttps%253A%252F%252Fvoice-portfolio-16--7vjod84a.preview.emergentagent.com",
+      "linkedin_note": "Caption copied. Paste it in LinkedIn and type @ to tag Ansik, Wispr Flow and Emergent.",
+      "x_href": "https://twitter.com/intent/tweet?text=I%20found%20the%20whisper%20and%20reached%20the%20Access%20Point%20in%20the%20Secret%20Layer%20of%20Out%20Loud%20by%20Ansik%20Aryan%20Samal.%20%40WisprFlow%20%40emergentlabs%20%23OutLoud&url=https%3A%2F%2Fvoice-portfolio-16--7vjod84a.preview.emergentagent.com",
+      "native_btn": 0,
+      "reopen_keeps_success": 1,
+      "reopen_words": [
+        1,
+        1
+      ]
+    }
+  },
+  {
+    "name": "bonus_dialog_scrolls_on_small_viewports",
+    "passed": true,
+    "detail": {
+      "390": {
+        "sh": 837,
+        "ch": 628,
+        "left": 9.750001907348633,
+        "right": 380.25000190734863,
+        "top": 63.35000991821289,
+        "bottom": 661.8499488830566,
+        "ov": "auto",
+        "W": 390,
+        "H": 700,
+        "scrolled": 191
+      },
+      "320": {
+        "sh": 937,
+        "ch": 628,
+        "left": 8.000001907348633,
+        "right": 312.00000190734863,
+        "top": 63.35000991821289,
+        "bottom": 661.8499488830566,
+        "ov": "auto",
+        "W": 320,
+        "H": 700,
+        "scrolled": 291
+      }
+    }
+  },
+  {
+    "name": "no_banned_meta_labels_sitewide",
+    "passed": true,
+    "detail": {
+      "upload_needed_count": 14,
+      "contexts": [
+        "Upload needed.",
+        "Voice note & transcript: Upload needed.",
+        "Voice note & transcript: Upload needed.",
+        "Voice note & transcript: Upload needed.",
+        "Voice note & transcript: Upload needed.",
+        "Voice note & transcript: Upload needed.",
+        "Voice note & transcript: Upload needed.",
+        "puts, not real worker data. Native-speaker audio: Upload needed.",
+        "Upload needed.",
+        "Upload needed.",
+        "Upload needed.",
+        "Upload needed.",
+        "Upload needed.",
+        "Upload needed."
+      ]
+    }
+  },
+  {
+    "name": "autopsy_6_filled_mistakes_3_chart_stats",
+    "passed": true,
+    "detail": {
+      "m1": "01  Mistake: Neglecting cloud infrastructure and current technologies.  Cost: Gaps in clou",
+      "m2": "02  Mistake: Thinking only like a developer.  Cost: Limited market and business awareness ",
+      "m3": "03  Mistake: Neglecting networking and spending too much time on unproductive activities. ",
+      "chart_rows": 10
+    }
+  },
+  {
+    "name": "projects_5_with_images_links_in_progress",
+    "passed": true,
+    "detail": {
+      "stock-screener": {
+        "img": 1,
+        "svg": 0,
+        "img_ok": true,
+        "links": [
+          [
+            "project-link-stock-screener-live-app",
+            "https://calm-white-cloud.lovable.app/",
+            "_blank"
+          ]
+        ]
+      },
+      "job-verification": {
+        "img": 1,
+        "svg": 0,
+        "img_ok": true,
+        "links": [
+          [
+            "project-link-job-verification-live-app",
+            "https://trust-hire.lovable.app/",
+            "_blank"
+          ]
+        ]
+      },
+      "finance-api": {
+        "img": 0,
+        "svg": 1,
+        "img_ok": true,
+        "links": [
+          [
+            "project-link-finance-api-github",
+            "https://github.com/Kiyotaka-Ayanak0ji/Data_Processing_Backend",
+            "_blank"
+          ],
+          [
+            "project-link-finance-api-postman-api-docs",
+            "https://documenter.getpostman.com/view/53009591/2sBXwqtBGr",
+            "_blank"
+          ]
+        ]
+      },
+      "image-messaging": {
+        "img": 0,
+        "svg": 1,
+        "img_ok": true,
+        "links": [
+          [
+            "project-link-image-messaging-live-app",
+            "https://steganography-project-updated-mwskcqpo9.vercel.app/",
+            "_blank"
+          ],
+          [
+            "project-link-image-messaging-github",
+            "https://github.com/Kiyotaka-Ayanak0ji/Steganography_Project_Updated",
+            "_blank"
+          ]
+        ]
+      },
+      "price-prediction": {
+        "img": 0,
+        "svg": 1,
+        "img_ok": true,
+        "links": [
+          [
+            "project-link-price-prediction-github",
+            "https://github.com/Kiyotaka-Ayanak0ji/Stock_Price_Prediction",
+            "_blank"
+          ]
+        ]
+      }
+    }
+  },
+  {
+    "name": "receipts_4_flow_text_no_evidence_speed_3_6x",
+    "passed": true,
+    "detail": {
+      "1": "The client initially asked me to build a tool. I approached ",
+      "2": "In 2024, I served as an event manager for my college’s E-Cel",
+      "3": "Replace the simple word hunt with a three-image puzzle that ",
+      "4": "Build a polished, mobile-first, single-page portfolio web ap",
+      "speed": "Typing versus talking |  | TYPING |  | 5m 20s |  | VOICE |  | 1m 30s |  | FASTER BY VOICE |  | 3.6× |  | Same passage, timed on my own setup. |  | Real projects |  | I dictate project material with Wispr Flow, then use AI to organise it"
+    }
+  },
+  {
+    "name": "print_resume_no_phone_stock_line",
+    "passed": true,
+    "detail": {
+      "pages": 3,
+      "display": "block"
+    }
+  },
+  {
+    "name": "nav_theme_light_dialog_motion",
+    "passed": true,
+    "detail": {
+      "links": [
+        "nav-link-autopsy",
+        "nav-link-bharat",
+        "nav-link-secret",
+        "nav-link-receipts",
+        "nav-link-work",
+        "nav-link-about",
+        "nav-link-contact"
+      ],
+      "theme": [
+        "dark",
+        "light"
+      ],
+      "dialog_bg": [
+        "rgb(255, 255, 255)",
+        "rgb(30, 41, 59)"
+      ],
+      "motion": [
+        "on",
+        "off"
+      ]
+    }
+  },
+  {
+    "name": "setup_loads_not_linked",
+    "passed": true,
+    "detail": []
+  },
+  {
+    "name": "mobile_390_320_no_overflow",
+    "passed": true,
+    "detail": {
+      "390": {
+        "scroll": 390,
+        "clip": []
+      },
+      "320": {
+        "scroll": 320,
+        "clip": []
+      }
+    }
+  },
+  {
+    "name": "about_has_3000_plan_not_in_secret",
+    "passed": true,
+    "detail": "ok"
+  },
+  {
+    "name": "no_page_errors",
+    "passed": true,
+    "detail": null
+  }
+]

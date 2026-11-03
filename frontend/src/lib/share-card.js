@@ -18,6 +18,9 @@ export async function drawShareCard(host) {
   ctx.fillStyle = "#FDBA74"; ctx.font = font(600, 24); ctx.fillText("THE SECRET LAYER · SOLVED", 80, 270);
   ctx.fillStyle = "#F8FAFC"; ctx.font = font(700, 64); ctx.fillText("Found the Whisper.", 80, 360);
   ctx.fillText("Reached the Access Point.", 80, 440);
-  ctx.fillStyle = "#94A3B8"; ctx.font = font(500, 26); ctx.fillText(`A portfolio by Ansik Aryan Samal  ·  ${host}`, 80, 540);
+  const foot = `A portfolio by Ansik Aryan Samal  ·  ${host}`;
+  let size = 26;
+  do { ctx.font = font(500, size); size -= 1; } while (ctx.measureText(foot).width > 1040 && size > 14);
+  ctx.fillStyle = "#94A3B8"; ctx.fillText(foot, 80, 540);
   return c.toDataURL("image/png");
 }

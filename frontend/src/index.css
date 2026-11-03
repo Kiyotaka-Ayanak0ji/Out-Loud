@@ -202,17 +202,19 @@
   }
   #print-root h2 {
     font-family: "Space Grotesk", sans-serif;
-    font-size: 10pt;
+    font-size: 9.5pt;
     text-transform: uppercase;
-    margin: 11pt 0 4pt;
+    margin: 7pt 0 3pt;
     border-bottom: 0.5pt solid #bbb;
-    padding-bottom: 2pt;
+    padding-bottom: 1.5pt;
+    break-after: avoid;
+    page-break-after: avoid;
   }
   #print-root p,
   #print-root li {
-    font-size: 9.5pt;
-    line-height: 1.45;
-    margin: 0 0 2pt;
+    font-size: 8.8pt;
+    line-height: 1.35;
+    margin: 0 0 1.5pt;
   }
   #print-root .notset {
     color: #666;
@@ -222,11 +224,11 @@
     color: #000;
   }
   #print-root { font-family: "Space Grotesk", sans-serif; }
-  #print-root .print-project { margin-bottom: 5pt; break-inside: avoid; }
-  #print-root ul { margin: 0 0 3pt 14pt; padding: 0; list-style: disc; }
-  #print-root li { margin-bottom: 1pt; }
+  #print-root .print-project { margin-bottom: 3pt; break-inside: avoid; }
+  #print-root ul { margin: 0 0 2pt 12pt; padding: 0; list-style: disc; }
+  #print-root li { margin-bottom: 0.5pt; }
   @page {
     size: A4;
-    margin: 13mm;
+    margin: 11mm;
   }
 }
