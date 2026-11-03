@@ -105,3 +105,9 @@ Suggested next material: a Stock Screener analytics export and pricing screensho
 - Proposal cards removed. Mistakes 1-2 titles filled; cost/change and mistake 3 Upload needed (full source narrative doc not supplied).
 - Text-to-SQL and Secure Notes removed from projects; in-progress statement added. Build log from Out_Loud_Project_Build_Log.pdf. Voice limitations, typing vs talking (5m20s vs 1m30s, 80-90% estimate), $3,000, why voice/growth, availability, Bangalore travel added.
 - Secret Layer unchanged; puzzle redesign proposal awaiting approval. /app/tests/portfolio_runtime.py PROJECTS list still includes removed project ids.
+
+## 2026-06 Secret Layer redesign + traffic chart
+- Plates are lossless PNGs (/app/backend/gen_lsb_plates.py): OU (blue), TL (red), OUD (green) in bit plane 0. Bench = channel picker + bit-plane slider. Text Clues removed. Answer checked by SHA-256 only; Show the method sets channel/plane, never prints the answer. Master plate passphrase is now outloud (spaces ignored).
+- D-06 has a CSS bar chart of Cloudflare pageviews by country (top 10).
+- R-01 spoken record and Bharat origin updated from user-pasted narrative.
+- Pending phase 2: user will supply a tailored résumé for Print summary plus remaining data (mistake 3, costs/changes, pricing & payment reasons). Note: the answer phrase matches the site brand name.

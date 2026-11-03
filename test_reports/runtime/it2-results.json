@@ -1,0 +1,144 @@
+[
+  {
+    "name": "answer_absent_from_secret_section_dom_and_no_text_clues",
+    "passed": true,
+    "detail": {
+      "OUT_LOUD_upper_in_body": false,
+      "brand_mentions_case_insensitive": [
+        "Out Loud",
+        "Ansik Aryan Samal / Out Loud",
+        "implified plan. Condensed the Out Loud concept and delivery plan int",
+        "Out Loud \u00b7 Ansik Aryan Samal"
+      ]
+    }
+  },
+  {
+    "name": "bit_plane_letters_only_in_expected_channel_plane0",
+    "passed": true,
+    "detail": {
+      "p1-red": 0.498,
+      "p1-green": 0.498,
+      "p1-blue": 0.66,
+      "p2-red": 0.648,
+      "p2-green": 0.504,
+      "p2-blue": 0.504,
+      "p3-red": 0.502,
+      "p3-green": 0.73,
+      "p3-blue": 0.502
+    }
+  },
+  {
+    "name": "hints_three_plus_per_plate_strong_no_answer",
+    "passed": true,
+    "detail": [
+      "Brightness and contrast will not help. The letters sit below what the eye can see.",
+      "Each pixel value is a stack of eight bits. Look at one colour channel one bit plane at a time.",
+      "The lowest plane carries the message, and each plate uses a different channel. Read the plates in order.",
+      "Plate 01: the blue channel, plane 0.",
+      "Plate 02: the red channel, plane 0.",
+      "Plate 03: the green channel, plane 0."
+    ]
+  },
+  {
+    "name": "answer_empty_wrong_shake_variants_reset",
+    "passed": true,
+    "detail": {
+      "shake": 1,
+      "out loud": "OUT LOUD",
+      "OUTLOUD": "OUTLOUD",
+      "Out-Loud": "OUT-LOUD",
+      "  out  loud ": "OUT LOUD"
+    }
+  },
+  {
+    "name": "show_method_sets_channel_plane_follows_plates_no_answer",
+    "passed": true,
+    "detail": {
+      "2": [
+        "true",
+        "0",
+        0.648
+      ],
+      "1": [
+        "true",
+        "0",
+        0.66
+      ],
+      "3": [
+        "true",
+        "0",
+        0.73
+      ],
+      "manual_override_channel_red": "true",
+      "status": "Solved with the method"
+    }
+  },
+  {
+    "name": "decoder_master_plate_pass_wrong_retry",
+    "passed": true,
+    "detail": "Wrong passphrase or damaged image. Try again."
+  },
+  {
+    "name": "autopsy_d06_chart_stats_evidence_no_proposals",
+    "passed": true,
+    "detail": [
+      "France 5.86k",
+      "Singapore 2.36k",
+      "Netherlands 1.71k",
+      "South Korea 1.5k",
+      "Hong Kong 1.17k",
+      "Australia 1.01k",
+      "Japan 920",
+      "India 720",
+      "Poland 700",
+      "United States 640"
+    ]
+  },
+  {
+    "name": "projects_five_receipts_spoken_record_buildlog_bharat_ecell",
+    "passed": true,
+    "detail": {
+      "in_progress": "I\u2019m currently working on a Text-to-SQL Analytics Copilot and a Secure Note-Sharing Application.",
+      "log_entries": 7
+    }
+  },
+  {
+    "name": "motion_toggle_keeps_canvas_drawn",
+    "passed": true,
+    "detail": {
+      "mean": 0.5002334104938272
+    }
+  },
+  {
+    "name": "setup_loads_not_linked",
+    "passed": true,
+    "detail": []
+  },
+  {
+    "name": "mobile_390_320_no_overflow_secret_autopsy",
+    "passed": true,
+    "detail": {
+      "390": {
+        "scroll": 390,
+        "clip": []
+      },
+      "320": {
+        "scroll": 320,
+        "clip": []
+      }
+    }
+  },
+  {
+    "name": "print_resume_one_page",
+    "passed": true,
+    "detail": {
+      "pages": 1,
+      "has_answer_upper": false
+    }
+  },
+  {
+    "name": "no_page_errors",
+    "passed": true,
+    "detail": null
+  }
+]

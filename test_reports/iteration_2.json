@@ -1,0 +1,30 @@
+{
+  "summary": "Frontend-only test of the Secret Layer LSB redesign, decoder, Autopsy D-06 country chart, content updates and full regressions, run in Chromium against the public preview URL. New suite /app/tests/portfolio_secret_layer.py: 13/13 passed. Updated portfolio_runtime.py: 19/19 passed. Updated portfolio_edges.py: 7/7 passed. Canvas pixels match the PNG LSB planes exactly (mean diff <0.002). Plate 01 blue, Plate 02 red and Plate 03 green show the letters at plane 0. Every other channel at plane 0 is noise (centre ~0.50 vs ~0.65-0.73). Planes 1-7 are identical across channels, so brightness or levels cannot reveal anything. Offline numpy check of the plates: OU, TL and OUD found. SHA-256 hash = sha256('outloud'). No application bugs found.",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": [
+      {"screen": "Global brand vs puzzle", "issues": ["The answer is the site brand: 'Out Loud' appears in the nav logo, hero ('/ Out Loud'), footer, <title>, meta description and build-log entry 02 ('Condensed the Out Loud concept...'). The secret section DOM never contains the answer, and the uppercase 'OUT LOUD' never appears before solving. Even so, a visitor can guess the phrase without decoding. This needs a product decision, not a code bug."]},
+      {"screen": "Autopsy D-06 chart", "issues": ["Number format is inconsistent: South Korea shows '1.5k' while the others show 2 decimals ('1.71k'). The replace(/0$/) trims only one zero, so a value such as 2000 would render '2.0k'."]}
+    ]
+  },
+  "test_report_links": ["/app/tests/portfolio_secret_layer.py", "/app/tests/portfolio_runtime.py", "/app/tests/portfolio_edges.py", "/app/test_reports/runtime/it2-results.json", "/app/test_reports/runtime/results.json", "/app/test_reports/runtime/edge-results.json"],
+  "action_items": [
+    "Optional: decide whether the visible 'Out Loud' brand name is an acceptable giveaway for the puzzle answer.",
+    "Optional: make the chart number format consistent (e.g. always 2 decimals, or trim trailing zeros fully)."
+  ],
+  "critical_code_review_comments": [
+    "SecretLayer reset() clears spoiler but keeps hintLevel, channel and plane. After reset, the bench still shows the correct channel at plane 0 with all hints visible. Minor; decide whether reset should fully restore the start state.",
+    "The hint button uses aria-disabled at level 3 but stays clickable (it is a no-op via Math.min). Harmless.",
+    "Plate tab thumbnails load the full ~0.7-1.1 MB PNGs (plus a 1.7 MB master plate in the decoder). Acceptable, but heavy on mobile.",
+    "The decoder takes channels R, G and B LSBs sequentially, while the comment says 'red pixel' only. The comment is stale."
+  ],
+  "updated_files": ["/app/tests/portfolio_secret_layer.py (new)", "/app/tests/portfolio_runtime.py (5 projects, filter counts 2/2/1/5, new puzzle/decoder passphrases, png retry route, projects voice-notes 6)", "/app/tests/portfolio_edges.py (removed decipher-auto-btn and fixed 'Upload needed.' reason assertion)"],
+  "success_rate": {"backend": "N/A (frontend only)", "frontend": "100% (39/39 checks)"},
+  "flaky_tests": ["portfolio_runtime.py wav_upload_play...: audio currentTime>0 after 350ms failed once (1 of 2 runs) in headless Chromium, which cascaded into the reset test. It passed on rerun. Environment flakiness, not an app bug."],
+  "seed_data_creation": "None. Only localStorage/IndexedDB in test browser contexts.",
+  "retest_needed": false,
+  "should_main_agent_self_test": false,
+  "context_for_next_testing_agent": "Run: cd /app/tests && python3 portfolio_secret_layer.py; python3 portfolio_runtime.py; python3 portfolio_edges.py. Tag text is CSS-uppercased, so use text_content() for easter-egg-solve-status. The master plate decodes to 'Upload needed.' with passphrase 'outloud'. Expected plate channels: 1->blue (2), 2->red (0), 3->green (1)."
+}

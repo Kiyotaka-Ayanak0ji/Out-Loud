@@ -4,102 +4,184 @@
     "transcript": ""
   },
   "autopsy": {
-    "projectName": "Stock Screener SaaS",
+    "projectName": "Stock Screener SaaS (EquityIQ)",
     "role": "Requirements, full-stack development, plans, payment approach, documentation and launch",
     "decisions": [
       {
         "id": "D-01",
-        "reason": "Upload needed.",
-        "lesson": "Upload needed.",
+        "reason": "I wanted to learn AI by building a real-time screener end to end.",
+        "lesson": "Stakeholder collaboration, clear requirements and documentation matter as much as code. The project taught me to think like a forward-deployed engineer.",
         "evidenceOk": false,
         "title": "Scope and audience",
-        "context": "A client needed a customisable stock screener for Indian markets.",
-        "decision": "Built live prices, watchlists, portfolio tracking and real-time analysis for NSE and BSE stocks.",
-        "result": "5,300+ stocks covered, as reported in the résumés.",
+        "context": "A freelance client project with a dual goal: a personalised stock screener for the client, and a product for investment enthusiasts.",
+        "decision": "Built it as an incremental prototype over about 12 iterations across the frontend, backend, authentication and security.",
+        "result": "Developed with Lovable, then worked on indexing and performance. Résumé-reported coverage: 5,300+ NSE and BSE stocks. Future ambition: open-source the project.",
         "evidence": "Dataset count or product screenshot",
-        "source": "All three résumés, Stock Screener; delivery plan §5.1"
+        "source": "Source narrative; all three résumés"
       },
       {
         "id": "D-02",
-        "reason": "Upload needed.",
+        "reason": "Unlimited access and an earlier $40 tier were considered and not retained. Detailed reasoning: Upload needed.",
         "lesson": "Upload needed.",
         "evidenceOk": false,
         "title": "Plans and pricing",
-        "context": "The screener included free and paid subscription plans.",
-        "decision": "Defined Free, Pro at $20/month and Premium at $40/month, with discounted yearly rates.",
-        "result": "Plans and pricing documented in the résumés. Conversion and revenue figures: Upload needed.",
+        "context": "The screener needed plans that worked for the client and for individual investors.",
+        "decision": "Final plans: Free trial, Pro at about $5/month and Premium at about $20/month. The Free trial changed from 30 days to about 15 days. Annual billing carries an average 17% discount. Watchlist export and sharing apply to the paid plans, and Premium adds the portfolio dashboard.",
+        "result": "Final plan structure documented. No paid subscriptions yet.",
         "evidence": "Pricing page screenshot",
-        "source": "All three résumés, Stock Screener; delivery plan §5.1"
+        "source": "Source narrative"
       },
       {
         "id": "D-03",
-        "reason": "Upload needed.",
+        "reason": "Competitor research shaped the split, and gating limited abuse and API load.",
         "lesson": "Upload needed.",
         "evidenceOk": false,
         "title": "Feature gating",
-        "context": "Access to screener features varied by subscription plan.",
-        "decision": "Tied stock search, watchlist count and automatic price refresh to each plan.",
-        "result": "Plan-based access described in the résumés. User response: Upload needed.",
+        "context": "Stock search, watchlists, Smart Alerts, OAuth sign-in and automatic price refresh had to be split across plans.",
+        "decision": "Gated the portfolio dashboard and automatic refresh to Premium. Required registration, with limited trial access.",
+        "result": "Plan-based access is in place. User response: Upload needed.",
         "evidence": "Feature matrix or product screenshot",
-        "source": "All three résumés, Stock Screener; delivery plan §5.1"
+        "source": "Source narrative; all three résumés"
       },
       {
         "id": "D-04",
-        "reason": "Upload needed.",
+        "reason": "Detailed comparison: Upload needed.",
         "lesson": "Upload needed.",
         "evidenceOk": false,
         "title": "Payments approach",
-        "context": "The client product needed a pricing and payment integration approach.",
-        "decision": "Selected the payment integration approach and wrote the project documentation.",
-        "result": "Approach selected; provider, integration details and payment outcomes: Upload needed.",
+        "context": "The product needed a payment provider for subscriptions.",
+        "decision": "Selected Razorpay after considering Stripe and Juspay. Discarded manual bank transfers.",
+        "result": "No paid subscriptions have occurred yet because development and deployment are incomplete.",
         "evidence": "Payment documentation",
-        "source": "All three résumés, Stock Screener; delivery plan §5.1"
+        "source": "Source narrative"
       },
       {
         "id": "D-05",
         "reason": "Upload needed.",
-        "lesson": "Upload needed.",
+        "lesson": "Launching exposed discoverability, performance, cost and sustainability as product problems, not only engineering ones.",
         "evidenceOk": false,
         "title": "Launch",
-        "context": "The client screener moved from requirements to launch.",
-        "decision": "Launched the product on a custom domain through Cloudflare.",
-        "result": "Custom-domain launch reported in the résumés. Launch channels and first-week activity: Upload needed.",
-        "evidence": "Live product link or launch record",
-        "source": "All three résumés, Stock Screener; delivery plan §5.1"
+        "context": "The screener moved from requirements to a public custom domain.",
+        "decision": "Launched on a custom domain through Cloudflare.",
+        "result": "Cloudflare reports traffic on equityiq.in, with significant United States and international request volume.",
+        "evidence": "Cloudflare analytics exports",
+        "evidenceText": "Cloudflare analytics exports supplied",
+        "source": "Source narrative; Cloudflare exports; all three résumés"
       },
       {
         "id": "D-06",
         "reason": "Upload needed.",
-        "lesson": "Upload needed.",
+        "lesson": "Raw views do not equal users. Bot filtering, performance and hosting cost decide whether traffic is sustainable.",
         "evidenceOk": false,
         "title": "Traffic",
-        "context": "The résumés report traffic over the first 3 to 4 months.",
+        "context": "Cloudflare analytics for equityiq.in, 3 October to 2 November 2026.",
         "decision": "Upload needed.",
-        "result": "About 10,000 views in 3 to 4 months. Views are not sign-ups or paying customers.",
-        "evidence": "Analytics export with date range and traffic sources",
-        "source": "All three résumés, Stock Screener; delivery plan §9.2 (evidence open)"
+        "result": "Cloudflare shows 17.48k pageviews and 17.02k visits in 30 days. Figure awaiting confirmation: the source narrative states 17,000+ organic views; the résumés state about 10,000 views in 3 to 4 months.",
+        "stats": [
+          [
+            "Pageviews",
+            "17.48k"
+          ],
+          [
+            "Visits",
+            "17.02k"
+          ],
+          [
+            "Requests",
+            "48.37k"
+          ],
+          [
+            "Data transfer",
+            "581.25 MB"
+          ],
+          [
+            "Top request countries",
+            "United States 9.11k, France 6.39k, Netherlands 6.19k, Singapore 5.29k, Japan 4.08k"
+          ],
+          [
+            "Devices (pageviews)",
+            "Desktop 17k, Tablet 270, Mobile 210"
+          ],
+          [
+            "Status codes",
+            "200 OK 17.61k; 525 Origin SSL Handshake 25.09k; 403 Forbidden 5.3k; 5xx rate 52.26%; cache hit rate 0.00%"
+          ],
+          [
+            "Automated traffic signals",
+            "Top user agents include None (8k), curl (2.85k) and Go-http-client (2.13k); top paths include /.env, /.env.local and /wp-includes probes"
+          ],
+          [
+            "Core Web Vitals (stockscreener.sbs, 6 May to 5 June 2026)",
+            "LCP 67% good, 33% poor; P50 1,224 ms, P75 21,912 ms (bold-moves.webp hero image); TTFB 459 ms; CLS 100% good; INP no data"
+          ]
+        ],
+        "chart": [
+          [
+            "France",
+            5860
+          ],
+          [
+            "Singapore",
+            2360
+          ],
+          [
+            "Netherlands",
+            1710
+          ],
+          [
+            "South Korea",
+            1500
+          ],
+          [
+            "Hong Kong",
+            1170
+          ],
+          [
+            "Australia",
+            1010
+          ],
+          [
+            "Japan",
+            920
+          ],
+          [
+            "India",
+            720
+          ],
+          [
+            "Poland",
+            700
+          ],
+          [
+            "United States",
+            640
+          ]
+        ],
+        "evidence": "Cloudflare analytics exports",
+        "evidenceText": "Cloudflare web, request and Core Web Vitals exports supplied. The exports do not separate organic from automated traffic",
+        "source": "Cloudflare exports; source narrative; all three résumés"
       }
     ],
     "mistakes": {
-      "happened": "",
-      "cost": "",
-      "change": ""
+      "happened": "I neglected cloud infrastructure and emerging technologies.",
+      "cost": "Upload needed.",
+      "change": "Upload needed."
     },
     "additionalMistakes": [
       {
-        "happened": "",
-        "cost": "",
-        "change": ""
+        "happened": "I thought only like a developer instead of connecting the work to business needs.",
+        "cost": "Upload needed.",
+        "change": "Upload needed."
       },
       {
-        "happened": "",
-        "cost": "",
-        "change": ""
+        "happened": "Upload needed.",
+        "cost": "Upload needed.",
+        "change": "Upload needed."
       }
     ]
   },
   "bharat": {
-    "origin": "At NEC E-Summit 2024 at IIT Bombay, I pitched a job-matching app for daily-wage and off-season workers. Our team’s pitch ranked 4th in India, as reported in my résumés. The idea included regional-language support, salary-negotiation help and planned government welfare tie-ups for fair wages.",
+    "origin": "In 2024, I served as event manager for my college’s E-Cell initiative. We pitched a regional voice-based system to help daily-wage workers with everyday communication and information needs. At NEC E-Summit 2024 at IIT Bombay, I pitched a job-matching app for daily-wage and off-season workers. Our team’s pitch ranked 4th in India, as reported in my résumés. The idea included regional-language support, salary-negotiation help and planned government welfare tie-ups for fair wages.",
     "users": "Daily-wage and off-season workers.",
     "languages": "English (professional), Hindi (native), Telugu (conversational), Odia (conversational).",
     "learned": ""
@@ -107,7 +189,7 @@
   "secret": {
     "story": "During my cybersecurity internship at Edunet Foundation, I studied bit-level image steganography and built a GUI to hide and retrieve data. This puzzle applies that technique in the browser.",
     "message": "",
-    "grant": ""
+    "grant": "$3,000 is about ₹2,80,000 in India. I would spend about 40 to 50% on a new smartphone, wired earphones and essential accessories, and possibly a high-end laptop if my Wispr Flow work needs one. Otherwise, I would save the remainder toward a better future device."
   },
   "receipts": [
     {
@@ -115,7 +197,7 @@
       "title": "The Autopsy",
       "said": "",
       "transcribed": "TEST_PRIVATE_TRANSCRIPT_839172_flow",
-      "built": "",
+      "built": "The client initially asked me to build a tool. I approached the requirement differently and developed a complete product end to end: cloud hosting, authentication, multi-user support, administrative access, user and analytics visibility, portfolio dashboards, subscription-based feature restrictions and role- and privilege-based access control. As admin, I could monitor users and application analytics; users reached dashboards and features according to their subscription tier and permissions. The client was satisfied, although I believe there was still room for improvement. The project is a starting point for my freelancing and software development career. Manual development, problem-solving and independent technical understanding will continue to remain valuable.",
       "evidence": ""
     },
     {
@@ -163,37 +245,23 @@
       "speaking": ""
     }
   ],
-  "buildLog": "",
-  "voiceLimit": "",
+  "buildLog": "01 Ideation. Asked for 10 to 15 project ideas that solve real problems, each with problem, solution, existing solutions, gaps and MVP.\n02 Simplified plan. Condensed the Out Loud concept and delivery plan into a buildable spec, with a prerequisites and requirements report.\n03 First demo. Built the single-page structure: Hero, Autopsy, Voice-First Bharat, Secret Layer, Voice Receipts, Projects and Skills, About and Contact, with marked placeholders and a global animation toggle.\n04 Design concepts. Requested three or four small design models before building, then chose one independent visual direction.\n05 Refinement. Fixed the title glitch with a typing animation, added dark and light themes, replaced the word hunt with a three-image puzzle and removed carousels and marquees.\n06 Private tools. Added the Content Setup tool, Voice Intro recording, one-page print summary and in-browser steganography decoder.\n07 Source-of-truth refresh. Filled sections from the résumés and reference, moved audio and transcripts to a private editor, changed the font and removed promotional labels.",
+  "voiceLimit": "Automatic corrections can change what I meant. Dictated text still needs editing. Accuracy drops with less familiar languages and words. Background noise affects recognition. Sensitive information should not be spoken aloud.",
   "speedMethod": "",
   "projects": [
     {
       "link": "",
       "evidenceOk": false,
       "id": "stock-screener",
-      "title": "Stock Screener SaaS",
+      "title": "Stock Screener SaaS (EquityIQ)",
       "cat": "Product",
       "summary": "A client product taken from requirements to a custom-domain launch.",
       "work": "Built a customisable screener with live prices, watchlists, portfolio tracking and real-time analysis. Defined subscription plans, feature access, the payment approach and project documentation.",
       "tools": "React.js, Tailwind CSS, Node.js, Flask, Axios, MongoDB",
-      "metric": "Résumé-reported: 5,300+ NSE and BSE stocks; about 10,000 views in 3 to 4 months.",
-      "detail": "Free, Pro ($20/month) and Premium ($40/month), with discounted yearly rates. Stock search, watchlist count and automatic refresh tied to each plan. Launched through Cloudflare.",
-      "evidence": "Analytics, pricing screenshot and dataset count",
-      "source": "All three résumés; delivery plan §5.1, §9.2"
-    },
-    {
-      "link": "",
-      "evidenceOk": false,
-      "id": "sql-copilot",
-      "title": "Text-to-SQL Analytics Copilot",
-      "cat": "AI & Data",
-      "summary": "Plain-English data questions with query safety guardrails.",
-      "work": "Built schema retrieval, SQL generation, sqlglot AST validation and read-only execution, returning tables, Plotly charts and query explanations.",
-      "tools": "Python, sqlglot, FastAPI, DuckDB, PostgreSQL, Chroma, pgvector, Plotly, Streamlit",
-      "metric": "Résumé-reported: evaluated on 100 question-to-expected-result pairs. Zero safety violations is a target, not a reported result.",
-      "detail": "Added database-error-driven self-correction and a bank of checked question-to-SQL pairs for few-shot examples and regression tests. Execution accuracy, safety violations and median latency are evaluation measures; results: Upload needed.",
-      "evidence": "Evaluation report and query test set",
-      "source": "Data Science résumé, Projects"
+      "metric": "Résumé-reported: 5,300+ NSE and BSE stocks. Cloudflare: 17.48k pageviews, 3 October to 2 November 2026. View figure awaiting confirmation.",
+      "detail": "Free trial (about 15 days), Pro (about $5/month) and Premium (about $20/month), with an average 17% annual discount. Portfolio dashboard and automatic refresh are Premium. Payments through Razorpay; no paid subscriptions yet. Launched through Cloudflare.",
+      "evidence": "Pricing screenshot and dataset count",
+      "source": "All three résumés; source narrative; Cloudflare exports"
     },
     {
       "link": "",
@@ -221,19 +289,6 @@
       "detail": "Dashboard summaries use optimised database structures and queries. No latency benchmark was supplied.",
       "evidence": "API documentation and performance measurements",
       "source": "All three résumés, Projects"
-    },
-    {
-      "link": "",
-      "evidenceOk": false,
-      "id": "secure-notes",
-      "title": "Secure Notes Sharing",
-      "cat": "Security",
-      "status": "In progress",
-      "summary": "Notes shared through restricted links with user-defined expiry.",
-      "work": "Building note access controls and sharing privileges. Developed an in-house URL shortener for compact note-sharing links.",
-      "tools": "",
-      "evidence": "Repository and implementation details",
-      "source": "Software Developer and AI Architect résumés, Projects"
     },
     {
       "link": "",
@@ -326,16 +381,16 @@
     "linkedin": "https://linkedin.com/in/ansik-aryan-1aa731250",
     "github": "https://github.com/Kiyotaka-Ayanak0ji",
     "other": "https://personalportfolio-theta-sable.vercel.app",
-    "whyVoice": "",
-    "whyGrowth": ""
+    "whyVoice": "Voice can give people in underserved areas access to technology in their own regional languages, from remote South Africa to rural India.",
+    "whyGrowth": "I want to join Wispr Flow’s Growth team to bring voice-first tools to those users."
   },
   "contact": {
     "email": "aryanansik@gmail.com",
     "location": "Hyderabad, Telangana, India",
     "profiles": "",
     "publish": true,
-    "availability": "",
-    "travel": "",
+    "availability": "Available during November 2026, subject to organisational needs, and immediately if required.",
+    "travel": "Willing to travel to or relocate to Bangalore for interviews, internships and full-time roles.",
     "video": "",
     "post": ""
   },

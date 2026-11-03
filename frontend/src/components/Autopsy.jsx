@@ -11,7 +11,7 @@ const CountryChart = ({ rows, idx }) => {
     <ul className="mt-3 grid gap-1.5">{rows.map(([k, v]) => <li key={k} className="grid grid-cols-[96px_1fr_44px] items-center gap-3 text-xs" data-testid={`chart-row-${k.toLowerCase().replaceAll(" ", "-")}`}>
       <span className="truncate text-tx-low">{k}</span>
       <span className="h-2 rounded-full bg-fill/5"><span className="block h-full rounded-full bg-acc/70" style={{ width: `${(v / max) * 100}%` }} /></span>
-      <span className="text-right tabular-nums text-tx">{v >= 1000 ? `${(v / 1000).toFixed(2).replace(/0$/, "")}k` : v}</span>
+      <span className="text-right tabular-nums text-tx">{v >= 1000 ? `${Number((v / 1000).toFixed(2))}k` : v}</span>
     </li>)}</ul>
   </figure>;
 };

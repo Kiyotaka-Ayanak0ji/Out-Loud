@@ -21,7 +21,7 @@ RESULTS = []
 NETWORK = []
 ERRORS = []
 SECTIONS = ['hero', 'autopsy', 'bharat', 'secret', 'receipts', 'work', 'about', 'contact']
-PROJECTS = ['stock-screener', 'sql-copilot', 'job-verification', 'finance-api', 'secure-notes', 'image-messaging', 'price-prediction']
+PROJECTS = ['stock-screener', 'job-verification', 'finance-api', 'image-messaging', 'price-prediction']
 PRIVATE = 'TEST_PRIVATE_TRANSCRIPT_839172'
 
 def wav_bytes(freq=440):
@@ -62,7 +62,7 @@ async def main():
         async def public():
             ids = await page.locator('main > section').evaluate_all('(es)=>es.map(e=>e.id)')
             assert ids == SECTIONS, ids
-            assert await page.locator('[data-testid^="project-card-"]').count() == 7
+            assert await page.locator('[data-testid^="project-card-"]').count() == 5
             text = await page.locator('.screen-only').inner_text()
             assert 'Built by Voice' not in text and 'built by voice' not in text.lower()
             assert not __import__('re').search(r'\[[^\]]+\]', text)
@@ -75,7 +75,7 @@ async def main():
         await case('public_content_font_contacts_privacy', public)
 
         async def filters():
-            for category, count in [('product',2),('ai-data',3),('security',2),('all',7)]:
+            for category, count in [('product',2),('ai-data',2),('security',1),('all',5)]:
                 await click(page, 'project-filter-'+category)
                 assert await page.locator('[data-testid^="project-card-"]').count() == count
             for id in PROJECTS:
@@ -85,7 +85,7 @@ async def main():
             await click(page,'skills-toggle')
             assert not await page.get_by_test_id('skill-group-1').is_visible()
             await click(page,'skills-toggle')
-        await case('project_filters_seven_details_skills', filters)
+        await case('project_filters_five_details_skills', filters)
 
         async def nav():
             await page.set_viewport_size({'width':1440,'height':1080})
@@ -167,50 +167,48 @@ async def main():
         await case('bharat_exact_samples_edit_free_text_no_inference', bharat)
 
         async def puzzle():
+            # Secret Layer LSB redesign: covered in detail by portfolio_secret_layer.py
+            assert await page.get_by_test_id('decipher-text-route-btn').count()==0
             for i in range(1,4):
+                await page.get_by_test_id(f'plate-tab-{i}').scroll_into_view_if_needed()
                 await click(page,f'plate-tab-{i}')
                 await page.get_by_test_id('decipher-canvas').wait_for()
-                await click(page,'decipher-auto-btn')
-                assert 50 <= int(await page.get_by_test_id('decipher-slider').input_value()) <= 210
-                await page.get_by_test_id('decipher-slider').fill('180')
-                assert await page.get_by_test_id('decipher-slider').input_value()=='180'
             for i in range(3): await click(page,'decipher-hint-btn')
             assert await page.get_by_test_id('decipher-hints').locator('p').count()==4
-            await click(page,'decipher-text-route-btn')
-            assert await page.get_by_test_id('decipher-text-route').locator('li').count()==3
             await click(page,'easter-egg-submit-btn')
             assert await page.get_by_test_id('easter-egg-feedback').inner_text()=='Enter an answer first.'
-            await page.get_by_test_id('easter-egg-input').fill('wrong')
-            await click(page,'easter-egg-submit-btn')
-            assert 'Not quite' in await page.get_by_test_id('easter-egg-feedback').inner_text()
             await page.get_by_test_id('easter-egg-input').fill('out')
             await click(page,'easter-egg-submit-btn')
+            await page.wait_for_timeout(200)
+            assert 'Not quite' in await page.get_by_test_id('easter-egg-feedback').inner_text()
+            await page.get_by_test_id('easter-egg-input').fill('out loud')
+            await click(page,'easter-egg-submit-btn')
+            await page.get_by_test_id('easter-egg-reveal').wait_for()
             assert await page.get_by_test_id('easter-egg-solve-status').text_content()=='Solved'
             assert 'Upload needed.' in await page.get_by_test_id('secret-bonus-story').inner_text()
             await click(page,'easter-egg-reset-btn')
             assert await page.get_by_test_id('easter-egg-input').input_value()==''
             assert not await page.get_by_test_id('easter-egg-reveal').count()
-            await click(page,'easter-egg-spoiler-btn')
-            assert await page.get_by_test_id('easter-egg-solve-status').text_content()=='Revealed with spoiler'
-            await click(page,'easter-egg-reset-btn')
-        await case('plates_slider_auto_hints_text_empty_wrong_out_spoiler_reset', puzzle)
+        await case('plates_hints_empty_wrong_outloud_reset', puzzle)
 
         async def retry():
-            await page.route('**/clues/plate-01.jpg', lambda r:r.abort())
+            await page.route('**/clues/plate-01.png', lambda r:r.abort())
+            await click(page,'plate-tab-2'); await page.get_by_test_id('decipher-canvas').wait_for()
+            await page.evaluate("()=>{}")
             await click(page,'plate-tab-1')
             await page.get_by_test_id('decipher-error').wait_for()
-            await page.unroute('**/clues/plate-01.jpg')
+            await page.unroute('**/clues/plate-01.png')
             await click(page,'decipher-retry-btn')
             await page.get_by_test_id('decipher-canvas').wait_for()
         await case('failed_plate_retry_recovers', retry)
 
         async def decoder():
             await click(page,'decoder-source-master-btn')
-            await page.get_by_test_id('decoder-pass-input').fill('out')
+            await page.get_by_test_id('decoder-pass-input').fill('out loud')
             await click(page,'decoder-run-btn')
             await page.get_by_test_id('decoder-result').wait_for()
             assert await page.get_by_test_id('decoder-result').inner_text()=='Upload needed.'
-            await page.get_by_test_id('decoder-pass-input').fill('ouu')
+            await page.get_by_test_id('decoder-pass-input').fill('out')
             await click(page,'decoder-run-btn')
             await page.wait_for_timeout(1200)
             assert await page.get_by_test_id('decoder-status').inner_text()=='Wrong passphrase or damaged image. Try again.'
@@ -219,7 +217,7 @@ async def main():
             await page.get_by_test_id('decoder-file-input').set_input_files({'name':'bad.txt','mimeType':'text/plain','buffer':b'invalid'})
             assert 'No valid hidden message' in await page.get_by_test_id('decoder-status').inner_text()
             await page.get_by_test_id('decoder-file-input').set_input_files({'name':'bad.png','mimeType':'image/png','buffer':b'not an image'})
-            await page.get_by_test_id('decoder-pass-input').fill('out')
+            await page.get_by_test_id('decoder-pass-input').fill('outloud')
             await click(page,'decoder-run-btn')
             await page.wait_for_timeout(700)
             assert 'Decoding failed' in await page.get_by_test_id('decoder-status').inner_text()
@@ -239,7 +237,7 @@ async def main():
                 assert counts[step]>0
                 assert await notes.locator('[data-testid^="voice-note-transcript-"]').count()==counts[step]
                 assert await notes.locator('[data-testid^="voice-note-upload-btn-"]').count()==counts[step]
-            assert counts=={'intro':1,'autopsy':10,'bharat':4,'secret':1,'receipts':8,'projects':8,'about':1,'contact':1},counts
+            assert counts=={'intro':1,'autopsy':10,'bharat':4,'secret':1,'receipts':8,'projects':6,'about':1,'contact':1},counts
             return counts
         await case('all_setup_steps_recording_and_extra_notes',editor_controls)
 
