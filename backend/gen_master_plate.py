@@ -6,7 +6,7 @@ from PIL import Image
 
 OUT = Path(__file__).resolve().parents[1] / "frontend/public/clues/master-plate.png"
 MESSAGE = "Upload needed."
-KEY = b"out"
+KEY = b"outloud"
 
 def encode(image, message, key):
     data = message.encode("utf-8")

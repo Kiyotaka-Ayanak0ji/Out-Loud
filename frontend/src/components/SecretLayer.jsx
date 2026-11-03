@@ -1,23 +1,23 @@
 import { useEffect, useRef, useState } from "react";
-import { Ear, Eye, Lightbulb, RefreshCcw } from "lucide-react";
+import { Eye, Lightbulb, RefreshCcw } from "lucide-react";
 import { Reveal, SectionHeader } from "./Reveal";
 import { Tag } from "./Tags";
 import Decoder from "./Decoder";
-import { PLATES, SECRET } from "../lib/content";
+import { CHANNELS, PLATES, SECRET } from "../lib/content";
 import { useProfile } from "../context/profile-context";
 
 const W = 720;
-const lum = (r, g, b) => 0.2126 * r + 0.7152 * g + 0.0722 * b;
+const sha256 = async (text) => Array.from(new Uint8Array(await crypto.subtle.digest("SHA-256", new TextEncoder().encode(text)))).map((b) => b.toString(16).padStart(2, "0")).join("");
 
 const SecretLayer = () => {
   const { profile } = useProfile();
   const story = profile.secret.story?.trim() ? profile.secret.story : SECRET.story;
   const [plateIdx, setPlateIdx] = useState(0);
   const [reload, setReload] = useState(0);
-  const [threshold, setThreshold] = useState(128);
+  const [channel, setChannel] = useState(0);
+  const [plane, setPlane] = useState(7);
   const [status, setStatus] = useState("loading");
   const [hintLevel, setHintLevel] = useState(0);
-  const [textRoute, setTextRoute] = useState(false);
   const [guess, setGuess] = useState("");
   const [state, setState] = useState("idle");
   const [attempts, setAttempts] = useState(0);
@@ -26,27 +26,19 @@ const SecretLayer = () => {
 
   const canvasRef = useRef(null);
   const imgRef = useRef(null);
-  const meanRef = useRef(null);
   const plate = PLATES[plateIdx];
+
+  useEffect(() => {
+    if (spoiler) { setChannel(plate.channel); setPlane(0); }
+  }, [spoiler, plate.channel]);
 
   useEffect(() => {
     let cancelled = false;
     setStatus("loading");
-    meanRef.current = null;
     const img = new Image();
     imgRef.current = img;
     img.onload = () => {
-      if (cancelled) return;
-      const c = document.createElement("canvas");
-      c.width = 180;
-      c.height = 180;
-      const cx = c.getContext("2d");
-      cx.drawImage(img, 0, 0, 180, 180);
-      const d = cx.getImageData(0, 0, 180, 180).data;
-      let s = 0;
-      for (let i = 0; i < d.length; i += 4) s += lum(d[i], d[i + 1], d[i + 2]);
-      meanRef.current = s / (d.length / 4);
-      setStatus("ready");
+      if (!cancelled) setStatus("ready");
     };
     img.onerror = () => {
       if (!cancelled) setStatus("error");
@@ -66,32 +58,32 @@ const SecretLayer = () => {
       canvas.width = W;
       canvas.height = W;
     }
-    const ctx = canvas.getContext("2d");
+    const ctx = canvas.getContext("2d", { willReadFrequently: true });
     ctx.drawImage(img, 0, 0, W, W);
     const im = ctx.getImageData(0, 0, W, W);
     const d = im.data;
     for (let i = 0; i < d.length; i += 4) {
-      const v = lum(d[i], d[i + 1], d[i + 2]) >= threshold ? 255 : 0;
+      const v = (d[i + channel] >> plane) & 1 ? 255 : 0;
       d[i] = v;
       d[i + 1] = v;
       d[i + 2] = v;
     }
     ctx.putImageData(im, 0, 0);
-  }, [threshold, status, plateIdx]);
+  }, [channel, plane, status, plateIdx]);
 
-  const autoLevels = () => {
-    if (meanRef.current != null) {
-      setThreshold(Math.round(Math.min(210, Math.max(50, meanRef.current + 12))));
-    }
+  const showMethod = () => {
+    setSpoiler(true);
+    setHintLevel(3);
   };
 
-  const check = (e) => {
+  const check = async (e) => {
     e.preventDefault();
-    if (!guess.trim()) {
+    const norm = guess.toLowerCase().replace(/[^a-z]/g, "");
+    if (!norm) {
       setState("empty");
       return;
     }
-    if (guess.trim().toLowerCase() === SECRET.answer) {
+    if ((await sha256(norm)) === SECRET.answerHash) {
       setState("solved");
     } else {
       setState("wrong");
@@ -116,7 +108,7 @@ const SecretLayer = () => {
           no="03"
           kicker="The Secret Layer"
           accent="tangerine"
-          title="Three plates. One buried word."
+          title="Three plates. One buried phrase."
           desc={story}
         />
 
@@ -155,7 +147,7 @@ const SecretLayer = () => {
                     <canvas
                       ref={canvasRef}
                       role="img"
-                      aria-label={`Deciphered view of ${plate.label}. ${plate.alt} The levels tool shows a thresholded black-and-white version of this plate; sweep the slider to bring the hidden ghost into view.`}
+                      aria-label={`Bit-plane view of ${plate.label}, ${CHANNELS[channel]} channel, plane ${plane}. ${plate.alt}`}
                       data-testid="decipher-canvas"
                       className="bench-canvas w-full rounded-2xl border border-line/10"
                     />
@@ -189,31 +181,22 @@ const SecretLayer = () => {
 
               <div className="grid content-start gap-5">
                 <div>
-                  <label htmlFor="levels" className="field-label">
-                    Levels threshold: {threshold}
+                  <p className="field-label">Colour channel</p>
+                  <div className="mt-2 flex flex-wrap gap-2" role="radiogroup" aria-label="Colour channel">
+                    {CHANNELS.map((c, i) => (
+                      <button key={c} type="button" role="radio" aria-checked={channel === i} onClick={() => setChannel(i)} data-testid={`decipher-channel-${c.toLowerCase()}`} className={`rounded-full border px-4 py-2 text-xs font-semibold transition-colors ${channel === i ? "border-tan bg-tan text-[#2A0F04]" : "border-line/15 text-tx-low hover:text-tx-hi"}`}>{c}</button>
+                    ))}
+                  </div>
+                </div>
+
+                <div>
+                  <label htmlFor="bitplane" className="field-label">
+                    Bit plane: {plane}
                   </label>
-                  <input
-                    id="levels"
-                    type="range"
-                    min="40"
-                    max="220"
-                    value={threshold}
-                    onChange={(e) => setThreshold(+e.target.value)}
-                    data-testid="decipher-slider"
-                    aria-label="Levels threshold"
-                    className="mt-2 w-full accent-acc"
-                  />
+                  <input id="bitplane" type="range" min="0" max="7" step="1" value={plane} onChange={(e) => setPlane(+e.target.value)} data-testid="decipher-slider" aria-label="Bit plane" className="mt-2 w-full accent-acc" />
                 </div>
 
                 <div className="flex flex-wrap gap-2">
-                  <button
-                    type="button"
-                    onClick={autoLevels}
-                    data-testid="decipher-auto-btn"
-                    className="rounded-full bg-tan px-4 py-2 text-xs font-bold text-[#2A0F04] transition-transform hover:-translate-y-0.5"
-                  >
-                    Auto levels
-                  </button>
                   <button
                     type="button"
                     onClick={() => setHintLevel((h) => Math.min(3, h + 1))}
@@ -223,16 +206,6 @@ const SecretLayer = () => {
                   >
                     <Lightbulb className="h-3.5 w-3.5" />
                     {hintLevel >= 3 ? "All hints shown" : `Hint ${hintLevel + 1} of 3`}
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => setTextRoute((v) => !v)}
-                    aria-expanded={textRoute}
-                    data-testid="decipher-text-route-btn"
-                    className="inline-flex items-center gap-1.5 rounded-full border border-line/15 px-4 py-2 text-xs font-semibold text-tx-low transition-colors hover:text-tx-hi"
-                  >
-                    <Ear className="h-3.5 w-3.5" />
-                    Text clues
                   </button>
                 </div>
 
@@ -251,19 +224,6 @@ const SecretLayer = () => {
                   )}
                 </div>
 
-                {textRoute && (
-                  <div className="rounded-2xl border border-line/10 bg-fill/[0.03] p-4" data-testid="decipher-text-route">
-                    <p className="field-label">Three riddles, in plate order</p>
-                    <ol className="mt-2 grid gap-2 text-xs leading-relaxed text-tx-low">
-                      {PLATES.map((p) => (
-                        <li key={p.id} className="flex gap-2">
-                          <span className="flex-none font-mono text-acc-soft">{p.label.replace("Plate ", "")}</span>
-                          <span>{p.riddle}</span>
-                        </li>
-                      ))}
-                    </ol>
-                  </div>
-                )}
               </div>
             </div>
           </div>
@@ -277,7 +237,7 @@ const SecretLayer = () => {
                   data-testid="easter-egg-input"
                   value={guess}
                   onChange={(e) => setGuess(e.target.value)}
-                  placeholder="Type the hidden word"
+                  placeholder="Type the hidden phrase"
                   aria-label="Your answer to the plate puzzle"
                   className="w-full rounded-full border border-tan/40 bg-bg/50 px-5 py-3 text-sm text-tx placeholder:text-tx-faint"
                 />
@@ -292,14 +252,11 @@ const SecretLayer = () => {
               <button
                 type="button"
                 data-testid="easter-egg-spoiler-btn"
-                onClick={() => {
-                  setSpoiler(true);
-                  setState("solved");
-                }}
+                onClick={showMethod}
                 className="inline-flex items-center gap-2 rounded-full border border-line/20 px-5 py-3 text-sm font-semibold text-tx transition-colors hover:bg-fill/5"
               >
                 <Eye className="h-4 w-4" />
-                Reveal answer
+                Show the method
               </button>
               {(state !== "idle" || attempts > 0) && (
                 <button
@@ -317,20 +274,21 @@ const SecretLayer = () => {
             <div aria-live="polite" className="mt-3 min-h-[22px] text-sm" data-testid="easter-egg-feedback">
               {state === "empty" && <p className="text-tan-soft">{SECRET.feedbackEmpty}</p>}
               {state === "wrong" && <p className="text-tan-soft">{SECRET.feedbackWrong}</p>}
+              {spoiler && !solved && <p className="text-tx-low" data-testid="easter-egg-method">{SECRET.spoilerMethod}</p>}
             </div>
 
             {solved && (
               <div data-testid="easter-egg-reveal" className="mt-4 rounded-2xl border border-emer/40 bg-emer/[0.06] p-5">
                 <div className="flex flex-wrap items-center gap-3">
                   <span className="font-display text-4xl font-extrabold tracking-[0.3em] text-emer-soft" data-testid="easter-egg-answer">
-                    OUT
+                    {guess.trim().toUpperCase()}
                   </span>
                   <Tag data-testid="easter-egg-solve-status" tone={spoiler ? "amber" : "emerald"} className="ml-auto">
-                    {spoiler ? "Revealed with spoiler" : "Solved"}
+                    {spoiler ? "Solved with the method" : "Solved"}
                   </Tag>
                 </div>
                 <p className="mt-3 text-sm font-semibold leading-relaxed text-tx">
-                  {spoiler ? SECRET.spoilerAnswer : SECRET.feedbackCorrect}
+                  {SECRET.feedbackCorrect}
                 </p>
                 <p className="mt-2 text-sm leading-relaxed text-tx-low">{SECRET.solveExplain}</p>
                 <p className="mt-3 text-sm text-tx-low" data-testid="secret-bonus-story">Bonus story: {profile.secret.message || "Upload needed."}</p>

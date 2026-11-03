@@ -85,7 +85,7 @@ const Decoder = () => {
       const d = cx.getImageData(0, 0, W, H).data;
       setProgress("Reading the least-significant bits…");
       await wait(350);
-      const text = decodeSecret(d, pass.trim().toLowerCase());
+      const text = decodeSecret(d, pass.toLowerCase().replace(/[^a-z]/g, ""));
       setMessage(text);
       setStatus("success");
     } catch (e) {
@@ -153,7 +153,7 @@ const Decoder = () => {
             type="text"
             value={pass}
             onChange={(e) => setPass(e.target.value)}
-            placeholder="The word the plates spelled"
+            placeholder="The phrase the plates spelled"
             data-testid="decoder-pass-input"
             className="mt-2 w-full rounded-full border border-tan/40 bg-bg/50 px-4 py-2.5 text-sm text-tx placeholder:text-tx-faint"
           />

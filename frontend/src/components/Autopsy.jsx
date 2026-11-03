@@ -4,6 +4,17 @@ import { Reveal, SectionHeader } from "./Reveal";
 import { useProfile } from "../context/profile-context";
 import { MISSING } from "../lib/profile-data";
 
+const CountryChart = ({ rows, idx }) => {
+  const max = Math.max(...rows.map(([, v]) => v));
+  return <figure className="border-t border-line/10 pt-4" data-testid={`decision-chart-${idx + 1}`}>
+    <figcaption className="field-label">Pageviews by country, top 10 (Cloudflare)</figcaption>
+    <ul className="mt-3 grid gap-1.5">{rows.map(([k, v]) => <li key={k} className="grid grid-cols-[96px_1fr_44px] items-center gap-3 text-xs" data-testid={`chart-row-${k.toLowerCase().replaceAll(" ", "-")}`}>
+      <span className="truncate text-tx-low">{k}</span>
+      <span className="h-2 rounded-full bg-fill/5"><span className="block h-full rounded-full bg-acc/70" style={{ width: `${(v / max) * 100}%` }} /></span>
+      <span className="text-right tabular-nums text-tx">{v >= 1000 ? `${(v / 1000).toFixed(2).replace(/0$/, "")}k` : v}</span>
+    </li>)}</ul>
+  </figure>;
+};
 const DecisionCard = ({ d, idx }) => {
   const [open, setOpen] = useState(idx === 0);
   return <article id={`decision-${idx + 1}`} data-testid={`autopsy-card-${idx + 1}`} className="glass overflow-hidden rounded-2xl transition-colors hover:border-acc/40">
@@ -14,6 +25,7 @@ const DecisionCard = ({ d, idx }) => {
     {open && <div id={`decision-body-${idx}`} className="grid gap-4 border-t border-line/10 p-5" data-testid={`decision-details-${idx + 1}`}>
       {[["Context", d.context], ["Decision", d.decision], ["Reason", d.reason], ["Outcome", d.result], ["Lesson", d.lesson]].map(([label, value]) => <div key={label} className="grid gap-1 sm:grid-cols-[84px_1fr] sm:gap-4"><span className="field-label">{label}</span><p className="text-sm leading-relaxed" data-testid={`decision-${idx + 1}-${label.toLowerCase()}`}>{value || MISSING}</p></div>)}
       <p className="text-xs leading-relaxed text-tx-low" data-testid={`decision-source-${idx + 1}`}>Source: {d.source || MISSING}</p>
+      {d.chart && <CountryChart rows={d.chart} idx={idx} />}
       {d.stats && <dl className="grid gap-2 border-t border-line/10 pt-4 text-xs" data-testid={`decision-stats-${idx + 1}`}>{d.stats.map(([k, v]) => <div key={k} className="grid gap-1 sm:grid-cols-[150px_1fr] sm:gap-4"><dt className="text-tx-low">{k}</dt><dd className="text-tx">{v}</dd></div>)}</dl>}
       <p className="text-xs text-amb-soft" data-testid={`decision-evidence-${idx + 1}`}>{d.evidenceText ? `Evidence: ${d.evidenceText}.` : `${d.evidence || "Supporting evidence"}: ${MISSING}`}</p>
       <p className="text-xs text-tx-low" data-testid={`decision-audio-${idx + 1}`}>Voice note & transcript: {MISSING}</p>
