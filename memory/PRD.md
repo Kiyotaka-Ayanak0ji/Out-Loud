@@ -98,3 +98,10 @@ Four supplied PDFs and exact extracted text live in `/app/reference/`, outside p
 - Owner visual edits using the preserved design lab, only when requested.
 
 Suggested next material: a Stock Screener analytics export and pricing screenshot would strengthen the main case study without adding features.
+
+## 2026-06 Content update (analytics, build log, narrative)
+- Autopsy D-01..D-06 rewritten from user-supplied narrative; Free trial ~15 days, Pro ~$5/mo, Premium ~$20/mo, 17% annual discount; Razorpay chosen (Stripe/Juspay considered); no paid subscriptions yet.
+- D-06 shows Cloudflare stats (equityiq.in, 3 Oct to 2 Nov 2026: 17.48k pageviews, 17.02k visits, 48.37k requests, 5xx 52.26%, bot signals) + Core Web Vitals (stockscreener.sbs). View figure discrepancy (17,000+ organic vs ~10,000/3-4 months) awaiting user confirmation.
+- Proposal cards removed. Mistakes 1-2 titles filled; cost/change and mistake 3 Upload needed (full source narrative doc not supplied).
+- Text-to-SQL and Secure Notes removed from projects; in-progress statement added. Build log from Out_Loud_Project_Build_Log.pdf. Voice limitations, typing vs talking (5m20s vs 1m30s, 80-90% estimate), $3,000, why voice/growth, availability, Bangalore travel added.
+- Secret Layer unchanged; puzzle redesign proposal awaiting approval. /app/tests/portfolio_runtime.py PROJECTS list still includes removed project ids.

@@ -1,4 +1,4 @@
-export { OWNER_NAME, DECISIONS, PROPOSALS, PROJECTS, SKILL_GROUPS } from "./profile-data";
+export { OWNER_NAME, DECISIONS, PROJECTS, SKILL_GROUPS } from "./profile-data";
 export const CHAPTERS = [
   ["hero", "Intro", "Intro"], ["autopsy", "Autopsy", "The Autopsy"],
   ["bharat", "Bharat", "Voice-First Bharat"], ["secret", "Secret", "The Secret Layer"],

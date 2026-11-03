@@ -2,7 +2,7 @@ import { useState } from "react";
 import { ArrowUpRight, ImageOff } from "lucide-react";
 import { Reveal, SectionHeader } from "./Reveal";
 import { useProfile } from "../context/profile-context";
-import { MISSING } from "../lib/profile-data";
+import { IN_PROGRESS, MISSING } from "../lib/profile-data";
 import { safeUrl } from "../lib/safe-url";
 
 export default function ProjectsSkills() {
@@ -23,6 +23,7 @@ export default function ProjectsSkills() {
         {safeUrl(p.link) ? <a href={safeUrl(p.link)} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-acc-soft" data-testid={`project-link-${p.id}`}>Project link <ArrowUpRight className="h-4 w-4" /></a> : <p>Project link: {MISSING}</p>}
       </div></details>
     </article></Reveal>)}</div>
+    <p className="mt-8 text-sm text-tx-low" data-testid="projects-in-progress">{IN_PROGRESS}</p>
     <details className="mt-12 border-y border-line/15 py-6" open><summary className="cursor-pointer font-display text-lg font-semibold text-tx-hi" data-testid="skills-toggle">Skills & tools</summary>
       <div className="mt-6 grid gap-x-8 gap-y-6 sm:grid-cols-2 lg:grid-cols-3">{profile.skills.map((s, i) => <div key={s.id || i} data-testid={`skill-group-${i + 1}`}><h3 className="font-semibold text-tx-hi">{s.name}</h3><p className="mt-2 text-sm leading-relaxed text-tx-low">{s.items}</p></div>)}</div>
     </details>
