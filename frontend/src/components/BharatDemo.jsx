@@ -16,10 +16,9 @@ export default function BharatDemo() {
   };
   return <section id="bharat" className="py-16 sm:py-24" data-testid="bharat-section"><div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
     <SectionHeader no="02" kicker="Voice-First Bharat" title="Regional voices. Fairer access." accent="emerald" desc={profile.bharat.origin} />
-    <p className="mt-4 text-xs text-tx-low" data-testid="bharat-evidence">Source: résumés and delivery plan §5.2. Pitch certificate or results link: Upload needed.</p>
     <div className="glass mt-8 rounded-3xl p-5 sm:p-8">
       <p className="text-sm font-medium text-emer-soft" data-testid="bharat-demo-status">Sample-only concept demo</p>
-      <p className="mt-2 text-sm text-tx-low" data-testid="bharat-sample-source">Illustrative inputs from the delivery plan, not real worker data. Native-verified audio: Upload needed.</p>
+      <p className="mt-2 text-sm text-tx-low" data-testid="bharat-sample-source">Illustrative sample inputs, not real worker data. Native-speaker audio: Upload needed.</p>
       <div className="mt-5 flex flex-wrap gap-2">{VOICE_SAMPLES.map((s, i) => <button key={s.id} onClick={() => { setInput(s.transcript); setResult(null); setError(""); }} data-testid={`voice-bharat-sample-btn-${i + 1}`} className="rounded-full border border-emer/40 bg-emer/10 px-4 py-2 text-sm font-semibold text-emer-soft transition-colors hover:bg-emer/20">{s.label}</button>)}</div>
       <label htmlFor="bharat-input" className="field-label mt-6 block">Demo input</label>
       <textarea id="bharat-input" data-testid="voice-bharat-input" value={input} onChange={(e) => { setInput(e.target.value); setResult(null); setError(""); }} maxLength={1000} placeholder="Choose a sample or enter text" rows={4} className="mt-2 w-full rounded-2xl border border-line/15 bg-bg/50 p-4 text-base" />
@@ -30,6 +29,6 @@ export default function BharatDemo() {
       <p className="mt-5 text-xs text-tx-low" data-testid="bharat-privacy">No microphone capture, uploads or stored visitor data.</p>
     </div>
     <p className="mt-5 text-sm text-tx-low" data-testid="bharat-languages">{profile.bharat.languages}</p>
-    <p className="mt-2 text-sm text-tx-low" data-testid="bharat-learning">User testing & learnings: {profile.bharat.learned || "Upload needed."}</p>
+    {profile.bharat.learned && <p className="mt-2 text-sm text-tx-low" data-testid="bharat-learning">{profile.bharat.learned}</p>}
   </div></section>;
 }

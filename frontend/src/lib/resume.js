@@ -1,0 +1,75 @@
+export const RESUME = {
+  name: "Ansik Aryan Samal",
+  contact: ["Hyderabad, Telangana, India", "aryanansik@gmail.com"],
+  links: [["LinkedIn", "linkedin.com/in/ansik-aryan-1aa731250"], ["GitHub", "github.com/Kiyotaka-Ayanak0ji"], ["Portfolio", "personalportfolio-theta-sable.vercel.app"]],
+  summary: "Computer Science graduate (B.Tech, 2025, CGPA 7.83) and AI Engineer intern at Clyptus Software Solutions, Hyderabad. Strong in Python, SQL and C++ with hands-on experience in software development, data science and machine learning projects. Built a job authenticity tool with 95% accuracy on unseen data, and secure REST APIs with role-based access control, and took a client product from requirements to launch. Used generative AI and automation (prompt engineering, RAG, n8n) to streamline workflows; currently completing a Data Science and Artificial Intelligence program with IIT Roorkee and Masai School and working on a Text-to-SQL analytics copilot with query safety guardrails.",
+  skills: [
+    ["Operating Systems, Networking and Troubleshooting", "Linux/Unix, operating systems fundamentals, computer networks fundamentals, debugging, root cause analysis (RCA), unit testing and creating PWAs (Progressive Web Applications)."],
+    ["Programming and Scripting", "Python, SQL, Bash and shell scripting, JavaScript, TypeScript, Java, C++, C"],
+    ["Databases and SQL", "PostgreSQL, MySQL, MongoDB, Supabase, Redis, DuckDB; data modelling, query optimization, SQL for data retrieval, cleaning and reporting"],
+    ["Automation and DevOps Concepts", "automation and workflow automation, n8n, DevOps concepts, CI/CD concepts (automated testing and releases), Docker, Git, GitHub, Postman; deployment on Railway, Render, Vercel and Cloudflare (custom domains)"],
+    ["Cloud Fundamentals", "AWS fundamentals, cloud deployment basics"],
+    ["Generative AI and AI Productivity Tools", "prompt engineering (one-shot, few-shot, chain-of-thought, role-based prompting), retrieval-augmented generation (RAG), embeddings and vector search, LLM evaluation, agentic workflows, Model Context Protocol (MCP); Claude Code, Cursor, Codex, ChatGPT, Lovable, Emergent, Replit, Perplexity"],
+    ["AI and Machine Learning", "Scikit-learn, regression, classification, feature engineering, Hugging Face inference models"],
+    ["Data Science and Analytics", "Pandas, NumPy, Matplotlib, Seaborn, Plotly, exploratory data analysis (EDA), data cleaning, statistical analysis, trend analysis, Power BI, Tableau, Microsoft Excel, dashboards and metrics reporting"],
+    ["Back End and APIs", "Python (Flask, FastAPI), Node.js, Express.js, RESTful APIs, WebSockets, authentication (Passport.js, bcrypt, JWT), role-based access control (RBAC)"],
+    ["Front End", "React.js, HTML, CSS, Tailwind CSS, responsive design"],
+    ["Computer Science Fundamentals", "Data Structures and Algorithms, object-oriented programming (OOP), SOLID principles, software development life cycle (SDLC)"],
+    ["Currently Working On", "Advanced RAG, Advanced Machine Learning, model fine-tuning, Generative AI and cloud fundamentals; also learning CI/CD, low-level design (LLD) and caching"],
+    ["Professional Skills", "analytical thinking, problem solving, technical documentation, clear written and verbal communication, collaboration, customer-focused mindset, adaptability, leadership"],
+  ],
+  projects: [
+    ["Text-to-SQL Analytics Copilot with Guardrails", "Python, sqlglot, FastAPI, DuckDB/PostgreSQL, Chroma/pgvector, Plotly, Streamlit", [
+      "Built a copilot that lets business users ask data questions in plain English and returns a result table, an auto-generated chart and a plain-English explanation of the query, removing the wait for an analyst on simple questions.",
+      "Retrieves the relevant database schema, generates SQL, validates it and runs it read-only, so wrong joins, invented columns and destructive queries never reach the database.",
+      "Parses every query into an abstract syntax tree (AST) with sqlglot and enforces safety rules in code instead of trusting the language model.",
+      "Added a self-correction loop that feeds database error messages back to the model, plus a query bank of verified question-to-SQL pairs that serves as few-shot examples and regression tests.",
+      "Evaluated against a gold set of 100 question-to-expected-result pairs, measuring execution accuracy, safety violations (target: zero) and median latency."]],
+    ["Job and Company Verification Tool", "Python, Flask, React.js, TypeScript, Supabase, Tailwind CSS, TanStack, Firecrawl", [
+      "Engineered a tool that checks a single job link, gathers company reviews and online presence data through Firecrawl, and flags warning signs in the posting.",
+      "Assigns each job an authenticity score from 0 to 100, reaching 95% accuracy on unseen data.",
+      "Delivered the first version with a Flask REST API, a nine-signal weighted scoring system, a unit test suite and a 39-page PDF report (ReportLab), deployed on Render, Railway and Vercel.",
+      "Introduced a bulk self-training feature that trains the model on batches of 30-40 company links, with predictions verified through Firecrawl.",
+      "Rebuilt the app around an in-house machine learning model that classifies job listings, after applying feature engineering learned in the Data Science course."]],
+    ["Finance Data Processing Backend", "Node.js, Express.js, PostgreSQL", [
+      "Developed secure REST APIs for user management, transactions and dashboard reports.",
+      "Implemented role-based access control with three permission levels: Viewer, Analyst and Admin.",
+      "Created endpoints that report income, expenses, balances and spending trends.",
+      "Optimized database schemas and queries so dashboard summaries load quickly in real time."]],
+    ["Stock Screener SaaS Web App (Client Project)", "React.js, Tailwind CSS, Node.js, Flask, Axios, MongoDB", [
+      "Translated a client's requirements into a customizable stock screener covering 5,300+ NSE and BSE stocks, with live prices, watchlists, portfolio tracking and real-time analysis.",
+      "Defined Free, Pro (about $5/month) and Premium (about $20/month) plans with an average 17% annual discount, and tied features such as stock search, number of watchlists and automatic price refresh to each plan.",
+      "Determined the pricing and payment integration approach and wrote the project documentation.",
+      "Launched on a custom domain through Cloudflare, reaching 17,000+ organic views."]],
+  ],
+  experience: [
+    ["Clyptus Software Solutions Pvt Ltd, Hyderabad", "AI Engineer Intern", "Present", []],
+    ["NxtWave Disruptive Technologies", "Associate Aptitude Instructor", "24th August 2026 - 13th October 2026", [
+      "Trained to teach quantitative aptitude and math modules for computer science learners accurately and clearly, following company guidelines and ethics.",
+      "Worked in a corporate setting with limited resources, staying punctual and raising issues early with the team."]],
+    ["Edunet Foundation (IBM SkillBuild)", "Cybersecurity Intern", "15th January 2025 - 26th February 2025", [
+      "Learned core cybersecurity concepts, network security and threat mitigation techniques.",
+      "Studied steganography methods for hiding and retrieving data within images using bit-level manipulation.",
+      "Built an interactive GUI application that encodes and decodes hidden data within image files."]],
+  ],
+  education: [
+    "Institute of Aeronautical Engineering (JNTUH), Dundigal, Hyderabad | B.Tech, Computer Science and Engineering | 2021 - 2025 | CGPA: 7.83 (out of 10)",
+    "Trividyaa Junior College, Hyderabad | Intermediate (MPC) | 2019 - 2021 | 98%",
+    "St. Michael's School, Old Alwal, Hyderabad | Secondary School | 2018 - 2019 | 94%",
+  ],
+  certifications: [
+    "Data Science and Artificial Intelligence | IIT Roorkee and Masai School | Ongoing, 2026",
+    "Python, SQL and Problem Solving | HackerRank",
+    "Web Development (WD101) and Node Development (WD201) | Pupilfirst (AICTE-based curriculum)",
+    "SEBI Investor Awareness | SEBI/NISM | 2025",
+    "In preparation: Oracle AI, Microsoft Fabric Analytics Engineer, Anthropic, and Google AI and Cloud certifications",
+  ],
+  achievements: [
+    "Selected through the University of Hyderabad (UoH) entrance examination; ranked 162nd in the Common Rank List (CRL) and 4th in the Armed Personnel Category.",
+    "Event Manager, Entrepreneurship Cell (E-Cell), IARE, for the National Entrepreneurship Challenge (NEC) E-Summit 2024 at IIT Bombay; the team's startup pitch ranked 4th in India.",
+    "Pitched a job-matching app for daily-wage and off-season workers, with regional language support, salary negotiation help and planned tie-ups with government welfare schemes for fair wages.",
+    "Scored 95.2 percentile in JEE Mains 2021.",
+    "Qualified for the final mock interview round in LEEE 2023.",
+  ],
+  languages: "English (Professional), Hindi (Native), Telugu (Conversational), Odia (Conversational)",
+};

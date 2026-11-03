@@ -223,6 +223,8 @@
   }
   #print-root { font-family: "Space Grotesk", sans-serif; }
   #print-root .print-project { margin-bottom: 5pt; break-inside: avoid; }
+  #print-root ul { margin: 0 0 3pt 14pt; padding: 0; list-style: disc; }
+  #print-root li { margin-bottom: 1pt; }
   @page {
     size: A4;
     margin: 13mm;

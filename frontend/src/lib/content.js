@@ -20,17 +20,17 @@ export const GENERIC_RESULT = Object.fromEntries(["name", "role", "experience", 
 export const PLATES = [
   { id: "plate-01", label: "Plate 01", src: "/clues/plate-01.png", alt: "Grayscale concrete texture.", channel: 2, strong: "Plate 01: the blue channel, plane 0." },
   { id: "plate-02", label: "Plate 02", src: "/clues/plate-02.png", alt: "Grayscale brushed metal texture.", channel: 0, strong: "Plate 02: the red channel, plane 0." },
-  { id: "plate-03", label: "Plate 03", src: "/clues/plate-03.png", alt: "Grayscale slate texture.", channel: 1, strong: "Plate 03: the green channel, plane 0." },
+  { id: "plate-03", label: "Plate 03", src: "/clues/plate-03.png", alt: "Grayscale weathered wood planks.", channel: 1, strong: "Plate 03: the green channel, plane 0." },
 ];
 export const CHANNELS = ["Red", "Green", "Blue"];
 export const SECRET = {
-  answerHash: "00b450cf89c54412bfd68a50383d4400513f313cc3e97f1bf482464b6444cd57", story: "", howTo: "", hints: [
-    "Brightness and contrast will not help. The letters sit below what the eye can see.",
+  answerHash: "2350a5a236b81fdcc0dc5187006274a31fc9401a9c3bf9f3bf8df302b3490eb1", story: "", howTo: "", hints: [
+    "Brightness and contrast will not help. Each plate hides one word below what the eye can see.",
     "Each pixel value is a stack of eight bits. Look at one colour channel one bit plane at a time.",
-    "The lowest plane carries the message, and each plate uses a different channel. Read the plates in order.",
+    "The lowest plane carries the words, and each plate uses a different channel. Read the plates in order to form a phrase.",
   ],
   feedbackEmpty: "Enter an answer first.", feedbackWrong: "Not quite. Try another channel or plane, or reveal a hint.",
   feedbackCorrect: "Solved.", spoilerMethod: "Method shown. The bench now displays the right channel and plane for each plate.",
-  solveExplain: "Each plate stores letters in the lowest bit of one colour channel. A change of 1 in a pixel value is invisible and survives any brightness tool, but the bit-plane view isolates it.",
-  unlockBody: "Upload needed.", note: "Images are processed locally. The passphrase is a puzzle, not encryption security.",
+  solveExplain: "Each plate stores one word in the lowest bit of one colour channel. A change of 1 in a pixel value is invisible and survives any brightness tool, but the bit-plane view isolates it.",
+  unlockBody: "Upload needed.", note: "Images are processed locally in your browser.",
 };

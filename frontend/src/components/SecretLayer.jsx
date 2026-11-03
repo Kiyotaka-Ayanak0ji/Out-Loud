@@ -2,12 +2,12 @@ import { useEffect, useRef, useState } from "react";
 import { Eye, Lightbulb, RefreshCcw } from "lucide-react";
 import { Reveal, SectionHeader } from "./Reveal";
 import { Tag } from "./Tags";
-import Decoder from "./Decoder";
+import { BonusDialog } from "./BonusDialog";
+import { sha256 } from "../lib/hash";
 import { CHANNELS, PLATES, SECRET } from "../lib/content";
 import { useProfile } from "../context/profile-context";
 
 const W = 720;
-const sha256 = async (text) => Array.from(new Uint8Array(await crypto.subtle.digest("SHA-256", new TextEncoder().encode(text)))).map((b) => b.toString(16).padStart(2, "0")).join("");
 
 const SecretLayer = () => {
   const { profile } = useProfile();
@@ -23,6 +23,7 @@ const SecretLayer = () => {
   const [attempts, setAttempts] = useState(0);
   const [spoiler, setSpoiler] = useState(false);
   const [shakeKey, setShakeKey] = useState(0);
+  const [bonusOpen, setBonusOpen] = useState(false);
 
   const canvasRef = useRef(null);
   const imgRef = useRef(null);
@@ -85,6 +86,7 @@ const SecretLayer = () => {
     }
     if ((await sha256(norm)) === SECRET.answerHash) {
       setState("solved");
+      setBonusOpen(true);
     } else {
       setState("wrong");
       setAttempts((a) => a + 1);
@@ -112,7 +114,6 @@ const SecretLayer = () => {
           desc={story}
         />
 
-        <p className="mt-4 text-xs text-tx-low" data-testid="secret-evidence">Source: supplied résumés, Edunet internship. Original repository or demo: Upload needed.</p>
 
         <Reveal className="mt-6">
           <div className="flex flex-wrap gap-2" role="tablist" aria-label="Choose a plate" data-testid="plate-selector">
@@ -291,8 +292,7 @@ const SecretLayer = () => {
                   {SECRET.feedbackCorrect}
                 </p>
                 <p className="mt-2 text-sm leading-relaxed text-tx-low">{SECRET.solveExplain}</p>
-                <p className="mt-3 text-sm text-tx-low" data-testid="secret-bonus-story">Bonus story: {profile.secret.message || "Upload needed."}</p>
-                <p className="mt-2 text-sm text-tx-low" data-testid="secret-grant-answer">The $3,000 work requirement: {profile.secret.grant || "Upload needed."}</p>
+                <button type="button" onClick={() => setBonusOpen(true)} data-testid="open-bonus-btn" className="mt-4 rounded-full bg-tan px-5 py-2.5 text-sm font-bold text-[#2A0F04] transition-transform hover:-translate-y-0.5">Open the Bonus Section</button>
               </div>
             )}
 
@@ -300,9 +300,7 @@ const SecretLayer = () => {
           </div>
         </Reveal>
 
-        <Reveal className="mt-6">
-          <Decoder />
-        </Reveal>
+        <BonusDialog open={bonusOpen} onOpenChange={setBonusOpen} />
       </div>
     </section>
   );

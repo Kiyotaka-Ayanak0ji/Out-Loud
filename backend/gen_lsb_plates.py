@@ -8,9 +8,9 @@ from PIL import Image, ImageDraw, ImageFont
 
 SRC = "https://static.prod-images.emergentagent.com/jobs/c9233ddb-b9cd-4f4d-be86-f71c7372af1e/images/"
 PLATES = {
-    "plate-01": ("OU", 2, SRC + "19fb4c22e129181ee6aec5da30eb9d14f638274bf0c160290d41b15a85a68964.jpeg"),
-    "plate-02": ("TL", 0, SRC + "233b7a90fa9219c304f991edd378ad13739639f6d9f6f701f2deae2a22f22773.jpeg"),
-    "plate-03": ("OUD", 1, SRC + "07af88a8ebfd2e96e01cdeb4de3e85a4e7d965a10d9030af68a457ab654382bd.jpeg"),
+    "plate-01": ("FIND", 2, SRC + "19fb4c22e129181ee6aec5da30eb9d14f638274bf0c160290d41b15a85a68964.jpeg"),
+    "plate-02": ("THE", 0, SRC + "233b7a90fa9219c304f991edd378ad13739639f6d9f6f701f2deae2a22f22773.jpeg"),
+    "plate-03": ("WHISPER", 1, SRC + "07af88a8ebfd2e96e01cdeb4de3e85a4e7d965a10d9030af68a457ab654382bd.jpeg"),
 }
 OUT = "/app/frontend/public/clues"
 FONT = "/usr/share/fonts/truetype/freefont/FreeSansBold.ttf"
@@ -20,7 +20,7 @@ SIZE = 720
 def mask(text):
     m = Image.new("L", (SIZE, SIZE), 0)
     d = ImageDraw.Draw(m)
-    f = ImageFont.truetype(FONT, int(SIZE * (0.42 if len(text) == 2 else 0.3)))
+    f = ImageFont.truetype(FONT, int(SIZE * {3: 0.3, 4: 0.24}.get(len(text), 0.15)))
     d.text((SIZE / 2, SIZE / 2), text, font=f, anchor="mm", fill=255)
     return np.asarray(m) > 127
 

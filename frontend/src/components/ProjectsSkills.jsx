@@ -1,9 +1,10 @@
 import { useState } from "react";
-import { ArrowUpRight, ImageOff } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 import { Reveal, SectionHeader } from "./Reveal";
 import { useProfile } from "../context/profile-context";
 import { IN_PROGRESS, MISSING } from "../lib/profile-data";
 import { safeUrl } from "../lib/safe-url";
+import { ProjectArt } from "./ProjectArt";
 
 export default function ProjectsSkills() {
   const { profile } = useProfile();
@@ -13,15 +14,15 @@ export default function ProjectsSkills() {
     <SectionHeader no="05" kicker="Projects & Skills" title="Selected work" />
     <div className="mt-8 flex flex-wrap gap-2" aria-label="Filter projects" data-testid="project-filters">{cats.map((c) => <button key={c} aria-pressed={cat === c} data-testid={`project-filter-${c.toLowerCase().replace(/[^a-z]+/g, "-")}`} onClick={() => setCat(c)} className={`rounded-full border px-4 py-2 text-sm transition-colors ${cat === c ? "border-acc bg-acc text-white" : "border-line/15 text-tx-low hover:border-acc"}`}>{c}</button>)}</div>
     <div className="mt-6 grid gap-5 sm:grid-cols-2">{profile.projects.filter((p) => cat === "All" || p.cat === cat).map((p) => <Reveal key={p.id} className="h-full"><article className="glass flex h-full flex-col rounded-3xl p-5 sm:p-6" data-testid={`project-card-${p.id}`}>
-      <div className="mb-5 flex items-center gap-2 border-b border-line/10 pb-4 text-xs text-tx-low" data-testid={`project-image-${p.id}`}><ImageOff className="h-4 w-4" />Project image: {MISSING}</div>
+      <div className="mb-5 aspect-[16/9] overflow-hidden rounded-2xl border border-line/10 bg-bg/40" data-testid={`project-image-${p.id}`}>
+        {p.image ? <img src={p.image} alt={`${p.title} landing page`} loading="lazy" className="h-full w-full object-cover object-top" /> : <ProjectArt kind={p.art} />}
+      </div>
       <div className="flex flex-wrap items-start justify-between gap-2"><h3 className="max-w-full font-display text-xl font-semibold text-tx-hi">{p.title}</h3>{p.status && <span className="text-xs text-amb-soft" data-testid={`project-status-${p.id}`}>{p.status}</span>}</div>
       <p className="mt-3 text-base leading-relaxed text-tx-low">{p.summary || MISSING}</p><p className="mt-4 text-sm leading-relaxed">{p.work || MISSING}</p>
       {p.metric && <p className="mt-4 border-l-2 border-acc/50 pl-3 text-sm leading-relaxed text-acc-soft" data-testid={`project-metric-${p.id}`}>{p.metric}</p>}
-      <p className="mt-5 text-xs leading-relaxed text-tx-low" data-testid={`project-tools-${p.id}`}>{p.tools || `Stack: ${MISSING}`}</p>
-      <details className="mt-5 border-t border-line/10 pt-3"><summary className="cursor-pointer text-sm font-medium text-tx-hi" data-testid={`project-details-${p.id}`}>Details & evidence</summary><div className="mt-3 grid gap-3 text-sm leading-relaxed text-tx-low" data-testid={`project-evidence-${p.id}`}>
-        {p.detail && <p>{p.detail}</p>}<p>Source: {p.source || MISSING}</p><p>{p.evidence || "Supporting evidence"}: {MISSING}</p>
-        {safeUrl(p.link) ? <a href={safeUrl(p.link)} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-acc-soft" data-testid={`project-link-${p.id}`}>Project link <ArrowUpRight className="h-4 w-4" /></a> : <p>Project link: {MISSING}</p>}
-      </div></details>
+      {p.tools && <p className="mt-5 text-xs leading-relaxed text-tx-low" data-testid={`project-tools-${p.id}`}>{p.tools}</p>}
+      {p.detail && <details className="mt-5 border-t border-line/10 pt-3"><summary className="cursor-pointer text-sm font-medium text-tx-hi" data-testid={`project-details-${p.id}`}>Details</summary><p className="mt-3 text-sm leading-relaxed text-tx-low" data-testid={`project-evidence-${p.id}`}>{p.detail}</p></details>}
+      <div className="mt-auto flex flex-wrap gap-4 pt-5">{(p.links || []).filter(([, url]) => safeUrl(url)).map(([label, url]) => <a key={label} href={safeUrl(url)} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-sm font-semibold text-acc-soft hover:underline" data-testid={`project-link-${p.id}-${label.toLowerCase().replace(/[^a-z]+/g, "-")}`}>{label}<ArrowUpRight className="h-4 w-4" /></a>)}</div>
     </article></Reveal>)}</div>
     <p className="mt-8 text-sm text-tx-low" data-testid="projects-in-progress">{IN_PROGRESS}</p>
     <details className="mt-12 border-y border-line/15 py-6" open><summary className="cursor-pointer font-display text-lg font-semibold text-tx-hi" data-testid="skills-toggle">Skills & tools</summary>

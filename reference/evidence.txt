@@ -1,0 +1,124 @@
+Portfolio Content & Evidence Report
+Out Loud portfolio | 3 November 2026
+Source: supplied deferred-materials checklist and newly attached voice transcript
+Purpose: consolidated source-backed content, project links/image guidance, requested
+transcript material, and follow-up items. Wording is clarified while preserving meaning. No
+unsupported evidence is added.
+1. Voice Introduction
+Voice recording: To be supplied by the user.
+Transcript: To be supplied by the user.
+[Blank space reserved for voice-introduction materials.]
+2. Project Links & Project Image
+EquityIQ (Stock Screening Platform)
+Live app: https://calm-white-cloud.lovable.app/
+Project Image: landing page is public and was observed. Insert captured browser screenshot.
+TrustHire (Job Verification Tool)
+Live app: https://trust-hire.lovable.app/
+Project Image: landing page is public and was observed. Insert captured browser screenshot.
+Finance Data Processing Backend
+GitHub: https://github.com/Kiyotaka-Ayanak0ji/Data_Processing_Backend
+Postman API tests: https://documenter.getpostman.com/view/53009591/2sBXwqtBGr
+Project Image: no deployed page supplied. Ask Emergent for a minimalist financial-data/API
+vector.
+Secure Image Messaging
+Deployment: https://steganography-project-updated-mwskcqpo9.vercel.app/
+GitHub: https://github.com/Kiyotaka-Ayanak0ji/Steganography_Project_Updated
+Project Image: deployment redirected to Vercel login at audit time. Use a minimal
+image/message vector unless public landing becomes available.
+Stock Price Prediction
+GitHub: https://github.com/Kiyotaka-Ayanak0ji/Stock_Price_Prediction
+Project Image: no deployed page supplied. Ask Emergent for a minimal price-chart/prediction
+vector.
+Note: Actual landing-page screenshot files were not available to embed in this report. The
+two public landing pages were verified in browser; insert their screenshots when available.
+Do not label a placeholder as a screenshot.
+3. Autopsy Section ? Voice Transcript
+Scope and Audience: the newly attached transcript contains no spoken Scope/Audience passage.
+Earlier requirements text supplies the narrative: client stock screener built as a
+personalized utility and consumer product; prototype followed by about 12 iterations across
+frontend/backend/authentication/security; motivation included AI, public-data real-time
+screening, stakeholder requirements, and FDE thinking. Use as written-source content, not
+Voice Transcript. Voice note/transcript pending.
+Plans and Pricing ? Voice Transcript
+Initial idea: Free, about $20, and about $40 with unlimited use. Unlimited was later judged
+unsustainable due to computation/server load and product value. Final described structure:
+Free, Pro about $5/month, Premium about $20/month. Free demonstrated the app with Pro access
+initially 30 days, later about 15 days by business/client decision. Annual discounts
+averaged 17%. Pro included selected Pro tools/custom features. Pro and Premium offered PDF
+watchlist export and configurable share links; Premium included a portfolio dashboard. One
+lead registered and tried it; no paid subscriptions because the application remained
+incomplete. Lesson: price according to value, costs, effort, and user needs; avoid
+over/undervaluing.
+3. Autopsy ? continued
+Feature Gating ? Voice Transcript
+Features included watchlist sharing/export, advanced filters, portfolio dashboard, automatic
+refresh, favorites, guided onboarding, and monthly Premium reports. Dashboard and automatic
+refresh were Premium+. Smart email alerts reflected habits, watchlists, and marked stocks.
+OAuth simplified sign-in. Competitor research informed choices. Unauthorized guest usage
+raised API/server-load concerns, so access restrictions and registration-gated ~15-day
+trials were introduced. Lesson: clarify requirements and feature behavior to avoid defects
+and instability.
+Payments Approach ? Voice Transcript
+Stripe was considered, but India availability, request/approval screening, and timing made
+it impractical in early development. Razorpay was selected for available payment
+infrastructure and currency conversion and is the only currently supported gateway
+described. Manual bank transfers were rejected due to security/scam risks. Juspay and
+PayPal/Stripe were possible alternatives, but time was limited. Subscription revenue was
+intended to help cover compute/infrastructure and recognize effort. Razorpay merchant
+verification was completed. No paid subscriptions yet because development is incomplete;
+source says Lovable cloud hosting inactive and app runs standalone on a Hostinger domain.
+Lesson: handle payment infrastructure and financial information carefully.
+Launch and Traffic ? Voice Transcript
+Cloudflare Analytics reportedly showed 17,000+ organic views, primarily US and other
+regions. The author learned that views alone do not establish sustained product use.
+Branding/logo, SEO/discoverability, speed, fluid UI, and iterative fixes helped. Costs
+include microservices, paid APIs, infrastructure, and development subscriptions, not only
+compute. Transcript says analytics/screenshots/docs/traffic-source files were attached, but
+those files were not present here; exact export/date range remain unverified.
+4. Typing versus Talking ? Personalized Copy
+Typing a piece of text took about 5 minutes 20 seconds; voice input took about 1 minute 30
+seconds. The author is dictating this project material with Wispr Flow and then using AI to
+organize it for Emergent. This makes it possible to produce more material quickly; the
+estimated 80?90% time saving is personal experience, not a general benchmark.
+Voice input helps with long documents, prompts, and substantial writing. It reduces reliance
+on keyboard access and typing speed. Typing still gives more precise control. Voice is
+useful when volume and speed matter; choice depends on task and environment.
+After two to three days, the author noticed automatic corrections can change intended
+wording. Reviewing a long transcript may take time. Voice input also depends on comfort with
+pronunciation, intonation, sentence formation, and punctuation; background noise reduces
+accuracy. Sensitive information such as passwords, bank details, or confidential messages
+may be unsuitable for dictation. Regional-language support can reduce the English-language
+barrier for some users. These are personal observations, not universal claims.
+5. Top Three Mistakes ? Mistake / Cost / Change
+Mistake 1: Neglecting cloud infrastructure and current technologies.
+Cost: Cloud/scaling knowledge gaps made deployment and maintenance harder and limited
+translation of requirements into infrastructure decisions.
+Change: Study cloud technologies, engage with difficult topics instead of avoiding them, and
+build comfort with deployment and scaling.
+Mistake 2: Thinking only like a developer.
+Cost: Limited market/business awareness contributed to interview rejections at Goldman
+Sachs, Amazon, and Uber; technical work was not consistently connected to real needs.
+Change: Tie features to business requirements and continue the IIT Roorkee Data Science and
+AI program to strengthen product/business perspective.
+Mistake 3: Neglecting networking and spending too much time on unproductive activities.
+Cost: Procrastination and sedentary habits contributed to difficulty entering professional
+life, missed opportunities, criticism, and a weaker support network.
+Change: Work regularly on projects, learn useful skills, attend technology events, read,
+follow current affairs when schedule permits, monitor relevant jobs, and attend interviews.
+6. Deferred Items & Confirmation Checklist
+To be supplied: voice-introduction audio and transcript; Scope and Audience voice
+note/transcript (absent from the newly attached transcript); separate Build Log
+prompt-history PDF; Submission Video Link and Challenge Post. Keep the latter sections
+unchanged until supplied.
+Evidence mentioned but not provided here: Cloudflare analytics export with date range and
+traffic sources; product screenshots, pricing screenshot, feature matrix, payment
+documentation, launch record; any voice-receipt recordings/transcripts/flow text/build
+results/evidence; Bharat pitch proof, verified audio, and user-testing learnings.
+Resolve the traffic discrepancy: supplied narrative says 17,000+ views; current portfolio
+previously showed about 10,000 views in 3?4 months. Confirm authoritative count/date range.
+Approval gate: obtain explicit approval before changing Secret Layer puzzle images,
+mechanics, or hints. Present the proposed three-image decoder puzzle first. No puzzle change
+is authorized by this report.
+Source limitation: attachment mentions screenshots/docs/analytics as attached, but those
+assets were not present with the text received for this report. No unsupported figures or
+evidence are asserted.

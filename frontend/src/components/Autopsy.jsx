@@ -24,10 +24,8 @@ const DecisionCard = ({ d, idx }) => {
     </button>
     {open && <div id={`decision-body-${idx}`} className="grid gap-4 border-t border-line/10 p-5" data-testid={`decision-details-${idx + 1}`}>
       {[["Context", d.context], ["Decision", d.decision], ["Reason", d.reason], ["Outcome", d.result], ["Lesson", d.lesson]].map(([label, value]) => <div key={label} className="grid gap-1 sm:grid-cols-[84px_1fr] sm:gap-4"><span className="field-label">{label}</span><p className="text-sm leading-relaxed" data-testid={`decision-${idx + 1}-${label.toLowerCase()}`}>{value || MISSING}</p></div>)}
-      <p className="text-xs leading-relaxed text-tx-low" data-testid={`decision-source-${idx + 1}`}>Source: {d.source || MISSING}</p>
       {d.chart && <CountryChart rows={d.chart} idx={idx} />}
       {d.stats && <dl className="grid gap-2 border-t border-line/10 pt-4 text-xs" data-testid={`decision-stats-${idx + 1}`}>{d.stats.map(([k, v]) => <div key={k} className="grid gap-1 sm:grid-cols-[150px_1fr] sm:gap-4"><dt className="text-tx-low">{k}</dt><dd className="text-tx">{v}</dd></div>)}</dl>}
-      <p className="text-xs text-amb-soft" data-testid={`decision-evidence-${idx + 1}`}>{d.evidenceText ? `Evidence: ${d.evidenceText}.` : `${d.evidence || "Supporting evidence"}: ${MISSING}`}</p>
       <p className="text-xs text-tx-low" data-testid={`decision-audio-${idx + 1}`}>Voice note & transcript: {MISSING}</p>
     </div>}
   </article>;
