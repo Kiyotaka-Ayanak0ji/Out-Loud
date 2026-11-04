@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { ArrowDown, AudioLines, Pause, Play, RotateCcw } from "lucide-react";
 import { useMotion } from "../context/motion-context";
 import { MEDIA } from "../lib/media";
@@ -52,14 +52,14 @@ export default function VoiceIntro() {
     return () => controller.abort();
   }, []);
 
-  const syncTranscript = () => {
+  const syncTranscript = useCallback(() => {
     const player = audioRef.current;
     if (!player || !transcript || !Number.isFinite(player.duration) || player.duration <= 0) return;
     setCurrentTime(player.currentTime);
     setRevealedChars(Math.floor(transcript.length * Math.min(1, player.currentTime / player.duration)));
-  };
+  }, [transcript]);
 
-  const playAudio = (restart = false) => {
+  const playAudio = useCallback((restart = false) => {
     const player = audioRef.current;
     if (!player) return;
     if (restart) {
@@ -98,13 +98,19 @@ export default function VoiceIntro() {
           : "The audio could not be played. Please try again.",
       );
     });
-  };
+  }, []);
 
   useEffect(() => {
     if (!autoplayAtLoadRef.current || didAutoplayRef.current) return;
     didAutoplayRef.current = true;
     playAudio();
-  }, []);
+  }, [playAudio]);
+
+  useEffect(() => {
+    if (!hasFinished || !transcript) return;
+    setRevealedChars(transcript.length);
+    if (duration > 0) setCurrentTime(duration);
+  }, [duration, hasFinished, transcript]);
 
   useEffect(() => () => {
     audioRef.current?.pause();
@@ -166,7 +172,7 @@ export default function VoiceIntro() {
 
     frame = requestAnimationFrame(tick);
     return () => cancelAnimationFrame(frame);
-  }, [isPlaying, motionOn, transcript]);
+  }, [isPlaying, motionOn, syncTranscript, transcript]);
 
   const handleAutoplayChange = (event) => {
     const enabled = event.target.checked;
@@ -187,6 +193,7 @@ export default function VoiceIntro() {
     }
     setCurrentTime(0);
     setRevealedChars(0);
+    setHasStarted(false);
     setHasFinished(false);
     scrollToSection("autopsy");
   };
@@ -201,11 +208,11 @@ export default function VoiceIntro() {
       >
         <img src={MEDIA.heroWave} alt="Abstract sound-wave artwork for the voice introduction." className="h-full w-full object-cover" />
         <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-panel via-panel/10 to-transparent" />
-        <div className="absolute left-5 top-5 inline-flex items-center gap-2 rounded-full border border-white/15 bg-black/35 px-3 py-1.5 text-[10px] font-semibold uppercase tracking-widest text-white backdrop-blur-md">
+        <div className="absolute left-5 top-5 z-10 inline-flex items-center gap-2 rounded-full border border-white/15 bg-black/35 px-3 py-1.5 text-[10px] font-semibold uppercase tracking-widest text-white backdrop-blur-md">
           <AudioLines className="h-3.5 w-3.5 text-amb-soft" />
           Voice intro
         </div>
-        <div className="absolute bottom-5 right-5 rounded-full border border-white/15 bg-black/35 px-3 py-1.5 font-mono text-[11px] text-white/90 backdrop-blur-md" data-testid="hero-voice-time">
+        <div className="absolute bottom-5 right-5 z-10 rounded-full border border-white/15 bg-black/35 px-3 py-1.5 font-mono text-[11px] text-white/90 backdrop-blur-md" data-testid="hero-voice-time">
           {formatTime(currentTime)} <span className="text-white/50">/</span> {formatTime(duration)}
         </div>
       </div>
