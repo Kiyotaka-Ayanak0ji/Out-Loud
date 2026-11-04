@@ -114,9 +114,14 @@ export default function AudioTranscriptDialog({ open, onOpenChange, title, audio
         <div className="rounded-2xl border border-line/10 bg-fill/[0.03] p-4">
           <p className="field-label">Recording & transcript</p>
           <div className="mt-4 flex items-center justify-between gap-4">
-            <span className="text-xs text-tx-low" data-testid={`${testId}-audio-status`}>
-              {isPlaying ? "Playing your message" : hasFinished ? "Message complete" : playbackBlocked ? "Audio needs a tap to start" : "Preparing your message"}
-            </span>
+            <div className="flex min-w-0 items-center gap-3">
+              <div className="bonus-waveform flex h-8 shrink-0 items-center gap-1" data-playing={isPlaying} aria-hidden="true">
+                {[35, 62, 44, 80, 52, 94, 58, 76, 40, 68, 34, 58].map((height, index) => <span key={index} className="wf-bar wf-anim w-[3px] rounded-full bg-amb-soft" style={{ height: `${height}%`, animationDelay: `${index * 70}ms` }} />)}
+              </div>
+              <span className="truncate text-xs text-tx-low" data-testid={`${testId}-audio-status`}>
+                {isPlaying ? "Playing your message" : hasFinished ? "Message complete" : playbackBlocked ? "Audio needs a tap to start" : "Preparing your message"}
+              </span>
+            </div>
             {!isPlaying && <button
               type="button"
               onClick={playFromStart}
