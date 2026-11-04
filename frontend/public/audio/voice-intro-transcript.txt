@@ -1,0 +1,17 @@
+What if the way you build a portfolio could become part of what makes it yours?
+
+I’m Ansik Aryan Samal, an AI Engineer Intern and full-stack developer based in Hyderabad. I created **Out Loud** to share more than a list of skills and projects. I wanted it to show how I think, what I’m curious about, and what I’ve learned by building things.
+
+A client’s stock-screening platform shaped a lot of that thinking. It started as a small prototype and grew through about twelve rounds of feedback. I learned to listen carefully, understand what someone actually needed, and connect each feature to a real problem. That experience also made me think beyond the feature in front of me: who is it for, and how can it keep being useful as it grows?
+
+The idea for this portfolio came from wanting to make something personal and a little unexpected. I was considering a regular portfolio, a way to explore GitHub projects, and even a task-tracking app. I chose a voice-first portfolio because it felt like a better way to bring together my projects, ideas, and personality. Sections like The Autopsy, Voice-First Bharat, and The Secret Layer each show a different part of what interests me, from learning through a client project to thinking about access and making exploration fun.
+
+Voice also changed how I could make the portfolio. It helped me get ideas out quickly, so I could spend more time shaping the experience and less time just getting words onto a page. For one passage, speaking took about a minute and a half; typing it took around five minutes and twenty seconds. That difference helped me make edits faster and work through a much larger amount of content in less time.
+
+For me, the biggest value is that voice gave the portfolio a personal feel. The words and ideas came from the way I naturally speak and explain things. That gives **Out Loud** a digital footprint that feels connected to my name and my story. It’s also an unconventional way to create a portfolio: less focused on showing off code, and more focused on creativity, decisions, and the person behind the work.
+
+Using voice has also reduced the number of errors I make while developing and refining the content. That’s been my experience, though voice still needs review: it can mishear words, and background noise can get in the way. I see voice and typing as useful in different situations. Voice helps me move quickly; typing gives me precision when I need it.
+
+I’m especially interested in making technology easier to use for people who are more comfortable speaking a regional language than typing in English. That’s one reason I’m drawn to Wispr Flow’s Growth team. I’d be excited to learn from the role and help make voice tools useful to more people.
+
+I hope you enjoy exploring the projects, ideas, and lessons that make **Out Loud** mine. Thanks for listening.

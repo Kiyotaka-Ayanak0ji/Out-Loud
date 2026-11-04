@@ -114,7 +114,7 @@ Suggested next material: a Stock Screener analytics export and pricing screensho
 
 ## 2026-06 Content completion + Find the Whisper + Bonus Section (approved plan, phase 1 DONE)
 - Narrative/evidence report applied site-wide; meta labels removed; Upload needed only for voice/recordings/video/post/bonus story.
-- Secret Layer: plates FIND/THE/WHISPER (blue/red/green, plane 0); passphrase decoder removed. Correct phrase opens Bonus dialog: AI-voice clip (/audio/bonus-clip.mp3, OpenAI TTS tts-1-hd coral, labelled AI), riddles Access + Point, final Access Point, share card PNG + caption + LinkedIn/X/native share.
+- Secret Layer: plates FIND/THE/WHISPER (blue/red/green, plane 0); passphrase decoder removed. Correct phrase opens Bonus dialog: supplied audio (/audio/bonus-clip.mp3) plays once automatically while unsolved, with transcript-synced typewriter text and Play Again after completion; riddles Access + Point, final Access Point, share card PNG + caption + LinkedIn/X/native share.
 - Projects: EquityIQ + TrustHire screenshots, SVG art for others, live/GitHub/Postman links. Print = tailored Data Science resume (2 A4 pages, no phone).
 - Tested: iteration_3 41/41; share card footer fit, print page breaks, riddle hint state fixed after.
 - Gaps: full typing test passage + word count (for WPM) not supplied; Scope voice note; voice intro; receipts recordings; submission video; challenge post; bonus story; Cloudflare chart shows France top for pageviews while narrative says mostly US (US leads requests).

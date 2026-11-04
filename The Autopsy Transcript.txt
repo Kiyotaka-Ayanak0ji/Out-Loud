@@ -1,0 +1,9 @@
+This project started with a client asking for a stock screener. I wanted to build something useful for them and for people who follow the market. So I began with a small prototype, listened to feedback, and worked through about twelve versions.
+
+That meant more than adding screens. I had to think about who could use each feature, how the app would handle access, and what it would take to keep it running. I added tools like filters, watchlists, portfolio features, alerts, and sign-in options. I also learned that giving everyone unlimited access could put too much pressure on the system, so I introduced plans and limits.
+
+Pricing took a few rounds of thought too. I considered higher-priced plans and unlimited access, but settled on a more affordable structure, with free access and paid plans for additional features. I chose Razorpay for payments after looking at other options, including Stripe. The app didn’t receive paid subscriptions while it was still unfinished.
+
+Cloudflare showed more than 17,000 organic views, which I hadn’t expected. That was exciting, but it also taught me that views alone don’t make a product successful. People need a reason to return, and the product needs to be reliable.
+
+I learned a lot about working with a client, turning their needs into features, and thinking beyond code. I also saw where I need to grow, especially in cloud technology and scaling. This project helped me start thinking about the whole product, not just the part I was building that day.

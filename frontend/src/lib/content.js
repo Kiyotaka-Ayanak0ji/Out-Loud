@@ -16,6 +16,12 @@ export const VOICE_SAMPLES = [
   { id: "telugu", label: "Telugu · beta", transcript: "Naa peru Suresh. Nenu aidu years nundi electrician ga panichestunnanu, Hyderabad lo.", gloss: "My name is Suresh. I have worked as an electrician for five years in Hyderabad.", result: { name: "Suresh", role: "Electrician", experience: "5 years", city: "Hyderabad", wage: "Not stated", skills: "Not stated", availability: "Not stated", languages: "Telugu" } },
   { id: "odia", label: "Odia · beta", transcript: "Mo naa Bijay. Mu pancha barsa dhari mason kama karuchi, Bhubaneswar re.", gloss: "My name is Bijay. I have worked as a mason for five years in Bhubaneswar.", result: { name: "Bijay", role: "Mason", experience: "5 years", city: "Bhubaneswar", wage: "Not stated", skills: "Not stated", availability: "Not stated", languages: "Odia" } },
 ];
+export const VOICE_RECEIPTS = [
+  { audio: "/audio/autopsy-clip.mp3", transcript: "/audio/autopsy-transcript.txt" },
+  { audio: "/audio/bharat-clip.mp3", transcript: "/audio/bharat-transcript.txt" },
+  { audio: "/audio/secret-layer-clip.mp3", transcript: "/audio/secret-layer-transcript.txt" },
+  { audio: "/audio/build-prompt-clip.mp3", transcript: "/audio/build-prompt-transcript.txt" },
+];
 export const GENERIC_RESULT = Object.fromEntries(["name", "role", "experience", "city", "wage", "skills", "availability", "languages"].map((key) => [key, "Not stated"]));
 export const PLATES = [
   { id: "plate-01", label: "Plate 01", src: "/clues/plate-01.png", alt: "Grayscale concrete texture.", channel: 2, strong: "Plate 01: the blue channel, plane 0." },

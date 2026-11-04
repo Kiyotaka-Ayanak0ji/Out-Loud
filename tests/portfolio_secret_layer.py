@@ -120,15 +120,36 @@ async def main():
             d = page.get_by_test_id('bonus-dialog')
             a = page.get_by_test_id('bonus-audio')
             info = await a.evaluate('e=>({src:e.getAttribute("src"),paused:e.paused,autoplay:e.autoplay,ct:e.currentTime})')
-            assert info['src'] == '/audio/bonus-clip.mp3' and info['paused'] and not info['autoplay'], info
+            assert info['src'] == '/audio/bonus-clip.mp3' and not info['autoplay'], info
             r = await ctx.request.get(URL + '/audio/bonus-clip.mp3'); info['clip_status'] = r.status; info['clip_type'] = r.headers.get('content-type')
             assert r.status == 200 and len(await r.body()) > 10000
-            assert 'AI voice' in await page.get_by_test_id('bonus-clip').text_content()
-            assert not await page.get_by_test_id('bonus-transcript').is_visible()
-            await click(page, 'bonus-transcript-toggle'); assert await page.get_by_test_id('bonus-transcript').is_visible()
-            await click(page, 'bonus-replay-btn'); await page.wait_for_timeout(1500)
+            tr = await ctx.request.get(URL + '/audio/bonus-transcript.txt')
+            assert tr.status == 200 and 'You found the whisper.' in await tr.text()
+            if await a.evaluate('e=>e.paused'):
+                await click(page, 'bonus-play-btn')
+                await page.wait_for_function("() => { const e = document.querySelector('[data-testid=bonus-audio]'); return e && !e.paused; }")
+            await page.wait_for_timeout(500)
+            assert await page.get_by_test_id('bonus-audio-status').inner_text() == 'Playing your message'
+            assert len(await page.get_by_test_id('bonus-transcript').inner_text()) > 0
+            assert await page.get_by_test_id('bonus-replay-btn').count() == 0
             info['after_replay'] = await a.evaluate('e=>({paused:e.paused,ct:e.currentTime,err:e.error&&e.error.code})')
+            await a.evaluate('e=>{e.pause();e.dispatchEvent(new Event("ended"))}')
+            replay = page.get_by_test_id('bonus-replay-btn'); await replay.wait_for()
+            assert await replay.is_enabled()
+            await replay.click()
+            assert await replay.is_disabled()
             await a.evaluate('e=>e.pause()')
+            assert await replay.is_disabled()
+            await a.evaluate('e=>e.dispatchEvent(new Event("ended"))')
+            assert await replay.is_enabled()
+            await replay.click()
+            assert await replay.is_disabled()
+            await page.keyboard.press('Escape')
+            await d.wait_for(state='detached')
+            await click(page, 'open-bonus-btn')
+            await d.wait_for()
+            replay = page.get_by_test_id('bonus-replay-btn')
+            assert await replay.is_enabled()
             info['story'] = await page.get_by_test_id('bonus-story').inner_text()
             assert await page.get_by_test_id('bonus-final').count() == 0
             for n, ans in ((1, 'ACCESS'), (2, ' point ')):

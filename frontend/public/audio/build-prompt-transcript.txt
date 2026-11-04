@@ -1,0 +1,11 @@
+I didn’t begin with a perfect plan for this portfolio. I was considering a regular portfolio, a way to explore GitHub projects, or even a tool for keeping track of tasks. I wanted to make something people would remember, but also something they could explore without needing a technical background. I kept asking myself: how can I show not only what I’ve made, but what I care about and how I approach a problem?
+
+That question led to **Out Loud**, a voice-first portfolio. Voice felt like a natural place to start because speaking is one of the simplest ways to share an idea. I wanted the site to feel personal and easy to move through, whether you’re a developer, a curious learner, or someone who has never built an app.
+
+So I started shaping the portfolio around stories, not just project titles. In **The Autopsy**, I share the thinking, decisions, and lessons behind a client project. **Voice-First Bharat** reflects an idea about making useful information easier to reach for people who rely on regional languages. **The Secret Layer** adds a little mystery and invites visitors to explore. Other sections bring together my projects, the things I’m learning, and my experience using voice alongside typing.
+
+As I worked through the idea, the shape of the portfolio kept changing. I tried different ways to organize it, looked at what a visitor might want to know, and refined the sections so the story would feel clear. I didn’t want to make a page that was only about tools or technical terms. I wanted people to see the questions behind the work: who it might help, what I learned, and what I’d like to try next.
+
+I also want to stay hands-on. Tools can help me get from an idea to a first version, but I still need to understand what I’m making, make thoughtful choices, and keep building my own skills.
+
+For me, **Out Loud** is a space to share the work and the person behind it: the experiments, the decisions, the lessons, and the ideas still taking shape. If you’re curious about how a project comes together or just want to explore something a little different , I hope you’ll find something here that speaks to you.
